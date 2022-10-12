@@ -1,0 +1,4 @@
+MPSPlots
+========
+
+Personal Matplotlib wrapper
