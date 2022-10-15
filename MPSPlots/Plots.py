@@ -140,11 +140,11 @@ class Scene:
     UnitSize = (10, 3)
     plt.rcParams['ytick.labelsize'] = 10
     plt.rcParams['xtick.labelsize'] = 10
-    plt.rcParams["font.size"]       = 3
+    plt.rcParams["font.size"]       = 10
     plt.rcParams["font.family"]     = "serif"
     plt.rcParams['axes.edgecolor']  = 'black'
     plt.rcParams['axes.linewidth']  = 1.5
-    plt.rcParams['legend.fontsize'] = 'small'
+    plt.rcParams['legend.fontsize'] = 'medium'
 
     def __init__(self, Title='', UnitSize=None):
         self.AxisGenerated = False

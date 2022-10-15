@@ -3,7 +3,7 @@ add_custom_command(
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/Upload.txt
   COMMAND rm -rf dist/*
   COMMAND echo $ENV{Password}
-  COMMAND python3 setup.py bdist_wheel --NewMinor
+  COMMAND python3 setup.py bdist_wheel
   COMMAND python3 -m twine upload --password ${Password} --username $ENV{PyPiToken} --repository pypi dist/*
   COMMENT "Upload on Pypi"
   COMMAND make Clean
