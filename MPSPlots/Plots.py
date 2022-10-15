@@ -41,31 +41,38 @@ class ColorBar:
     Orientation: str = "vertical"
     Symmetric: bool = False
     LogNorm: bool = False
+    Format: str = ':.3f'
+    LogNorm: bool = False
 
     def Render(self, Ax, Scalar, Image):
         divider = make_axes_locatable(Ax._ax)
         cax = divider.append_axes(self.Position, size="10%", pad=0.15)
 
         if self.Discreet:
-            Norm = colors.BoundaryNorm(numpy.unique(Scalar), 200, extend='both')
+            Values = numpy.unique(Scalar)
+            Norm = colors.BoundaryNorm(Values, Values.size+1, extend='both')
+            Norm.autoscale(Scalar)
             Image.set_norm(Norm)
             ticks = numpy.unique(Scalar)
-            plt.colorbar(mappable=Image, norm=Norm, boundaries=ticks, ticks=ticks, cax=cax, orientation=self.Orientation)
+            plt.colorbar(mappable=Image, norm=Norm, boundaries=ticks, cax=cax, orientation=self.Orientation)
             return
 
         if self.Symmetric:
             Norm = colors.CenteredNorm()
+            Norm.autoscale(Scalar)
             Image.set_norm(Norm)
             plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
             return
 
         if self.LogNorm:
-            Norm = matplotlib.colors.LogNorm()
+            Norm = matplotlib.colors.SymLogNorm(linthresh=0.03)
+            Norm.autoscale(Scalar)
             Image.set_norm(Norm)
             plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
             return
         
         plt.colorbar(mappable=Image, norm=None, cax=cax, orientation=self.Orientation)
+
 
 
 

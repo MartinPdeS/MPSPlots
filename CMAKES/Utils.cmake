@@ -16,7 +16,7 @@ add_custom_target(Upload DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Upload.txt)
 #Cleaning command---------------------------------------------------------------
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/Clean.txt
-  COMMAND rm -rf dist CMakeCache.txt cmake_install.cmake *.egg* CMakeCache.txt CMakeFiles install_manifest.txt
+  COMMAND rm -rf dist CMakeCache.txt cmake_install.cmake *.egg* CMakeCache.txt CMakeFiles install_manifest.txt Makefile build
   COMMENT "Cleaning cmake output files")
 
 add_custom_target(Clean DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/Clean.txt)
