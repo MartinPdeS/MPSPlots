@@ -6,31 +6,16 @@ import matplotlib.pyplot     as plt
 from matplotlib              import colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.backends.backend_pdf import PdfPages
-from matplotlib.colors import LinearSegmentedColormap
+from itertools import cycle
 
 from dataclasses import dataclass
-
-
-try:
-    from mayavi     import mlab
-    from tvtk.tools import visual
-except ImportError:
-    logging.warning('Mayavi package could not be loaded! Not 3D rendering available.')
-
+from . import CMAP
 
 import matplotlib
 matplotlib.style.use('ggplot')
 
 
-FieldMap = \
-LinearSegmentedColormap.from_list('my_gradient', (
-    # Edit this gradient at https://eltos.github.io/gradient/#0:7A90FF-33.9:0025B3-50:000000-75.8:C7030D-100:FF6E75
-    (0.000, (0.478, 0.565, 1.000)),
-    (0.339, (0.000, 0.145, 0.702)),
-    (0.500, (0.000, 0.000, 0.000)),
-    (0.758, (0.780, 0.012, 0.051)),
-    (1.000, (1.000, 0.431, 0.459))))
-
+linecycler = cycle(["-","--","-.",":"])
 
 
 @dataclass
@@ -57,19 +42,21 @@ class ColorBar:
             plt.colorbar(mappable=Image, norm=Norm, boundaries=ticks, cax=cax, orientation=self.Orientation)
             return
 
-        if self.Symmetric:
-            Norm = colors.CenteredNorm()
-            Norm.autoscale(Scalar)
-            Image.set_norm(Norm)
-            plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
-            return
-
         if self.LogNorm:
-            Norm = matplotlib.colors.SymLogNorm(linthresh=0.03)
-            Norm.autoscale(Scalar)
-            Image.set_norm(Norm)
-            plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
-            return
+            if self.Symmetric:
+
+                Norm = matplotlib.colors.SymLogNorm(linthresh=1e-10)
+                Norm.autoscale(Scalar)
+                Image.set_norm(Norm)
+                plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
+                return
+        
+            if not self.Symmetric:
+                Norm = matplotlib.colors.LogNorm(linthresh=0.03)
+                Norm.autoscale(Scalar)
+                Image.set_norm(Norm)
+                plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
+                return
         
         plt.colorbar(mappable=Image, norm=None, cax=cax, orientation=self.Orientation)
 
@@ -81,7 +68,7 @@ class Contour:
     X: numpy.ndarray
     Y: numpy.ndarray
     Scalar: numpy.ndarray
-    ColorMap: str = 'viridis'
+    ColorMap: str = CMAP.BKR
     xLabel: str = ''
     yLabel: str = ''
     IsoLines: list = None
@@ -107,7 +94,7 @@ class Mesh:
     X: numpy.ndarray
     Y: numpy.ndarray
     Scalar: numpy.ndarray
-    ColorMap: str = 'viridis'
+    ColorMap: str = CMAP.BKR
     Label: str = ''
 
     def Render(self, Ax):
@@ -127,13 +114,12 @@ class Line:
     Label: str = None
     Fill: bool = False
     Color: str = None
-
+    
     def Render(self, Ax):
-
-        Ax._ax.plot(self.X, self.Y, label=self.Label)
+        Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=next(linecycler))
 
         if self.Fill:
-            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, alpha=0.7)
+            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=next(linecycler), alpha=0.7)
 
 
 class Scene:
@@ -289,51 +275,6 @@ def Multipage(filename, figs=None, dpi=200):
 
 
     pp.close()
-
-
-
-
-def PlotPropagation(Fields, Factor=5, Offset=11, SaveAs: str=None):
-    FileName = []
-
-    fig = mlab.figure(size=(1000,700), bgcolor=(1,1,1), fgcolor=(0,0,0))
-
-    surface = mlab.surf(Fields[0] * Factor + Offset, colormap='coolwarm', warp_scale='4', representation='wireframe', line_width=6, opacity=0.9, transparent=True)
-
-    baseline = mlab.surf(mesh*0, color=(0,0,0), representation='wireframe', opacity=0.53)
-
-    #mlab.contour_surf(mesh, color=(0,0,0), contours=[mesh.min(), 1.4, mesh.max()], line_width=6)
-
-    mlab.axes( xlabel='x', ylabel='y', zlabel='z', color=(0,0,0), nb_labels=10, ranges=(0,40,0,40,0,20), y_axis_visibility=False )
-
-
-    mlab.gcf().scene.parallel_projection = False
-    mlab.view(elevation=70, distance=300)
-    mlab.move(up=-6)
-
-    #mlab.outline(baseline)
-
-
-    import imageio
-
-    @mlab.animate(delay=10)
-    def anim_loc():
-        for n, field in enumerate(Fields):
-            surface.mlab_source.scalars = field * Factor + Offset
-            baseline.mlab_source.scalars = field*3
-
-            FileName.append( f'{Directories.RootPath}/Animation/temporary_{n:03d}.png' )
-            mlab.savefig(filename=FileName[-1])
-
-            yield
-
-    anim_loc()
-    mlab.show()
-
-    with imageio.get_writer(SaveAs, mode='I', fps=50) as writer:
-        for filename in FileName:
-            image = imageio.imread(filename)
-            writer.append_data(image)
 
 
 # -
