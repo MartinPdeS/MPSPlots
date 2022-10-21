@@ -3,6 +3,7 @@
 
 import logging, numpy
 import matplotlib.pyplot     as plt
+from matplotlib.offsetbox import AnchoredText
 from matplotlib              import colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.backends.backend_pdf import PdfPages
@@ -108,6 +109,53 @@ class Mesh:
 
 
 @dataclass
+class FillLine:
+    X: numpy.ndarray
+    Y0: numpy.ndarray
+    Y1: numpy.ndarray
+    Label: str = None
+    Fill: bool = False
+    Color: str = None
+    
+    def Render(self, Ax):
+        Ax._ax.fill_between(self.X, self.Y0, self.Y1, color=self.Color, linestyle=next(linecycler), alpha=0.7, label=self.Label)
+
+
+@dataclass
+class STDLine:
+    X: numpy.ndarray
+    YMean: numpy.ndarray
+    YSTD: numpy.ndarray
+    Label: str = None
+    Fill: bool = False
+    Color: str = None
+    
+    def Render(self, Ax):
+        y0 = self.YMean - self.YSTD
+        y1 =  self.YMean + self.YSTD
+
+        l = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=next(linecycler))
+        print()
+        Ax._ax.fill_between(self.X, y0, y1, color=l[-1].get_color(), linestyle='-', alpha=0.3, label=self.Label + '[std]')
+
+
+@dataclass
+class Text:
+    Position: list = (0.9, 0.9)
+    FontSize: int = 8
+    Text: str = ''
+
+    def Render(self, Ax):
+        art = AnchoredText(self.Text,
+                       loc='lower left', prop=dict(size=self.FontSize), frameon=True,
+                       bbox_to_anchor=(0.10, 1.0),
+                       bbox_transform=Ax._ax.transAxes
+                       )
+
+        Ax._ax.get_figure().add_artist(art)
+
+
+@dataclass
 class Line:
     X: numpy.ndarray
     Y: numpy.ndarray
@@ -119,7 +167,7 @@ class Line:
         Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=next(linecycler))
 
         if self.Fill:
-            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=next(linecycler), alpha=0.7)
+            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=next(linecycler), alpha=0.7, label=self.Label)
 
 
 class Scene:
@@ -260,7 +308,7 @@ class Axis:
 
         self._ax.text(0.5, 0.1, self.WaterMark, transform=self._ax.transAxes,
                 fontsize=30, color='white', alpha=0.2,
-                ha='center', va='baseline', rotation='0')
+                ha='center', va='baseline')
 
         if self.Equal:
             self._ax.set_aspect("equal")
