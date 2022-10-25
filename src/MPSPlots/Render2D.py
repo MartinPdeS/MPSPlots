@@ -2,15 +2,16 @@
 # -*- coding: utf-8 -*-
 
 import logging, numpy
-import matplotlib.pyplot     as plt
+import matplotlib.pyplot as plt
 from matplotlib.offsetbox import AnchoredText
-from matplotlib              import colors
+from matplotlib import colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.backends.backend_pdf import PdfPages
 from itertools import cycle
+from . import CMAP
 
 from dataclasses import dataclass
-from . import CMAP
+
 
 import matplotlib
 matplotlib.style.use('ggplot')
@@ -170,7 +171,7 @@ class Line:
             Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=next(linecycler), alpha=0.7, label=self.Label)
 
 
-class Scene:
+class Scene2D:
     UnitSize = (10, 3)
     plt.rcParams['ytick.labelsize'] = 10
     plt.rcParams['xtick.labelsize'] = 10
@@ -265,7 +266,7 @@ class Axis:
     Equal: bool = False
     Colorbar: ColorBar = None
     WaterMark: str = ''
-    Figure: Scene = None
+    Figure: Scene2D = None
 
     def __post_init__(self):
 
