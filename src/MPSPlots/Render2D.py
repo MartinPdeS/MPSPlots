@@ -7,6 +7,7 @@ from matplotlib.offsetbox import AnchoredText
 from matplotlib import colors
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.backends.backend_pdf import PdfPages
+import matplotlib.gridspec as gridspec
 from itertools import cycle
 from . import CMAP
 
@@ -117,10 +118,15 @@ class FillLine:
     Label: str = None
     Fill: bool = False
     Color: str = None
+    LineStyle: str = None
+    Outline: bool = True
     
     def Render(self, Ax):
-        Ax._ax.fill_between(self.X, self.Y0, self.Y1, color=self.Color, linestyle=next(linecycler), alpha=0.7, label=self.Label)
-
+        if self.LineStyle is None: self.LineStyle = next(linecycler)
+        Ax._ax.fill_between(self.X, self.Y0, self.Y1, color=self.Color, linestyle=self.LineStyle, alpha=0.7, label=self.Label)
+        
+        if self.Outline:
+            Ax._ax.plot(self.X, self.Y1, color='k', linestyle='-', linewidth=1)
 
 @dataclass
 class STDLine:
@@ -130,14 +136,36 @@ class STDLine:
     Label: str = None
     Fill: bool = False
     Color: str = None
+    LineStyle: str = None
     
     def Render(self, Ax):
+        if self.LineStyle is None: self.LineStyle = next(linecycler)
+
         y0 = self.YMean - self.YSTD
         y1 =  self.YMean + self.YSTD
 
-        l = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=next(linecycler))
-        print()
+        l = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=self.LineStyle)
+
         Ax._ax.fill_between(self.X, y0, y1, color=l[-1].get_color(), linestyle='-', alpha=0.3, label=self.Label + '[std]')
+
+
+@dataclass
+class Line:
+    X: numpy.ndarray
+    Y: numpy.ndarray
+    Label: str = None
+    Fill: bool = False
+    Color: str = None
+    LineStyle: str = None
+    
+    def Render(self, Ax):
+        if self.LineStyle is None: self.LineStyle = next(linecycler)
+
+        Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=self.LineStyle)
+
+        if self.Fill:
+            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=self.LineStyle, alpha=0.7, label=self.Label)
+
 
 
 @dataclass
@@ -156,19 +184,6 @@ class Text:
         Ax._ax.get_figure().add_artist(art)
 
 
-@dataclass
-class Line:
-    X: numpy.ndarray
-    Y: numpy.ndarray
-    Label: str = None
-    Fill: bool = False
-    Color: str = None
-    
-    def Render(self, Ax):
-        Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=next(linecycler))
-
-        if self.Fill:
-            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=next(linecycler), alpha=0.7, label=self.Label)
 
 
 class Scene2D:
@@ -220,10 +235,17 @@ class Scene2D:
 
         FigSize = [ self.UnitSize[0]*(ColMax+1), self.UnitSize[1]*(RowMax+1) ]
 
-        self.Figure, Ax  = plt.subplots(ncols=ColMax+1, nrows=RowMax+1, figsize=FigSize)
+        self.Figure = plt.figure(figsize=FigSize)
 
-        if not isinstance(Ax, numpy.ndarray): Ax = numpy.asarray([[Ax]])
-        if Ax.ndim == 1: Ax = numpy.asarray([Ax])
+        Grid = gridspec.GridSpec(ncols=ColMax+1, nrows=RowMax+1, figure=self.Figure)
+
+        Ax = numpy.full(shape=(RowMax+1, ColMax+1), fill_value=None)
+
+        for axis in self._Axis:
+            subplot = self.Figure.add_subplot(Grid[axis.Row, axis.Col], projection=axis.Projection)
+            Ax[axis.Row, axis.Col] = subplot
+
+        Ax = numpy.asarray(Ax)
 
         self.Figure.suptitle(self.Title)
 
@@ -245,8 +267,10 @@ class Scene2D:
         return self
 
 
-    def Show(self):
+    def Show(self, SaveDir: str=None, **kwargs):
         self.Render()
+        if SaveDir is not None:
+            plt.savefig(fname=SaveDir, **kwargs)
         plt.show()
 
 
@@ -267,6 +291,7 @@ class Axis:
     Colorbar: ColorBar = None
     WaterMark: str = ''
     Figure: Scene2D = None
+    Projection: str=None
 
     def __post_init__(self):
 

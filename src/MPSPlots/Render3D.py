@@ -26,6 +26,51 @@ class Scene3D:
         return self.Figure
 
 
+    def Add_theta_vector_field(self, Plot, R=[1.03/2]):
+        self.Figure.subplot(*Plot)
+        theta = numpy.arange(0, 360, 10)
+        phi = numpy.arange(180, 0, -10)
+
+
+        Theta_vector = numpy.stack( [ i.transpose().swapaxes(-2, -1).ravel("C") for i in pyvista.transform_vectors_sph_to_cart( theta, phi, R, [1], [0], [0] ) ], axis=1 )
+
+        Spherical_Vector = pyvista.grid_from_sph_coords(theta, phi, R)
+
+        Spherical_Vector.point_data["Theta"] = Theta_vector * 0.1
+
+        self.Figure.add_mesh(Spherical_Vector.glyph(orient="Theta", scale="Theta", tolerance=0.005), color='k')
+
+
+    def Add_phi_vector_field(self, Plot, R=[1.03/2]):
+        self.Figure.subplot(*Plot)
+        theta = numpy.arange(0, 360, 10)
+        phi = numpy.arange(180, 0, -10)
+
+        Phi_vector = numpy.stack( [ i.transpose().swapaxes(-2, -1).ravel("C") for i in pyvista.transform_vectors_sph_to_cart( theta, phi, R, [0], [1], [0] ) ], axis=1 )
+
+
+        Spherical_Vector = pyvista.grid_from_sph_coords(theta, phi, R)
+
+        Spherical_Vector.point_data["Phi"] = Phi_vector * 0.1
+
+        p = self.Figure.add_mesh(Spherical_Vector.glyph(orient="Phi", scale="Phi", tolerance=0.005), color='k')
+
+
+    def Add_r_vector_field(self, Plot, R=[1.03/2]):
+        self.Figure.subplot(*Plot)
+        theta = numpy.arange(0, 360, 10)
+        phi = numpy.arange(180, 0, -10)
+
+        R_vector = numpy.stack( [ i.transpose().swapaxes(-2, -1).ravel("C") for i in pyvista.transform_vectors_sph_to_cart( theta, phi, R, [0], [0], [1] ) ], axis=1 )
+
+        Spherical_Vector = pyvista.grid_from_sph_coords(theta, phi, R)
+
+        Spherical_Vector.point_data["R"] = R_vector * 0.1
+
+        p.add_mesh(Spherical_Vector.glyph(orient="R", scale="R", tolerance=0.005), color='k')
+
+
+
     def __add_unit_sphere__(self, Plot: tuple=(0,0), **kwargs):
         self.Figure.subplot(*Plot)
         sphere = pyvista.Sphere(radius=1)
@@ -42,6 +87,6 @@ class Scene3D:
         self.Figure.add_text(Text, **kwargs)
 
 
-    def Show(self):
-        self.Figure.show()
+    def Show(self, SaveDir: str=None):
+        self.Figure.show(screenshot=SaveDir)
 
