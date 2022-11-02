@@ -98,9 +98,9 @@ def Direct2Angle(DirectVec: numpy.ndarray, k: float) -> numpy.ndarray:
 
 def NA2Angle(NA: float) -> numpy.ndarray:
     if NA <= 1.0: 
-        return Angle(numpy.arcsin(NA), Unit='Radian')
+        return numpy.arcsin(NA)
     if NA >= 1.0: 
-        return Angle(numpy.arcsin(NA - 1) + numpy.pi / 2, Unit='Radian')
+        return numpy.arcsin(NA - 1) + numpy.pi / 2
 
 
 def Direct2spherical(X, Y, MaxAngle):
