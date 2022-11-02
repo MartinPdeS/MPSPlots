@@ -64,8 +64,6 @@ class ColorBar:
         plt.colorbar(mappable=Image, norm=None, cax=cax, orientation=self.Orientation)
 
 
-
-
 @dataclass
 class Contour:
     X: numpy.ndarray
@@ -128,6 +126,7 @@ class FillLine:
         if self.Outline:
             Ax._ax.plot(self.X, self.Y1, color='k', linestyle='-', linewidth=1)
 
+
 @dataclass
 class STDLine:
     X: numpy.ndarray
@@ -142,7 +141,7 @@ class STDLine:
         if self.LineStyle is None: self.LineStyle = next(linecycler)
 
         y0 = self.YMean - self.YSTD
-        y1 =  self.YMean + self.YSTD
+        y1 = self.YMean + self.YSTD
 
         l = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=self.LineStyle)
 
@@ -154,18 +153,18 @@ class Line:
     X: numpy.ndarray
     Y: numpy.ndarray
     Label: str = None
-    Fill: bool = False
     Color: str = None
     LineStyle: str = None
     
     def Render(self, Ax):
-        if self.LineStyle is None: self.LineStyle = next(linecycler)
+        if self.LineStyle is None: 
+            self.LineStyle = next(linecycler)
 
-        Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=self.LineStyle)
-
-        if self.Fill:
-            Ax._ax.fill_between(self.X, self.Y.min(), self.Y, color=self.Color, linestyle=self.LineStyle, alpha=0.7, label=self.Label)
-
+        if numpy.iscomplexobj(self.Y):
+            Ax._ax.plot(self.X, self.Y.real, label=self.Label + "[real]", color=self.Color, linestyle=self.LineStyle)
+            Ax._ax.plot(self.X, self.Y.imag, label=self.Label + "[imag]", color=self.Color, linestyle=self.LineStyle)
+        else:
+            Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=self.LineStyle)
 
 
 @dataclass
@@ -177,23 +176,20 @@ class Text:
     def Render(self, Ax):
         art = AnchoredText(self.Text,
                        loc='lower left', prop=dict(size=self.FontSize), frameon=True,
-                       bbox_to_anchor=(0.10, 1.0),
-                       bbox_transform=Ax._ax.transAxes
-                       )
+                       bbox_to_anchor=(0.05, 1.0),
+                       bbox_transform=Ax._ax.transAxes)
 
         Ax._ax.get_figure().add_artist(art)
-
-
 
 
 class Scene2D:
     UnitSize = (10, 3)
     plt.rcParams['ytick.labelsize'] = 10
     plt.rcParams['xtick.labelsize'] = 10
-    plt.rcParams["font.size"]       = 10
-    plt.rcParams["font.family"]     = "serif"
-    plt.rcParams['axes.edgecolor']  = 'black'
-    plt.rcParams['axes.linewidth']  = 1.5
+    plt.rcParams["font.size"] = 10
+    plt.rcParams["font.family"] = "serif"
+    plt.rcParams['axes.edgecolor'] = 'black'
+    plt.rcParams['axes.linewidth'] = 1.5
     plt.rcParams['legend.fontsize'] = 'medium'
 
     def __init__(self, Title='', UnitSize=None):
@@ -204,7 +200,6 @@ class Scene2D:
         self.nRows = None
         if UnitSize is not None: self.UnitSize = UnitSize
 
-
     @property
     def Axis(self):
         if not self.AxisGenerated:
@@ -213,22 +208,19 @@ class Scene2D:
 
         return self._Axis
 
-
     def AddAxes(self, *Axis):
         for ax in Axis:
             self._Axis.append(ax)
 
         return self
 
-
     def GetMaxColsRows(self):
-        RowMax, ColMax = 0,0
+        RowMax, ColMax = 0, 0
         for ax in self._Axis:
             RowMax = ax.Row if ax.Row > RowMax else RowMax
             ColMax = ax.Col if ax.Col > ColMax else ColMax
 
         return RowMax, ColMax
-
 
     def GenerateAxis(self):
         RowMax, ColMax = self.GetMaxColsRows()
@@ -256,8 +248,6 @@ class Scene2D:
 
         return self
 
-
-
     def Render(self):
         for ax in self.Axis:
             ax.Render()
@@ -266,8 +256,7 @@ class Scene2D:
 
         return self
 
-
-    def Show(self, SaveDir: str=None, **kwargs):
+    def Show(self, SaveDir: str = None, **kwargs):
         self.Render()
         if SaveDir is not None:
             plt.savefig(fname=SaveDir, **kwargs)
@@ -291,20 +280,18 @@ class Axis:
     Colorbar: ColorBar = None
     WaterMark: str = ''
     Figure: Scene2D = None
-    Projection: str=None
+    Projection: str = None
 
     def __post_init__(self):
 
         self._ax = None
-        self.Artist  = []
-
+        self.Artist = []
 
     @property
     def Labels(self):
         return {'x': self.xLabel,
                 'y': self.yLabel,
                 'Title': self.Title}
-
 
     def AddArtist(self, *Artist):
         for art in Artist:
@@ -319,11 +306,13 @@ class Axis:
         if self.Legend:
             self._ax.legend(fancybox=True, facecolor='white', edgecolor='k')
 
-
         self._ax.grid(self.Grid)
 
-        if self.xLimits is not None: self._ax.set_xlim(self.xLimits)
-        if self.yLimits is not None: self._ax.set_ylim(self.yLimits)
+        if self.xLimits is not None: 
+            self._ax.set_xlim(self.xLimits)
+
+        if self.yLimits is not None: 
+            self._ax.set_ylim(self.yLimits)
 
         self._ax.set_xlabel(self.Labels['x'])
         self._ax.set_ylabel(self.Labels['y'])
@@ -340,13 +329,11 @@ class Axis:
             self._ax.set_aspect("equal")
 
 
-
 def Multipage(filename, figs=None, dpi=200):
     pp = PdfPages(filename)
 
     for fig in figs:
         fig.Figure.savefig(pp, format='pdf')
-
 
     pp.close()
 
