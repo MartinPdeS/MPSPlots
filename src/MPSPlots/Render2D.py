@@ -138,14 +138,15 @@ class STDLine:
     LineStyle: str = None
     
     def Render(self, Ax):
-        if self.LineStyle is None: self.LineStyle = next(linecycler)
+        if self.LineStyle is None: 
+            self.LineStyle = next(linecycler)
 
-        y0 = self.YMean - self.YSTD
-        y1 = self.YMean + self.YSTD
+        y0 = self.YMean - self.YSTD / 2
+        y1 = self.YMean + self.YSTD / 2
 
-        l = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=self.LineStyle)
+        line = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=self.LineStyle)
 
-        Ax._ax.fill_between(self.X, y0, y1, color=l[-1].get_color(), linestyle='-', alpha=0.3, label=self.Label + '[std]')
+        Ax._ax.fill_between(self.X, y0, y1, color=line[-1].get_color(), linestyle='-', alpha=0.3, label=self.Label + '[std]')
 
 
 @dataclass
@@ -198,7 +199,8 @@ class Scene2D:
         self.Title = Title
         self.nCols = 1
         self.nRows = None
-        if UnitSize is not None: self.UnitSize = UnitSize
+        if UnitSize is not None: 
+            self.UnitSize = UnitSize
 
     @property
     def Axis(self):
