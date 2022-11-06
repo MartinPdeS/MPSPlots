@@ -1,7 +1,9 @@
 #   !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import pyvista, numpy
+import pyvista
+import numpy
+import logging
 
 
 class Scene3D:
@@ -68,7 +70,7 @@ class Scene3D:
 
         Spherical_Vector.point_data["R"] = R_vector * 0.1
 
-        p.add_mesh(Spherical_Vector.glyph(orient="R", scale="R", tolerance=0.005), color='k')
+        self.Figure.add_mesh(Spherical_Vector.glyph(orient="R", scale="R", tolerance=0.005), color='k')
 
     def __add_unit_sphere__(self, Plot: tuple = (0, 0), **kwargs):
         self.Figure.subplot(*Plot)
@@ -84,4 +86,7 @@ class Scene3D:
         self.Figure.add_text(Text, **kwargs)
 
     def Show(self, SaveDir: str = None):
-        self.Figure.show(screenshot=SaveDir)
+        if pyvista.OFF_SCREEN:
+            logging.info('No plots produced as OFF_SCREEN option is set to True')
+        else:
+            self.Figure.show(screenshot=SaveDir)
