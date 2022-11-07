@@ -4,10 +4,10 @@
 import pyvista
 import numpy
 import logging
+import matplotlib
 
 
 class Scene3D:
-    
     def __init__(self, shape: tuple = (1, 1), 
                        unit_size: tuple = (800, 800), 
                        window_size: tuple = None, **kwargs):
@@ -25,11 +25,15 @@ class Scene3D:
         Points = pyvista.wrap(Coordinate)
         self.Figure.add_points(Points, scalars=Scalar, point_size=20, render_points_as_spheres=True, **kwargs)
 
-    def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), **kwargs):
+    def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap=matplotlib.colormaps['seismic'], **kwargs):
+        dsa
+        if isinstance(cmap, str):
+            cmap = matplotlib.colormaps[cmap]
+
         self.Figure.subplot(*Plot)
         mesh = pyvista.StructuredGrid(*Coordinate)
 
-        self.Figure.add_mesh(mesh, **kwargs)
+        self.Figure.add_mesh(mesh, cmap, **kwargs)
 
         return self.Figure
 
