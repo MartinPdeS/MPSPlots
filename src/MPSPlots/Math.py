@@ -8,7 +8,6 @@ from MPSPlots.Utils import ToList
 class Angle(object):
 
     def __init__(self, input, Unit='degree'):
-        print(input)
         input = ToList(input)
         
         if Unit.lower() == 'degree':
