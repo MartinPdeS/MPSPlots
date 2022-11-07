@@ -8,17 +8,20 @@ from MPSPlots.Utils import ToList
 class Angle(object):
 
     def __init__(self, input, Unit='degree'):
+        print(input)
+        input = ToList(input)
+        
         if Unit.lower() == 'degree':
-            self.Degree = ToList([i if i is not None else numpy.nan for i in input])
-            self.Radian = ToList([numpy.deg2rad(i) if i is not None else numpy.nan for i in input])
+            self.Degree = [i if i is not None else numpy.nan for i in input]
+            self.Radian = [numpy.deg2rad(i) if i is not None else numpy.nan for i in input]
 
         if Unit.lower() == 'radian':
-            self.Radian = ToList([i if i is not None else numpy.nan for i in input])
-            self.Degree = ToList([numpy.rad2deg(i) if i is not None else numpy.nan for i in input])
+            self.Radian = [i if i is not None else numpy.nan for i in input]
+            self.Degree = [numpy.rad2deg(i) if i is not None else numpy.nan for i in input]
 
         if len(self.Degree) == 1:
-            self.Degree = ToList([self.Degree[0]])
-            self.Radian = ToList([self.Radian[0]])
+            self.Degree = [self.Degree[0]]
+            self.Radian = [self.Radian[0]]
 
 
 def Deg2Rad(Value):
@@ -140,6 +143,8 @@ def Sp2Cart(Phi, Theta, R=None):
     return x, y, z
 
 
+
+
 def RotateY(Phi, Theta, Angle):
     x, y, z = Sp2Cart(Phi=Phi, Theta=Theta)
     xp = x * numpy.cos(Angle) + z * numpy.sin(Angle)
@@ -189,6 +194,134 @@ def Angle2Jones(Delta):
     JonesVector = numpy.array([1, val])
     Norm = (numpy.sqrt(1 + numpy.abs(val)**2))
     return JonesVector / Norm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# -- 
+
+def cart2sp(x, y, z):
+    """Converts data from cartesian coordinates into spherical.
+
+    Args:
+        x (scalar or array_like): X-component of data.
+        y (scalar or array_like): Y-component of data.
+        z (scalar or array_like): Z-component of data.
+
+    Returns:
+        Tuple (r, theta, phi) of data in spherical coordinates.
+    """
+    x = np.asarray(x)
+    y = np.asarray(y)
+    z = np.asarray(z)
+    scalar_input = False
+    if x.ndim == 0 and y.ndim == 0 and z.ndim == 0:
+        x = x[None]
+        y = y[None]
+        z = z[None]
+        scalar_input = True
+    r = np.sqrt(x**2 + y**2 + z**2)
+    theta = np.arcsin(z / r)
+    phi = np.arctan2(y, x)
+    if scalar_input:
+        return (r.squeeze(), theta.squeeze(), phi.squeeze())
+    return (r, theta, phi)
+
+
+def sp2cart(r, theta, phi):
+    """Converts data in spherical coordinates into cartesian.
+
+    Args:
+        r (scalar or array_like): R-component of data.
+        theta (scalar or array_like): Theta-component of data.
+        phi (scalar or array_like): Phi-component of data.
+
+    Returns:
+        Tuple (x, y, z) of data in cartesian coordinates.
+    """
+    r = np.asarray(r)
+    theta = np.asarray(theta)
+    phi = np.asarray(phi)
+    scalar_input = False
+    if r.ndim == 0 and theta.ndim == 0 and phi.ndim == 0:
+        r = r[None]
+        theta = theta[None]
+        phi = phi[None]
+        scalar_input = True
+    x = r * np.cos(theta) * np.cos(phi)
+    y = r * np.cos(theta) * np.sin(phi)
+    z = r * np.sin(theta)
+    if scalar_input:
+        return (x.squeeze(), y.squeeze(), z.squeeze())
+    return (x, y, z)
+
+
+def cart2cyl(x, y, z):
+    """Converts data in cartesian coordinates into cylyndrical.
+
+    Args:
+        x (scalar or array_like): X-component of data.
+        y (scalar or array_like): Y-component of data.
+        z (scalar or array_like): Z-component of data.
+
+    Returns:
+        Tuple (r, phi, z) of data in cylindrical coordinates.
+    """
+    x = np.asarray(x)
+    y = np.asarray(y)
+    z = np.asarray(z)
+    scalar_input = False
+    if x.ndim == 0 and y.ndim == 0 and z.ndim == 0:
+        x = x[None]
+        y = y[None]
+        z = z[None]
+        scalar_input = True
+    r = np.sqrt(x**2 + y**2)
+    phi = np.arctan2(y, x)
+    if scalar_input:
+        return (r.squeeze(), phi.squeeze(), z.squeeze())
+    return (r, phi, z)
+
+
+def cyl2cart(r, phi, z):
+    """Converts data in cylindrical coordinates into cartesian.
+
+    Args:
+        r (scalar or array_like): R-component of data.
+        phi (scalar or array_like): Phi-component of data.
+        z (scalar or array_like): Z-component of data.
+
+    Returns:
+        Tuple (x, y, z) of data in cartesian coordinates.
+    """
+    r = np.asarray(r)
+    phi = np.asarray(phi)
+    z = np.asarray(z)
+    scalar_input = False
+    if r.ndim == 0 and phi.ndim == 0 and z.ndim == 0:
+        r = r[None]
+        phi = phi[None]
+        z = z[None]
+        scalar_input = True
+    x = r * np.cos(phi)
+    y = r * np.sin(phi)
+    if scalar_input:
+        return (x.squeeze(), y.squeeze(), z.squeeze())
+    return (x, y, z)
 
 
 #-
