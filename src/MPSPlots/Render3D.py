@@ -26,7 +26,6 @@ class Scene3D:
         self.Figure.add_points(Points, scalars=Scalar, point_size=20, render_points_as_spheres=True, **kwargs)
 
     def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap=matplotlib.colormaps['seismic'], **kwargs):
-        dsa
         if isinstance(cmap, str):
             cmap = matplotlib.colormaps[cmap]
 
