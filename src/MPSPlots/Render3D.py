@@ -32,7 +32,7 @@ class Scene3D:
         self.Figure.subplot(*Plot)
         mesh = pyvista.StructuredGrid(*Coordinate)
 
-        self.Figure.add_mesh(mesh, cmap, **kwargs)
+        self.Figure.add_mesh(mesh=mesh, cmap=cmap, **kwargs)
 
         return self.Figure
 
