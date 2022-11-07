@@ -25,7 +25,7 @@ class Scene3D:
         Points = pyvista.wrap(Coordinate)
         self.Figure.add_points(Points, scalars=Scalar, point_size=20, render_points_as_spheres=True, **kwargs)
 
-    def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap=matplotlib.colormaps['seismic'], **kwargs):
+    def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap=matplotlib.colormaps['seismic'], **kwargs): 
         if isinstance(cmap, str):
             cmap = matplotlib.colormaps[cmap]
 
