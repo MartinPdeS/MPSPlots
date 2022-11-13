@@ -6,7 +6,6 @@ from MPSPlots.Utils import ToList
 
 
 class Angle(object):
-
     def __init__(self, input, Unit='degree'):
         input = ToList(input)
         

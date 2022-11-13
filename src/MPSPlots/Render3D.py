@@ -89,7 +89,6 @@ class Scene3D:
         self.Figure.add_text(Text, **kwargs)
 
     def Show(self, SaveDir: str = None):
-        if pyvista.OFF_SCREEN:
-            logging.info('No plots produced as OFF_SCREEN option is set to True')
-        else:
-            self.Figure.show(screenshot=SaveDir)
+        self.Figure.show(screenshot=SaveDir)
+
+        return self.Figure
