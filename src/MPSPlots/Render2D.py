@@ -53,14 +53,14 @@ class ColorBar:
                 Image.set_norm(Norm)
                 plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
                 return
-        
+
             if not self.Symmetric:
                 Norm = matplotlib.colors.LogNorm(linthresh=0.03)
                 Norm.autoscale(Scalar)
                 Image.set_norm(Norm)
                 plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
                 return
-        
+
         plt.colorbar(mappable=Image, norm=None, cax=cax, orientation=self.Orientation)
 
 
@@ -118,11 +118,11 @@ class FillLine:
     Color: str = None
     LineStyle: str = None
     Outline: bool = True
-    
+
     def Render(self, Ax):
         if self.LineStyle is None: self.LineStyle = next(linecycler)
         Ax._ax.fill_between(self.X, self.Y0, self.Y1, color=self.Color, linestyle=self.LineStyle, alpha=0.7, label=self.Label)
-        
+
         if self.Outline:
             Ax._ax.plot(self.X, self.Y1, color='k', linestyle='-', linewidth=1)
 
@@ -136,9 +136,9 @@ class STDLine:
     Fill: bool = False
     Color: str = None
     LineStyle: str = None
-    
+
     def Render(self, Ax):
-        if self.LineStyle is None: 
+        if self.LineStyle is None:
             self.LineStyle = next(linecycler)
 
         y0 = self.YMean - self.YSTD / 2
@@ -156,9 +156,9 @@ class Line:
     Label: str = None
     Color: str = None
     LineStyle: str = None
-    
+
     def Render(self, Ax):
-        if self.LineStyle is None: 
+        if self.LineStyle is None:
             self.LineStyle = next(linecycler)
 
         if numpy.iscomplexobj(self.Y):
@@ -199,7 +199,7 @@ class Scene2D:
         self.Title = Title
         self.nCols = 1
         self.nRows = None
-        if UnitSize is not None: 
+        if UnitSize is not None:
             self.UnitSize = UnitSize
 
     @property
@@ -264,6 +264,8 @@ class Scene2D:
             plt.savefig(fname=SaveDir, **kwargs)
         plt.show()
 
+        return self.Figure
+
 
 @dataclass
 class Axis:
@@ -310,10 +312,10 @@ class Axis:
 
         self._ax.grid(self.Grid)
 
-        if self.xLimits is not None: 
+        if self.xLimits is not None:
             self._ax.set_xlim(self.xLimits)
 
-        if self.yLimits is not None: 
+        if self.yLimits is not None:
             self._ax.set_ylim(self.yLimits)
 
         self._ax.set_xlabel(self.Labels['x'])
