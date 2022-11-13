@@ -258,13 +258,18 @@ class Scene2D:
 
         return self
 
+    def Close(self):
+        plt.close(self.Figure)
+
     def Show(self, SaveDir: str = None, **kwargs):
         self.Render()
+
         if SaveDir is not None:
             plt.savefig(fname=SaveDir, **kwargs)
+
         plt.show()
 
-        return self.Figure
+        return self
 
 
 @dataclass

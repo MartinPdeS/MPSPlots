@@ -91,4 +91,7 @@ class Scene3D:
     def Show(self, SaveDir: str = None):
         self.Figure.show(screenshot=SaveDir)
 
-        return self.Figure
+        return self
+
+    def Close(self):
+        self.Figure.close()
