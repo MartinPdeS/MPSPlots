@@ -37,7 +37,7 @@ class Scene3D:
         return self.Figure
 
     def Add_theta_vector_field(self, Plot, Radius=1.03 / 2):
-        self.Figure.subplot(*Plot)
+        self.Figure.subplot(*Plot) 
         theta = numpy.arange(0, 360, 10)
         phi = numpy.arange(180, 0, -10)
 
