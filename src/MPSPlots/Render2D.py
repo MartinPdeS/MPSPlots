@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import logging, numpy
+import logging
+import numpy
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import AnchoredText
 from matplotlib import colors
@@ -18,7 +19,7 @@ import matplotlib
 matplotlib.style.use('ggplot')
 
 
-linecycler = cycle(["-","--","-.",":"])
+linecycler = cycle(["-", "--", "-.", ":"])
 
 
 @dataclass
@@ -38,7 +39,7 @@ class ColorBar:
 
         if self.Discreet:
             Values = numpy.unique(Scalar)
-            Norm = colors.BoundaryNorm(Values, Values.size+1, extend='both')
+            Norm = colors.BoundaryNorm(Values, Values.size + 1, extend='both')
             Norm.autoscale(Scalar)
             Image.set_norm(Norm)
             ticks = numpy.unique(Scalar)
@@ -78,16 +79,16 @@ class Contour:
         Image = Ax.contour(self.X,
                             self.Y,
                             self.Scalar,
-                            level = self.IsoLines,
+                            level=self.IsoLines,
                             colors="black",
-                            linewidth=.5 )
+                            linewidth=.5)
 
         Image = Ax.contourf(self.X,
                             self.Y,
                             self.Scalar,
-                            level = self.IsoLines,
+                            level=self.IsoLines,
                             cmap=self.ColorMap,
-                            norm=colors.LogNorm() )
+                            norm=colors.LogNorm())
 
 
 @dataclass
@@ -120,7 +121,9 @@ class FillLine:
     Outline: bool = True
 
     def Render(self, Ax):
-        if self.LineStyle is None: self.LineStyle = next(linecycler)
+        if self.LineStyle is None:
+            self.LineStyle = next(linecycler)
+
         Ax._ax.fill_between(self.X, self.Y0, self.Y1, color=self.Color, linestyle=self.LineStyle, alpha=0.7, label=self.Label)
 
         if self.Outline:
@@ -227,13 +230,13 @@ class Scene2D:
     def GenerateAxis(self):
         RowMax, ColMax = self.GetMaxColsRows()
 
-        FigSize = [ self.UnitSize[0]*(ColMax+1), self.UnitSize[1]*(RowMax+1) ]
+        FigSize = [self.UnitSize[0] * (ColMax + 1), self.UnitSize[1] * (RowMax + 1)]
 
         self.Figure = plt.figure(figsize=FigSize)
 
-        Grid = gridspec.GridSpec(ncols=ColMax+1, nrows=RowMax+1, figure=self.Figure)
+        Grid = gridspec.GridSpec(ncols=ColMax + 1, nrows=RowMax + 1, figure=self.Figure)
 
-        Ax = numpy.full(shape=(RowMax+1, ColMax+1), fill_value=None)
+        Ax = numpy.full(shape=(RowMax + 1, ColMax + 1), fill_value=None)
 
         for axis in self._Axis:
             subplot = self.Figure.add_subplot(Grid[axis.Row, axis.Col], projection=axis.Projection)
