@@ -3,20 +3,19 @@
 
 import pyvista
 import numpy
-import logging
 import matplotlib
 
 
 class Scene3D:
-    def __init__(self, shape: tuple = (1, 1), 
-                       unit_size: tuple = (800, 800), 
+    def __init__(self, shape: tuple = (1, 1),
+                       unit_size: tuple = (800, 800),
                        window_size: tuple = None, **kwargs):
 
         if window_size is None:
             window_size = (unit_size[1] * shape[1], unit_size[0] * shape[0])
 
-        self.Figure = pyvista.Plotter(theme=pyvista.themes.DocumentTheme(), 
-                                      window_size=window_size, 
+        self.Figure = pyvista.Plotter(theme=pyvista.themes.DocumentTheme(),
+                                      window_size=window_size,
                                       shape=shape, **kwargs)
 
     def Add_Unstructured(self, Coordinate: numpy.ndarray, Scalar: numpy.ndarray = None, Plot: tuple = (0, 0), **kwargs):
@@ -25,8 +24,8 @@ class Scene3D:
         Points = pyvista.wrap(Coordinate)
         self.Figure.add_points(Points, scalars=Scalar, point_size=20, render_points_as_spheres=True, **kwargs)
 
-    def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap=matplotlib.colormaps['seismic'], **kwargs): 
-        if isinstance(cmap, str):
+    def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap='seismic', **kwargs):
+        if isinstance(cmap, str): # works only for matplotlbi 3.6.1
             cmap = matplotlib.colormaps[cmap]
 
         self.Figure.subplot(*Plot)
@@ -37,7 +36,7 @@ class Scene3D:
         return self.Figure
 
     def Add_theta_vector_field(self, Plot, Radius=1.03 / 2):
-        self.Figure.subplot(*Plot) 
+        self.Figure.subplot(*Plot)
         theta = numpy.arange(0, 360, 10)
         phi = numpy.arange(180, 0, -10)
 
