@@ -17,6 +17,9 @@ from dataclasses import dataclass
 
 import matplotlib
 matplotlib.style.use('ggplot')
+plt.rcParams["mathtext.fontset"] = "dejavuserif"
+plt.rcParams["font.family"] = "serif"
+plt.rcParams['axes.edgecolor'] = 'black'
 
 
 linecycler = cycle(["-", "--", "-.", ":"])
@@ -24,192 +27,251 @@ linecycler = cycle(["-", "--", "-.", ":"])
 
 @dataclass
 class ColorBar:
-    Color: str = 'viridis'
-    Discreet: bool = False
-    Position: str = 'left'
-    Orientation: str = "vertical"
-    Symmetric: bool = False
-    LogNorm: bool = False
-    Format: str = ':.3f'
-    LogNorm: bool = False
+    color: str = 'viridis'
+    discreet: bool = False
+    position: str = 'left'
+    orientation: str = "vertical"
+    symmetric: bool = False
+    log_norm: bool = False
+    numeric_format: str = ':.3f'
+    n_ticks: int = None
+    label_size: int = None
 
-    def Render(self, Ax, Scalar, Image):
+    def _render_(self, Ax, Scalar, Image) -> None:
         divider = make_axes_locatable(Ax._ax)
-        cax = divider.append_axes(self.Position, size="10%", pad=0.15)
+        cax = divider.append_axes(self.position, size="10%", pad=0.15)
+        if self.discreet:
+            unique_values = numpy.unique(Scalar)
+            Norm = colors.BoundaryNorm(unique_values, unique_values.size + 1, extend='both')
+            ticks = numpy.unique(Scalar)
+            cbar = plt.colorbar(mappable=Image, norm=Norm, boundaries=ticks, cax=cax, orientation=self.orientation, format=self.numeric_format)
 
-        if self.Discreet:
-            Values = numpy.unique(Scalar)
-            Norm = colors.BoundaryNorm(Values, Values.size + 1, extend='both')
+        elif self.log_norm and self.symmetric:
+            Norm = matplotlib.colors.SymLogNorm(linthresh=1e-10)
             Norm.autoscale(Scalar)
             Image.set_norm(Norm)
-            ticks = numpy.unique(Scalar)
-            plt.colorbar(mappable=Image, norm=Norm, boundaries=ticks, cax=cax, orientation=self.Orientation)
-            return
+            cbar = plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.orientation, format=self.numeric_format)
 
-        if self.LogNorm:
-            if self.Symmetric:
+        elif self.log_norm and not self.symmetric:
+            Norm = matplotlib.colors.LogNorm(linthresh=0.03)
+            Norm.autoscale(Scalar)
+            Image.set_norm(Norm)
+            cbar = plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.orientation, format=self.numeric_format)
 
-                Norm = matplotlib.colors.SymLogNorm(linthresh=1e-10)
-                Norm.autoscale(Scalar)
-                Image.set_norm(Norm)
-                plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
-                return
+        elif not self.log_norm and self.symmetric:
+            Norm = matplotlib.colors.TwoSlopeNorm(vcenter=0, vmax=numpy.abs(Scalar).max(), vmin=-numpy.abs(Scalar).max())
+            Image.set_norm(Norm)
+            cbar = plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.orientation)
 
-            if not self.Symmetric:
-                Norm = matplotlib.colors.LogNorm(linthresh=0.03)
-                Norm.autoscale(Scalar)
-                Image.set_norm(Norm)
-                plt.colorbar(mappable=Image, norm=Norm, cax=cax, orientation=self.Orientation)
-                return
+        else:
+            cbar = plt.colorbar(mappable=Image, norm=None, cax=cax, orientation=self.orientation, format=self.numeric_format)
 
-        plt.colorbar(mappable=Image, norm=None, cax=cax, orientation=self.Orientation)
+        if self.n_ticks is not None and not self.log_norm:
+            cbar.ax.locator_params(nbins=self.n_ticks)
+
+        if self.label_size is not None:
+            cbar.ax.tick_params(labelsize=self.label_size)
 
 
 @dataclass
 class Contour:
-    X: numpy.ndarray
-    Y: numpy.ndarray
-    Scalar: numpy.ndarray
-    ColorMap: str = CMAP.BKR
-    xLabel: str = ''
-    yLabel: str = ''
-    IsoLines: list = None
+    x: numpy.ndarray
+    y: numpy.ndarray
+    scalar: numpy.ndarray
+    colormap: str = CMAP.BKR
+    isolines: list = None
 
-    def Render(self, Ax):
-        Image = Ax.contour(self.X,
-                            self.Y,
-                            self.Scalar,
-                            level=self.IsoLines,
-                            colors="black",
-                            linewidth=.5)
+    def _render_(self, Ax) -> None:
+        Ax.contour(self.x,
+                   self.y,
+                   self.scalar,
+                   level=self.isolines,
+                   colors="black",
+                   linewidth=.5)
 
-        Image = Ax.contourf(self.X,
-                            self.Y,
-                            self.Scalar,
-                            level=self.IsoLines,
-                            cmap=self.ColorMap,
-                            norm=colors.LogNorm())
+        Ax.contourf(self.x,
+                    self.y,
+                    self.scalar,
+                    level=self.isolines,
+                    cmap=self.colormap,
+                    norm=colors.LogNorm())
 
 
 @dataclass
 class Mesh:
-    X: numpy.ndarray
-    Y: numpy.ndarray
-    Scalar: numpy.ndarray
-    ColorMap: str = CMAP.BKR
-    Label: str = ''
+    x: numpy.ndarray
+    y: numpy.ndarray
+    scalar: numpy.ndarray
+    colormap: str = CMAP.BKR
 
-    def Render(self, Ax):
-        Image = Ax._ax.pcolormesh(self.X, self.Y, self.Scalar.T, cmap=self.ColorMap, shading='auto')
+    def _render_(self, Ax):
+        Image = Ax._ax.pcolormesh(self.x, self.y, self.scalar.T, cmap=self.colormap, shading='auto')
         Image.set_edgecolor('face')
 
-        if Ax.Colorbar is not None:
-            Ax.Colorbar.Render(Ax=Ax, Scalar=self.Scalar, Image=Image)
+        if Ax.colorbar is not None:
+            Ax.colorbar._render_(Ax=Ax, Scalar=self.scalar, Image=Image)
 
         return Image
 
 
 @dataclass
 class FillLine:
-    X: numpy.ndarray
-    Y0: numpy.ndarray
-    Y1: numpy.ndarray
-    Label: str = None
-    Fill: bool = False
-    Color: str = None
-    LineStyle: str = None
-    Outline: bool = True
+    x: numpy.ndarray
+    y0: numpy.ndarray
+    y1: numpy.ndarray
+    label: str = None
+    fill: bool = False
+    color: str = None
+    line_style: str = None
+    show_outline: bool = True
 
-    def Render(self, Ax):
-        if self.LineStyle is None:
-            self.LineStyle = next(linecycler)
+    def _render_(self, Ax) -> None:
+        if self.line_style is None:
+            self.line_style = next(linecycler)
 
-        Ax._ax.fill_between(self.X, self.Y0, self.Y1, color=self.Color, linestyle=self.LineStyle, alpha=0.7, label=self.Label)
+        Ax._ax.fill_between(self.x, self.y0, self.y1, color=self.color, linestyle=self.line_style, alpha=0.7, label=self.label)
 
-        if self.Outline:
-            Ax._ax.plot(self.X, self.Y1, color='k', linestyle='-', linewidth=1)
+        if self.show_outline:
+            Ax._ax.plot(self.x, self.y1, color='k', linestyle='-', linewidth=1)
 
 
 @dataclass
 class STDLine:
-    X: numpy.ndarray
-    YMean: numpy.ndarray
-    YSTD: numpy.ndarray
-    Label: str = None
-    Fill: bool = False
-    Color: str = None
-    LineStyle: str = None
+    x: numpy.ndarray
+    y_mean: numpy.ndarray
+    y_std: numpy.ndarray
+    label: str = None
+    color: str = None
+    line_style: str = None
 
-    def Render(self, Ax):
-        if self.LineStyle is None:
-            self.LineStyle = next(linecycler)
+    def _render_(self, Ax):
+        if self.line_style is None:
+            self.line_style = next(linecycler)
 
-        y0 = self.YMean - self.YSTD / 2
-        y1 = self.YMean + self.YSTD / 2
+        y0 = self.y_mean - self.y_std / 2
+        y1 = self.y_mean + self.y_std / 2
 
-        line = Ax._ax.plot(self.X, self.YMean, color=self.Color, label=self.Label + '[mean]', linestyle=self.LineStyle)
+        line = Ax._ax.plot(self.x, self.y_mean, color=self.color, label=self.label + '[mean]', linestyle=self.line_style)
 
-        Ax._ax.fill_between(self.X, y0, y1, color=line[-1].get_color(), linestyle='-', alpha=0.3, label=self.Label + '[std]')
+        Ax._ax.fill_between(self.x, y0, y1, color=line[-1].get_color(), linestyle='-', alpha=0.3, label=self.label + '[std]')
 
 
 @dataclass
 class Line:
-    X: numpy.ndarray
-    Y: numpy.ndarray
-    Label: str = None
-    Color: str = None
-    LineStyle: str = None
+    x: numpy.ndarray
+    y: numpy.ndarray
+    label: str = None
+    color: str = None
+    line_style: str = None
 
-    def Render(self, Ax):
-        if self.LineStyle is None:
-            self.LineStyle = next(linecycler)
+    def _render_(self, Ax):
+        if self.line_style is None:
+            self.line_style = next(linecycler)
 
-        if numpy.iscomplexobj(self.Y):
-            Ax._ax.plot(self.X, self.Y.real, label=self.Label + "[real]", color=self.Color, linestyle=self.LineStyle)
-            Ax._ax.plot(self.X, self.Y.imag, label=self.Label + "[imag]", color=self.Color, linestyle=self.LineStyle)
+        if numpy.iscomplexobj(self.y):
+            Ax._ax.plot(self.x, self.y.real, label=self.label + "[real]", color=self.color, linestyle=self.line_style)
+            Ax._ax.plot(self.x, self.y.imag, label=self.label + "[imag]", color=self.color, linestyle=self.line_style)
         else:
-            Ax._ax.plot(self.X, self.Y, label=self.Label, color=self.Color, linestyle=self.LineStyle)
+            Ax._ax.plot(self.x, self.y, label=self.label, color=self.color, linestyle=self.line_style)
 
 
 @dataclass
 class Text:
-    Position: list = (0.9, 0.9)
-    FontSize: int = 8
-    Text: str = ''
+    position: list = (0.9, 0.9)
+    font_size: int = 8
+    text: str = ''
 
-    def Render(self, Ax):
-        art = AnchoredText(self.Text,
-                       loc='lower left', prop=dict(size=self.FontSize), frameon=True,
-                       bbox_to_anchor=(0.05, 1.0),
-                       bbox_transform=Ax._ax.transAxes)
+    def _render_(self, Ax):
+        art = AnchoredText(self.text,
+                           loc='lower left',
+                           prop=dict(size=self.font_size),
+                           frameon=True,
+                           bbox_to_anchor=(0.05, 1.0),
+                           bbox_transform=Ax._ax.transAxes)
 
         Ax._ax.get_figure().add_artist(art)
 
 
+@dataclass
 class Scene2D:
-    UnitSize = (10, 3)
-    plt.rcParams['ytick.labelsize'] = 10
-    plt.rcParams['xtick.labelsize'] = 10
-    plt.rcParams["font.size"] = 10
-    plt.rcParams["font.family"] = "serif"
-    plt.rcParams['axes.edgecolor'] = 'black'
-    plt.rcParams['axes.linewidth'] = 1.5
-    plt.rcParams['legend.fontsize'] = 'medium'
+    unit_size: tuple = (10, 3)
+    tight_layout: bool = False
+    title: str = ""
 
-    def __init__(self, Title='', UnitSize=None):
+    def __post_init__(self):
         self.AxisGenerated = False
         self._Axis = []
-        self.Title = Title
-        self.nCols = 1
+        self.nCols = None
         self.nRows = None
-        if UnitSize is not None:
-            self.UnitSize = UnitSize
+
+    def font_size(self, value: int):
+        for ax in self:
+            ax.font_size = value
+
+    def tick_size(self, value: int):
+        for ax in self:
+            ax.tick_size = value
+
+    def x_limits(self, value: list):
+        for ax in self:
+            ax.x_limits = value
+
+    def y_limits(self, value: list):
+        for ax in self:
+            ax.y_limits = value
+
+    def x_label(self, value: list):
+        for ax in self:
+            ax.x_label = value
+
+    def y_label(self, value: list):
+        for ax in self:
+            ax.y_label = value
+
+    def water_mark(self, value: str):
+        for ax in self:
+            ax.water_mark = value
+
+    def equal(self, value: bool):
+        for ax in self:
+            ax.equal = value
+
+    def show_legend(self, value: bool):
+        for ax in self:
+            ax.show_legend = value
+
+    def show_grid(self, value: bool):
+        for ax in self:
+            ax.show_grid = value
+
+    def colorbar_n_ticks(self, value: int):
+        for ax in self:
+            ax.colorbar.n_ticks = value
+
+    def colorbar_label_size(self, value: int):
+        for ax in self:
+            ax.colorbar.label_size = value
+
+    font_size = property(None, font_size)
+    tick_size = property(None, tick_size)
+    x_limits = property(None, x_limits)
+    y_limits = property(None, y_limits)
+    x_label = property(None, x_label)
+    y_label = property(None, y_label)
+    water_mark = property(None, water_mark)
+    equal = property(None, equal)
+    show_legend = property(None, show_legend)
+    show_grid = property(None, show_grid)
+    colorbar_n_ticks = property(None, colorbar_n_ticks)
+    colorbar_label_size = property(None, colorbar_label_size)
+
+    def __getitem__(self, idx):
+        return self.Axis[idx]
 
     @property
     def Axis(self):
         if not self.AxisGenerated:
-
-            self.GenerateAxis()
+            self._generate_axis_()
 
         return self._Axis
 
@@ -219,45 +281,44 @@ class Scene2D:
 
         return self
 
-    def GetMaxColsRows(self):
-        RowMax, ColMax = 0, 0
+    def _get_max_col_row_(self):
+        max_row, max_col = 0, 0
         for ax in self._Axis:
-            RowMax = ax.Row if ax.Row > RowMax else RowMax
-            ColMax = ax.Col if ax.Col > ColMax else ColMax
+            max_row = ax.row if ax.row > max_row else max_row
+            max_col = ax.col if ax.col > max_col else max_col
 
-        return RowMax, ColMax
+        return max_row + 1, max_col + 1
 
-    def GenerateAxis(self):
-        RowMax, ColMax = self.GetMaxColsRows()
+    def _generate_axis_(self):
+        max_row, max_col = self._get_max_col_row_()
 
-        FigSize = [self.UnitSize[0] * (ColMax + 1), self.UnitSize[1] * (RowMax + 1)]
+        FigSize = [self.unit_size[0] * max_col, self.unit_size[1] * max_row]
 
         self.Figure = plt.figure(figsize=FigSize)
 
-        Grid = gridspec.GridSpec(ncols=ColMax + 1, nrows=RowMax + 1, figure=self.Figure)
+        grid = gridspec.GridSpec(ncols=max_col, nrows=max_row, figure=self.Figure)
 
-        Ax = numpy.full(shape=(RowMax + 1, ColMax + 1), fill_value=None)
+        Ax = numpy.full(shape=(max_row, max_col), fill_value=None)
 
         for axis in self._Axis:
-            subplot = self.Figure.add_subplot(Grid[axis.Row, axis.Col], projection=axis.Projection)
-            Ax[axis.Row, axis.Col] = subplot
+            subplot = self.Figure.add_subplot(grid[axis.row, axis.col], projection=axis.projection)
+            Ax[axis.row, axis.col] = subplot
 
-        Ax = numpy.asarray(Ax)
-
-        self.Figure.suptitle(self.Title)
+        self.Figure.suptitle(self.title)
 
         for ax in self._Axis:
-            ax._ax = Ax[ax.Row, ax.Col]
+            ax._ax = Ax[ax.row, ax.col]
 
         self.AxisGenerated = True
 
         return self
 
-    def Render(self):
+    def _render_(self):
         for ax in self.Axis:
-            ax.Render()
+            ax._render_()
 
-        plt.tight_layout()
+        if self.tight_layout:
+            plt.tight_layout()
 
         return self
 
@@ -265,8 +326,7 @@ class Scene2D:
         plt.close(self.Figure)
 
     def Show(self, SaveDir: str = None, **kwargs):
-        self.Render()
-
+        self._render_()
         if SaveDir is not None:
             plt.savefig(fname=SaveDir, **kwargs)
 
@@ -277,68 +337,92 @@ class Scene2D:
 
 @dataclass
 class Axis:
-    Row: int
-    Col: int
-    xLabel: str = ''
-    yLabel: str = ''
-    Title: str = ''
-    Grid: bool = True
-    Legend: bool = False
-    xScale: str = 'linear'
-    yScale: str = 'linear'
-    xLimits: list = None
-    yLimits: list = None
-    Equal: bool = False
-    Colorbar: ColorBar = None
-    WaterMark: str = ''
+    row: int
+    col: int
+    x_label: str = None
+    y_label: str = None
+    title: str = ''
+    show_grid: bool = True
+    show_legend: bool = False
+    x_scale: str = 'linear'
+    y_scale: str = 'linear'
+    x_limits: list = None
+    y_limits: list = None
+    equal_limits: bool = False
+    equal: bool = False
+    colorbar: ColorBar = None
+    water_mark: str = ''
     Figure: Scene2D = None
-    Projection: str = None
+    projection: str = None
+    font_size: int = 10
+    tick_size: int = 10
 
     def __post_init__(self):
-
         self._ax = None
         self.Artist = []
-
-    @property
-    def Labels(self):
-        return {'x': self.xLabel,
-                'y': self.yLabel,
-                'Title': self.Title}
 
     def AddArtist(self, *Artist):
         for art in Artist:
             self.Artist.append(art)
 
-    def Render(self):
+    def _render_(self):
         logging.debug("Rendering Axis...")
 
         for art in self.Artist:
-            Image = art.Render(self)
+            art._render_(self)
 
-        if self.Legend:
+        if self.x_limits is not None:
+            self._ax.set_xlim(self.x_limits)
+
+        if self.y_limits is not None:
+            self._ax.set_ylim(self.y_limits)
+
+        if self.equal_limits:
+            x_max = max(self._ax.get_xlim())
+            x_min = min(self._ax.get_xlim())
+            y_max = max(self._ax.get_ylim())
+            y_min = min(self._ax.get_ylim())
+
+            max_lim = x_max if x_max > y_max else y_max
+            min_lim = x_min if x_min > y_min else y_min
+
+            self._ax.set_xlim([min_lim, max_lim])
+            self._ax.set_ylim([min_lim, max_lim])
+
+        self._decorate_ax_()
+
+    def _decorate_ax_(self):
+        if self.show_legend:
             self._ax.legend(fancybox=True, facecolor='white', edgecolor='k')
 
-        self._ax.grid(self.Grid)
+        if self.x_label is not None:
+            self._ax.set_xlabel(self.x_label, fontsize=self.font_size)
 
-        if self.xLimits is not None:
-            self._ax.set_xlim(self.xLimits)
+        if self.y_label is not None:
+            self._ax.set_ylabel(self.y_label, fontsize=self.font_size)
 
-        if self.yLimits is not None:
-            self._ax.set_ylim(self.yLimits)
+        if self.title is not None:
+            self._ax.set_title(self.title, fontsize=self.font_size)
 
-        self._ax.set_xlabel(self.Labels['x'])
-        self._ax.set_ylabel(self.Labels['y'])
-        self._ax.set_title(self.Labels['Title'])
+        if self.x_scale is not None:
+            self._ax.set_xscale(self.x_scale)
 
-        self._ax.set_xscale(self.xScale)
-        self._ax.set_yscale(self.yScale)
+        if self.y_scale is not None:
+            self._ax.set_yscale(self.y_scale)
 
-        self._ax.text(0.5, 0.1, self.WaterMark, transform=self._ax.transAxes,
-                fontsize=30, color='white', alpha=0.2,
-                ha='center', va='baseline')
+        if self.tick_size is not None:
+            self._ax.tick_params(labelsize=self.tick_size)
 
-        if self.Equal:
+        if self.equal:
             self._ax.set_aspect("equal")
+
+        if self.show_grid:
+            self._ax.grid(self.show_grid)
+
+        if self.water_mark is not None:
+            self._ax.text(0.5, 0.1, self.water_mark, transform=self._ax.transAxes,
+                    fontsize=30, color='white', alpha=0.2,
+                    ha='center', va='baseline')
 
 
 def Multipage(filename, figs=None, dpi=200):

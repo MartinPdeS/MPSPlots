@@ -25,7 +25,7 @@ class Scene3D:
         self.Figure.add_points(Points, scalars=Scalar, point_size=20, render_points_as_spheres=True, **kwargs)
 
     def Add_Mesh(self, Coordinate: numpy.ndarray, Plot: tuple = (0, 0), cmap='seismic', **kwargs):
-        if isinstance(cmap, str): # works only for matplotlbi 3.6.1
+        if isinstance(cmap, str):  # works only for matplotlib 3.6.1
             cmap = matplotlib.colormaps[cmap]
 
         self.Figure.subplot(*Plot)
@@ -34,7 +34,7 @@ class Scene3D:
         self.Figure.add_mesh(mesh=mesh, cmap=cmap, **kwargs)
 
         return self.Figure
- 
+
     def Add_theta_vector_field(self, Plot, Radius=1.03 / 2):
         self.Figure.subplot(*Plot)
         theta = numpy.arange(0, 360, 10)
