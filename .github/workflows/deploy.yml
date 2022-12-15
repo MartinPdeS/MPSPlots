@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   Ubuntu_x86_64:
-    uses: MartinPdeS/MPSPlots/.github/workflows/ubuntu_x86_64.yml@master
+    uses: MartinPdeS/MPSPlots/.github/workflows/ubuntu_x86_64.yml@main
     secrets: inherit
     with:
       publish_wheel: true
