@@ -4,6 +4,7 @@ MPSPlots
 
 |python|
 |PyPi|
+|codecov|
 
 Personal Matplotlib wrapper
 
@@ -24,3 +25,5 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
 
 .. |PyPi| image:: https://badge.fury.io/py/MPSPlots.svg
    :target: https://pypi.org/project/MPSPlots/
+
+.. |codecov| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/16caa7bb2a83d5af36740e4a6a0f861d/raw/MPSPlots_covbadge.json

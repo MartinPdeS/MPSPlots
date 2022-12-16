@@ -87,7 +87,7 @@ jobs:
         with:
           auth: ${{ secrets.MPdS_gist_token }}
           gistID: fdbae2f798d47a3a4585cdb53229c937
-          filename: covbadge.json
+          filename: MPSPlots_covbadge.json
           label: Coverage
           message: ${{ env.total }}%
           minColorRange: 50
