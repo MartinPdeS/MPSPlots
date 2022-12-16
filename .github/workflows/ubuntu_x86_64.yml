@@ -42,11 +42,6 @@ jobs:
         python-version: ${{ fromJson(inputs.python_wheel) }}
     steps:
 
-      - name: "Set up QEMU"
-        uses: docker/setup-qemu-action@v2
-        with:
-          platform: arm64
-
       - name: "Checkout repository"
         uses: actions/checkout@v3
         with:
@@ -68,12 +63,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -e .[devs_all]
-          coverage run -p -m pytest -s
+          python -m coverage run -p -m pytest -s
           coverage combine
           coverage report -m --skip-covered
           coverage json -o CoverageReport.json
           python setup.py bdist_wheel
-
+ 
       - name: "Computing total coverage"
         run: |
           export TOTAL=$(python -c "import json;print(json.load(open('CoverageReport.json'))['totals']['percent_covered_display'])")
