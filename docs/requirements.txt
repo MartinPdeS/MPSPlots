@@ -1,6 +1,7 @@
 wheel
 numpy
 matplotlib
+pyvista
 Jinja2
 numpydoc
 Babel
