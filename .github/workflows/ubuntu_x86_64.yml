@@ -85,23 +85,23 @@ jobs:
           name: "manylinux_wheel_python${{ matrix.python-version[1] }}"
           path: ./dist/*
 
-      # - name: "Upload: Coverage badge"
-      #   if: ${{ inputs.update_coverage == true }}"
-      #   uses: schneegans/dynamic-badges-action@v1.4.0
-      #   with:
-      #     auth: ${{ secrets.GIST_TOKEN }}
-      #     gistID: 16caa7bb2a83d5af36740e4a6a0f861d
-      #     filename: covbadge.json
-      #     label: Coverage
-      #     message: ${{ env.total }}%
-      #     minColorRange: 50
-      #     maxColorRange: 90
-      #     valColorRange: ${{ env.total }}
+      - name: "Upload: Coverage badge"
+        if: ${{ inputs.update_coverage == 'true' }}"
+        uses: schneegans/dynamic-badges-action@v1.4.0
+        with:
+          auth: ${{ secrets.GIST_TOKEN }}
+          gistID: 16caa7bb2a83d5af36740e4a6a0f861d
+          filename: covbadge.json
+          label: Coverage
+          message: ${{ env.total }}%
+          minColorRange: 50
+          maxColorRange: 90
+          valColorRange: ${{ env.total }}
 
 
   Documentation:
     needs: [job_create_wheel]
-    if: ${{ inputs.upload_documentation == true }}"
+    if: ${{ inputs.upload_documentation == 'true' }}"
     name: "Publish documentation to RTD"
     runs-on: ubuntu-latest
     steps:
