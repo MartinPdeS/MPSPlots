@@ -86,7 +86,7 @@ jobs:
           path: ./dist/*
 
       - name: "Upload: Coverage badge"
-        if: ${{ inputs.update_coverage == 'true' }}
+        if: "${{ inputs.update_coverage == 'true' }}"
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
           auth: ${{ secrets.GIST_TOKEN }}
