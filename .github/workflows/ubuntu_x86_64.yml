@@ -79,14 +79,14 @@ jobs:
           echo "total=$TOTAL" >> $GITHUB_ENV
 
       - name: "Upload: Wheel"
-        if: ${{ inputs.publish_wheel == true }}"
+        if: ${{ inputs.publish_wheel == 'true' }}
         uses: actions/upload-artifact@v3
         with:
           name: "manylinux_wheel_python${{ matrix.python-version[1] }}"
           path: ./dist/*
 
       - name: "Upload: Coverage badge"
-        if: ${{ inputs.update_coverage == 'true' }}"
+        if: ${{ inputs.update_coverage == 'true' }}
         uses: schneegans/dynamic-badges-action@v1.4.0
         with:
           auth: ${{ secrets.GIST_TOKEN }}
@@ -101,7 +101,7 @@ jobs:
 
   Documentation:
     needs: [job_create_wheel]
-    if: ${{ inputs.upload_documentation == 'true' }}"
+    if: ${{ inputs.upload_documentation == 'true' }}
     name: "Publish documentation to RTD"
     runs-on: ubuntu-latest
     steps:
