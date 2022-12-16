@@ -19,7 +19,7 @@ jobs:
       python_twine: '3.8'
       upload_documentation: false
       python_documentation: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
-      update_coverage: True
+      update_coverage: true
 
 
   job_publish_wheel:
