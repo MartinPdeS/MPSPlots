@@ -105,7 +105,8 @@ class Mesh:
     colormap: str = CMAP.BKR
 
     def _render_(self, Ax):
-        Image = Ax._ax.pcolormesh(self.x, self.y, self.scalar.T, cmap=self.colormap, shading='auto')
+        Image = Ax._ax.pcolormesh(self.x, self.y, self.scalar, cmap=self.colormap, shading='auto')
+
         Image.set_edgecolor('face')
 
         if Ax.colorbar is not None:
@@ -195,7 +196,7 @@ class Text:
 @dataclass
 class Scene2D:
     unit_size: tuple = (10, 3)
-    tight_layout: bool = False
+    tight_layout: bool = True
     title: str = ""
 
     def __post_init__(self):
@@ -236,6 +237,10 @@ class Scene2D:
         for ax in self:
             ax.equal = value
 
+    def equal_limits(self, value: bool):
+        for ax in self:
+            ax.equal_limits = value
+
     def show_legend(self, value: bool):
         for ax in self:
             ax.show_legend = value
@@ -260,6 +265,7 @@ class Scene2D:
     y_label = property(None, y_label)
     water_mark = property(None, water_mark)
     equal = property(None, equal)
+    equal_limits = property(None, equal_limits)
     show_legend = property(None, show_legend)
     show_grid = property(None, show_grid)
     colorbar_n_ticks = property(None, colorbar_n_ticks)
