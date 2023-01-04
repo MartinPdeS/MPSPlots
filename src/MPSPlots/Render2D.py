@@ -163,14 +163,18 @@ class STDLine:
 
 @dataclass
 class Line:
-    x: numpy.ndarray
     y: numpy.ndarray
+    x: numpy.ndarray = None
     label: str = None
     color: str = None
     line_style: str = None
 
+    def __post_init__(self):
+        if self.x is None:
+            self.x = numpy.arange(self.y.size)
+
     def _render_(self, Ax):
-        if self.line_style is None:
+        if self.line_style == 'alternate':
             self.line_style = next(linecycler)
 
         if numpy.iscomplexobj(self.y):
@@ -204,8 +208,8 @@ class Scene2D:
     title: str = ""
 
     def __post_init__(self):
-        self.AxisGenerated = False
-        self._Axis = []
+        self.axisGenerated = False
+        self._axis = []
         self.nCols = None
         self.nRows = None
 
@@ -276,24 +280,24 @@ class Scene2D:
     colorbar_label_size = property(None, colorbar_label_size)
 
     def __getitem__(self, idx):
-        return self.Axis[idx]
+        return self.axis[idx]
 
     @property
-    def Axis(self):
-        if not self.AxisGenerated:
+    def axis(self):
+        if not self.axisGenerated:
             self._generate_axis_()
 
-        return self._Axis
+        return self._axis
 
-    def AddAxes(self, *Axis):
-        for ax in Axis:
-            self._Axis.append(ax)
+    def add_axes(self, *axis):
+        for ax in axis:
+            self._axis.append(ax)
 
         return self
 
     def _get_max_col_row_(self):
         max_row, max_col = 0, 0
-        for ax in self._Axis:
+        for ax in self._axis:
             max_row = ax.row if ax.row > max_row else max_row
             max_col = ax.col if ax.col > max_col else max_col
 
@@ -310,21 +314,21 @@ class Scene2D:
 
         Ax = numpy.full(shape=(max_row, max_col), fill_value=None)
 
-        for axis in self._Axis:
+        for axis in self._axis:
             subplot = self.Figure.add_subplot(grid[axis.row, axis.col], projection=axis.projection)
             Ax[axis.row, axis.col] = subplot
 
         self.Figure.suptitle(self.title)
 
-        for ax in self._Axis:
+        for ax in self._axis:
             ax._ax = Ax[ax.row, ax.col]
 
-        self.AxisGenerated = True
+        self.axisGenerated = True
 
         return self
 
     def _render_(self):
-        for ax in self.Axis:
+        for ax in self.axis:
             ax._render_()
 
         if self.tight_layout:
@@ -332,10 +336,10 @@ class Scene2D:
 
         return self
 
-    def Close(self):
+    def close(self):
         plt.close(self.Figure)
 
-    def Show(self, SaveDir: str = None, **kwargs):
+    def show(self, SaveDir: str = None, **kwargs):
         self._render_()
         if SaveDir is not None:
             plt.savefig(fname=SaveDir, **kwargs)
@@ -371,12 +375,12 @@ class Axis:
         self._ax = None
         self.Artist = []
 
-    def AddArtist(self, *Artist):
+    def add_artist(self, *Artist):
         for art in Artist:
             self.Artist.append(art)
 
     def _render_(self):
-        logging.debug("Rendering Axis...")
+        logging.debug("Rendering axis...")
 
         for art in self.Artist:
             art._render_(self)

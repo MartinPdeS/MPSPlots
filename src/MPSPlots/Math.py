@@ -1,6 +1,5 @@
 import numpy
 from scipy import ndimage
-import re
 
 from MPSPlots.Utils import ToList
 
@@ -8,7 +7,7 @@ from MPSPlots.Utils import ToList
 class Angle(object):
     def __init__(self, input, Unit='degree'):
         input = ToList(input)
-        
+
         if Unit.lower() == 'degree':
             self.Degree = [i if i is not None else numpy.nan for i in input]
             self.Radian = [numpy.deg2rad(i) if i is not None else numpy.nan for i in input]
@@ -23,9 +22,9 @@ class Angle(object):
 
 
 def Deg2Rad(Value):
-    if Value is None: 
+    if Value is None:
         return numpy.nan
-    else: 
+    else:
         return numpy.deg2rad(Value)
 
 
@@ -43,18 +42,18 @@ def Normalize(Scalar):
 
 def InterpFull(Meshes, Scalar, Shape):
 
-    Phi, Theta = numpy.mgrid[-numpy.pi / 2:numpy.pi / 2:complex(Shape[0]),
+    phi, theta = numpy.mgrid[-numpy.pi / 2:numpy.pi / 2:complex(Shape[0]),
                           -numpy.pi:numpy.pi:complex(Shape[1])]
 
-    Scalar = interp_at(Meshes.Phi.Radian,
-                       Meshes.Theta.Radian,
+    Scalar = interp_at(Meshes.phi.Radian,
+                       Meshes.theta.Radian,
                        Scalar.astype(numpy.complex).flatten(),
-                       Phi.flatten(),
-                       Theta.flatten(),
+                       phi.flatten(),
+                       theta.flatten(),
                        algorithm='linear',
                        extrapolate=True)
 
-    return Scalar.reshape(Shape), Phi, Theta
+    return Scalar.reshape(Shape), phi, theta
 
 
 def RescaleComplex(Input, Num):
@@ -70,124 +69,117 @@ def RotateComplex(Input, Rotation):
     return InputReal + 1j * InputImag
 
 
-def Angle2Direct(AngleVec: numpy.ndarray, k: float,) -> numpy.ndarray:
+def angle2Direct(angleVec: numpy.ndarray, k: float,) -> numpy.ndarray:
 
-    RadSpace = numpy.deg2rad(AngleVec)
+    RadSpace = numpy.deg2rad(angleVec)
 
     FourierSpace = numpy.sin(RadSpace) * k / (2 * numpy.pi)
 
     fourier_unit = (FourierSpace[1] - FourierSpace[0]).__abs__()
 
-    DirectSpace = numpy.fft.fftshift(numpy.fft.fftfreq(AngleVec.shape[0], d=fourier_unit))
+    DirectSpace = numpy.fft.fftshift(numpy.fft.fftfreq(angleVec.shape[0], d=fourier_unit))
 
     return DirectSpace
 
 
-def Direct2Angle(DirectVec: numpy.ndarray, k: float) -> numpy.ndarray:
+def direct_space_to_angle(direct_space: numpy.ndarray, k: float) -> numpy.ndarray:
 
-    direct_unit = (DirectVec[1] - DirectVec[0]).__abs__()
+    direct_unit = (direct_space[1] - direct_space[0]).__abs__()
 
-    FourierSpace = numpy.fft.fftshift(numpy.fft.fftfreq(DirectVec.shape[0], d=direct_unit))
+    FourierSpace = numpy.fft.fftshift(numpy.fft.fftfreq(direct_space.shape[0], d=direct_unit))
 
-    AngleVec = numpy.arcsin(2 * numpy.pi * FourierSpace / k) # conversion spatial frequency to angular space
+    angleVec = numpy.arcsin(2 * numpy.pi * FourierSpace / k) # conversion spatial frequency to angular space
 
-    if numpy.isnan(AngleVec).any():
+    if numpy.isnan(angleVec).any():
         raise Exception("Magnification too large.")
 
-    return AngleVec * 180 / numpy.pi
+    return angleVec * 180 / numpy.pi
 
 
-def NA2Angle(NA: float) -> numpy.ndarray:
-    if NA <= 1.0: 
+def NA_to_angle(NA: float) -> numpy.ndarray:
+    if NA <= 1.0:
         return numpy.arcsin(NA)
-    if NA >= 1.0: 
+    if NA >= 1.0:
         return numpy.arcsin(NA - 1) + numpy.pi / 2
 
 
-def Direct2spherical(X, Y, MaxAngle):
-    Z = 50 / numpy.tan(MaxAngle)
+def direct_space_to_spherical(x, y, max_angle):
+    z = (x * 0.) + 50 / numpy.tan(max_angle)
 
-    _, Phi, Theta = Cart2Sp(X, Y, X * 0 + Z)
-
-    return Phi, Theta
-
-
-def Direct2Angle(X, Y, MaxAngle):
-    MaxZ = numpy.max(X) / numpy.cos(MaxAngle)
-
-
-def AngleUnit2DirectUnit(Angle, k):
-    FourierSpace = numpynpnumpy.sin(Angle) * k / (2 * numpy.pi)
-
-    fourier_unit = (FourierSpace[1] - FourierSpace[0]).__abs__()
-
-    DirectSpace = numpy.fft.fftshift(numpy.fft.fftfreq(Angle.shape[0], d=fourier_unit))
-
-    return DirectSpace
-
-
-def Cart2Sp(x, y, z):
-    R = numpy.sqrt(x**2 + y**2 + z**2)
-    Phi = numpy.arcsin(z/R)
-    Theta = numpy.arctan2(y, x)
-    return R, Phi, Theta
-
-
-def Sp2Cart(Phi, Theta, R=None):
-    R = R if R is not None else Phi * 0 + 1
-    x = R * numpy.cos(Phi) * numpy.cos(Theta)
-    y = R * numpy.cos(Phi) * numpy.sin(Theta)
-    z = R * numpy.sin(Phi)
-    return x, y, z
-
-
-
-
-def RotateY(Phi, Theta, Angle):
-    x, y, z = Sp2Cart(Phi=Phi, Theta=Theta)
-    xp = x * numpy.cos(Angle) + z * numpy.sin(Angle)
-    yp = y
-    zp = z * numpy.cos(Angle) - x * numpy.sin(Angle)
-    return Cart2Sp(x=xp, y=yp, z=zp)
-
-
-def RotateZ(Phi, Theta, Angle):
-    x, y, z = Sp2Cart(Phi=Phi, Theta=Theta)
-    xp = x * numpy.cos(Angle) - y * numpy.sin(Angle)
-    yp = x * numpy.sin(Angle) + y * numpy.cos(Angle)
-    zp = z
-    return Cart2Sp(x=xp, y=yp, z=zp)
-
-
-def RotateX(Phi, Theta, Angle):
-    x, y, z = Sp2Cart(Phi=Phi, Theta=Theta)
-
-    xp = x
-    yp = y * numpy.cos(Angle) - z * numpy.sin(Angle)
-    zp = y * numpy.sin(Angle) + z * numpy.cos(Angle)
-    return Cart2Sp(x=xp, y=yp, z=zp)
-
-
-def FormatStr(function):
-    def wrapped(*args, **kwargs):
-        args = (re.sub(r"\s+", "", arg.lower()) if isinstance(arg, str) else arg for arg in args)
-
-        kwargs = {k: re.sub(r"\s+", "", v.lower()) if isinstance(v, str) else v for k, v in kwargs.items()}
-
-        return function(*args, **kwargs)
-    return wrapped
-
-
-def GetSphericalMesh(Sampling, MaxAngle):
-
-    x, y = numpy.mgrid[-50: 50: complex(Sampling), -50: 50: complex(Sampling)]
-    z = 50 / numpy.tan(MaxAngle)
-    _, theta, phi = Cart2Sp(x, y, x * 0 + z)
+    _, phi, theta = cartesian_to_spherical(x, y, z)
 
     return phi, theta
 
 
-def Angle2Jones(Delta):
+def angleUnit2DirectUnit(angle, k):
+    FourierSpace = numpy.sin(angle) * k / (2 * numpy.pi)
+
+    fourier_unit = (FourierSpace[1] - FourierSpace[0]).__abs__()
+
+    DirectSpace = numpy.fft.fftshift(numpy.fft.fftfreq(angle.shape[0], d=fourier_unit))
+
+    return DirectSpace
+
+
+def cartesian_to_spherical(x, y, z):
+    x = numpy.asarray(x)
+    y = numpy.asarray(y)
+    z = numpy.asarray(z)
+
+    r = numpy.sqrt(x**2 + y**2 + z**2)
+    phi = numpy.arcsin(z / r)
+    theta = numpy.arctan2(y, x)
+    return r, phi, theta
+
+
+def spherical_to_cartesian(phi, theta, r=None):
+    phi = numpy.asarray(phi)
+    theta = numpy.asarray(theta)
+    r = r if r is not None else numpy.ones(phi.shape)
+
+    x = r * numpy.cos(phi) * numpy.cos(theta)
+    y = r * numpy.cos(phi) * numpy.sin(theta)
+    z = r * numpy.sin(phi)
+    return x, y, z
+
+
+def rotate_on_y(phi: numpy.ndarray, theta: numpy.ndarray, angle: float):
+    x, y, z = spherical_to_cartesian(phi=phi, theta=theta)
+
+    xp = x * numpy.cos(angle) + z * numpy.sin(angle)
+    yp = y
+    zp = z * numpy.cos(angle) - x * numpy.sin(angle)
+    return cartesian_to_spherical(x=xp, y=yp, z=zp)
+
+
+def rotate_on_z(phi: numpy.ndarray, theta: numpy.ndarray, angle: float):
+    x, y, z = spherical_to_cartesian(phi=phi, theta=theta)
+
+    xp = x * numpy.cos(angle) - y * numpy.sin(angle)
+    yp = x * numpy.sin(angle) + y * numpy.cos(angle)
+    zp = z
+    return cartesian_to_spherical(x=xp, y=yp, z=zp)
+
+
+def rotate_on_x(phi: numpy.ndarray, theta: numpy.ndarray, angle: float):
+    x, y, z = spherical_to_cartesian(phi=phi, theta=theta)
+
+    xp = x
+    yp = y * numpy.cos(angle) - z * numpy.sin(angle)
+    zp = y * numpy.sin(angle) + z * numpy.cos(angle)
+    return cartesian_to_spherical(x=xp, y=yp, z=zp)
+
+
+def GetSphericalMesh(Sampling, Maxangle):
+
+    x, y = numpy.mgrid[-50: 50: complex(Sampling), -50: 50: complex(Sampling)]
+    z = 50 / numpy.tan(Maxangle)
+    _, theta, phi = cartesian_to_spherical(x, y, x * 0 + z)
+
+    return phi, theta
+
+
+def angle2Jones(Delta):
     val = numpy.exp(1j * Delta) * 2
     JonesVector = numpy.array([1, val])
     Norm = (numpy.sqrt(1 + numpy.abs(val)**2))
@@ -210,7 +202,7 @@ def Angle2Jones(Delta):
 
 
 
-# -- 
+# --
 
 def cart2sp(x, y, z):
     """Converts data from cartesian coordinates into spherical.
@@ -223,18 +215,18 @@ def cart2sp(x, y, z):
     Returns:
         Tuple (r, theta, phi) of data in spherical coordinates.
     """
-    x = np.asarray(x)
-    y = np.asarray(y)
-    z = np.asarray(z)
+    x = numpy.asarray(x)
+    y = numpy.asarray(y)
+    z = numpy.asarray(z)
     scalar_input = False
     if x.ndim == 0 and y.ndim == 0 and z.ndim == 0:
         x = x[None]
         y = y[None]
         z = z[None]
         scalar_input = True
-    r = np.sqrt(x**2 + y**2 + z**2)
-    theta = np.arcsin(z / r)
-    phi = np.arctan2(y, x)
+    r = numpy.sqrt(x**2 + y**2 + z**2)
+    theta = numpy.arcsin(z / r)
+    phi = numpy.arctan2(y, x)
     if scalar_input:
         return (r.squeeze(), theta.squeeze(), phi.squeeze())
     return (r, theta, phi)
@@ -245,24 +237,24 @@ def sp2cart(r, theta, phi):
 
     Args:
         r (scalar or array_like): R-component of data.
-        theta (scalar or array_like): Theta-component of data.
-        phi (scalar or array_like): Phi-component of data.
+        theta (scalar or array_like): theta-component of data.
+        phi (scalar or array_like): phi-component of data.
 
     Returns:
         Tuple (x, y, z) of data in cartesian coordinates.
     """
-    r = np.asarray(r)
-    theta = np.asarray(theta)
-    phi = np.asarray(phi)
+    r = numpy.asarray(r)
+    theta = numpy.asarray(theta)
+    phi = numpy.asarray(phi)
     scalar_input = False
     if r.ndim == 0 and theta.ndim == 0 and phi.ndim == 0:
         r = r[None]
         theta = theta[None]
         phi = phi[None]
         scalar_input = True
-    x = r * np.cos(theta) * np.cos(phi)
-    y = r * np.cos(theta) * np.sin(phi)
-    z = r * np.sin(theta)
+    x = r * numpy.cos(theta) * numpy.cos(phi)
+    y = r * numpy.cos(theta) * numpy.sin(phi)
+    z = r * numpy.sin(theta)
     if scalar_input:
         return (x.squeeze(), y.squeeze(), z.squeeze())
     return (x, y, z)
@@ -279,17 +271,17 @@ def cart2cyl(x, y, z):
     Returns:
         Tuple (r, phi, z) of data in cylindrical coordinates.
     """
-    x = np.asarray(x)
-    y = np.asarray(y)
-    z = np.asarray(z)
+    x = numpy.asarray(x)
+    y = numpy.asarray(y)
+    z = numpy.asarray(z)
     scalar_input = False
     if x.ndim == 0 and y.ndim == 0 and z.ndim == 0:
         x = x[None]
         y = y[None]
         z = z[None]
         scalar_input = True
-    r = np.sqrt(x**2 + y**2)
-    phi = np.arctan2(y, x)
+    r = numpy.sqrt(x**2 + y**2)
+    phi = numpy.arctan2(y, x)
     if scalar_input:
         return (r.squeeze(), phi.squeeze(), z.squeeze())
     return (r, phi, z)
@@ -300,23 +292,23 @@ def cyl2cart(r, phi, z):
 
     Args:
         r (scalar or array_like): R-component of data.
-        phi (scalar or array_like): Phi-component of data.
+        phi (scalar or array_like): phi-component of data.
         z (scalar or array_like): Z-component of data.
 
     Returns:
         Tuple (x, y, z) of data in cartesian coordinates.
     """
-    r = np.asarray(r)
-    phi = np.asarray(phi)
-    z = np.asarray(z)
+    r = numpy.asarray(r)
+    phi = numpy.asarray(phi)
+    z = numpy.asarray(z)
     scalar_input = False
     if r.ndim == 0 and phi.ndim == 0 and z.ndim == 0:
         r = r[None]
         phi = phi[None]
         z = z[None]
         scalar_input = True
-    x = r * np.cos(phi)
-    y = r * np.sin(phi)
+    x = r * numpy.cos(phi)
+    y = r * numpy.sin(phi)
     if scalar_input:
         return (x.squeeze(), y.squeeze(), z.squeeze())
     return (x, y, z)
