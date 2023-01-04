@@ -99,13 +99,17 @@ class Contour:
 
 @dataclass
 class Mesh:
-    x: numpy.ndarray
-    y: numpy.ndarray
     scalar: numpy.ndarray
     colormap: str = CMAP.BKR
+    x: numpy.ndarray = None
+    y: numpy.ndarray = None
 
     def _render_(self, Ax):
-        Image = Ax._ax.pcolormesh(self.x, self.y, self.scalar, cmap=self.colormap, shading='auto')
+        if self.x is not None and self.y is not None:
+            Image = Ax._ax.pcolormesh(self.x, self.y, self.scalar, cmap=self.colormap, shading='auto')
+
+        else:
+            Image = Ax._ax.pcolormesh(self.scalar, cmap=self.colormap, shading='auto')
 
         Image.set_edgecolor('face')
 
