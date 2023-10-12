@@ -1,0 +1,5 @@
+wheel
+numpy
+matplotlib
+pyvista==0.37.0
+shapely >= 2.0.0
