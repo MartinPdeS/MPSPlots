@@ -4,7 +4,7 @@ Mesh - Matrix
 """
 
 import numpy
-from MPSPlots.Render2D import SceneMatrix
+from MPSPlots.render2D import SceneMatrix
 
 x, y, = numpy.mgrid[0:100, 0:100]
 

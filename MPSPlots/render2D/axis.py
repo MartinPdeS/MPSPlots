@@ -227,9 +227,9 @@ class Axis:
 
             artist._render_(self)
 
-        self.set_ax_limits()
-
         self._decorate_ax_()
+
+        self.set_ax_limits()
 
     def generate_legend(self) -> None:
         """

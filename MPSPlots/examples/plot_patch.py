@@ -4,7 +4,7 @@ STD line
 """
 
 import numpy
-from MPSPlots.Render2D import SceneList
+from MPSPlots.render2D import SceneList
 
 
 x = numpy.arange(100)

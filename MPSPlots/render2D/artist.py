@@ -380,9 +380,16 @@ class Line():
             self.line_style = next(linecycler)
 
         if numpy.iscomplexobj(self.y):
+            x = self.x * self.x_scale_factor
+            y_real = self.y.real * self.y_scale_factor
+            y_imag = self.y.imag * self.y_scale_factor
+
+            if ax.y_scale in ['log', 'logarithmic'] and (y.real.min() <= 0 or y.imag.min() <= 0):
+                raise ValueError('Cannot plot negative or zero value data on logarithmic scale!')
+
             ax._ax.plot(
-                self.x * self.x_scale_factor,
-                self.y.real * self.y_scale_factor,
+                x,
+                y_real,
                 label=self.label + "[real]",
                 color=self.color,
                 linestyle=self.line_style,
@@ -391,8 +398,8 @@ class Line():
             )
 
             ax._ax.plot(
-                self.x * self.x_scale_factor,
-                self.y.imag * self.y_scale_factor,
+                x,
+                y_imag,
                 label=self.label + "[imag]",
                 color=self.color,
                 linestyle=self.line_style,
@@ -401,9 +408,15 @@ class Line():
             )
 
         else:
+            x = self.x * self.x_scale_factor
+            y = self.y * self.y_scale_factor
+
+            if ax.y_scale in ['log', 'logarithmic'] and self.y.real.min() <= 0:
+                raise ValueError('Cannot plot negative or zero value data on logarithmic scale!')
+
             ax._ax.plot(
-                self.x * self.x_scale_factor,
-                self.y * self.y_scale_factor,
+                x,
+                y,
                 label=self.label,
                 color=self.color,
                 linestyle=self.line_style,

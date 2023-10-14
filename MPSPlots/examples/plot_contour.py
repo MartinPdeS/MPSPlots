@@ -4,7 +4,7 @@ Mesh
 """
 
 import numpy
-from MPSPlots.Render2D import SceneList
+from MPSPlots.render2D import SceneList
 
 x_grid, y_grid = numpy.mgrid[0:100, 0:100]
 scalar = x_grid**2 + y_grid**2

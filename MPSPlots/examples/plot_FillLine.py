@@ -4,7 +4,7 @@ Fill Line
 """
 
 import numpy
-from MPSPlots.Render2D import Scene2D, Axis, FillLine
+from MPSPlots.render2D import Scene2D, Axis, FillLine
 
 
 x = numpy.arange(100)
