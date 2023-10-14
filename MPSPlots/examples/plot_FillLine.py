@@ -4,36 +4,30 @@ Fill Line
 """
 
 import numpy
-from MPSPlots.render2D import Scene2D, Axis, FillLine
+from MPSPlots.render2D import SceneList
 
 
 x = numpy.arange(100)
 y0 = numpy.random.rand(100) + x
 y1 = numpy.random.rand(100) - x
 
-figure = Scene2D(
+figure = SceneList(
     unit_size=(8, 4),
     title='random data simple lines'
 )
 
-ax = Axis(
-    row=0,
-    col=0,
+ax = figure.append_ax(
     x_label='x data',
     y_label='y data',
     show_legend=True
 )
 
-figure.add_axes(ax)
-
-artist_0 = FillLine(
+_ = ax.add_fill_line(
     x=x,
     y0=y0,
     y1=y1,
     label='Fill between lines',
     show_outline=True
 )
-
-_ = ax.add_artist(artist_0)
 
 _ = figure.show()
