@@ -73,9 +73,9 @@ class Axis:
     """ Line width of the contained artists. """
     line_style: float = None
     """ Line style of the contained artists. """
-    x_scale_factor: float = 1
+    x_scale_factor: float = None
     """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
+    y_scale_factor: float = None
     """ Scaling factor for the y axis """
 
     def __post_init__(self):
@@ -213,8 +213,11 @@ class Axis:
         :rtype:     None
         """
         for artist in self._artist_list:
-            artist.x_scale_factor = self.x_scale_factor
-            artist.y_scale_factor = self.y_scale_factor
+            if self.x_scale_factor is not None:
+                artist.x_scale_factor = self.x_scale_factor
+
+            if self.y_scale_factor is not None:
+                artist.y_scale_factor = self.y_scale_factor
 
             if self.show_colorbar is not None:
                 artist.show_colorbar = self.show_colorbar

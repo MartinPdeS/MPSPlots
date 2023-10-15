@@ -569,10 +569,11 @@ class PatchPolygon():
 
     def __post_init__(self):
         self.coordinates = numpy.asarray(self.coordinates)
+
+    def _render_(self, ax) -> None:
         self.coordinates[:, 0] *= self.x_scale_factor
         self.coordinates[:, 1] *= self.y_scale_factor
 
-    def _render_(self, ax) -> None:
         polygon = plt.Polygon(
             self.coordinates,
             facecolor=self.facecolor,
