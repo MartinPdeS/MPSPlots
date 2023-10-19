@@ -7,7 +7,10 @@ MPSPlots
 |PyPi|
 
 
-My personal Matplotlib wrapper.
+The library
+***********
+
+My personal Matplotlib wrapper. Its aim is to offer a good compromise between ease-of-use and flexibility. I have started this library in order to uniformise my plots for scientific journal and as of today I continue to update and distribute the code.
 
 
 

@@ -56,7 +56,7 @@ sphinx_gallery_conf = {
     'plot_gallery': True,
     'thumbnail_size': [600, 600],
     'download_all_examples': False,
-    'line_numbers': True,
+    'line_numbers': False,
     'remove_config_comments': True,
     'within_subsection_order': FileNameSortKey,
     'capture_repr': ('_repr_html_', '__repr__'),
