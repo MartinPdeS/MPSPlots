@@ -551,6 +551,23 @@ class Text():
 
 
 @dataclass
+class AxAnnotation():
+    text: str = ""
+    font_size: int = 12
+    font_weight: str = 'normal'
+    position: tuple = (-0.08, 1.08)
+
+    def _render_(self, ax) -> None:
+        ax._ax.text(
+            *self.position,
+            self.text,
+            transform=ax._ax.transAxes,
+            size=self.font_size,
+            weight=self.font_weight
+        )
+
+
+@dataclass
 class PatchPolygon():
     coordinates: numpy.ndarray = None
     """ Coordinate of the vertices """

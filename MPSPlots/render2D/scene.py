@@ -9,11 +9,13 @@ import matplotlib.pyplot as plt
 
 # Other imports
 import numpy
+import string
 from pathvalidate import sanitize_filepath
 from pathlib import Path
 from dataclasses import dataclass
 import MPSPlots
 from MPSPlots.render2D.axis import Axis
+from MPSPlots.tools.utils import int_to_roman
 
 MPSPlots.use_ggplot_style()
 
@@ -217,16 +219,20 @@ class SceneProperties:
         self._mpl_figure = plt.figure(figsize=figure_size)
         self._mpl_figure.suptitle(self.title)
 
-    # def __setitem__(self, idx: int, value) -> None:
-    #     assert isinstance(value, MPSPlots.render2D.axis.Axis), f"Cannot assign type: {value.__class__} to Scene2D axis"
-    #     self._axis[idx] = value
+    def annotate_axis(self, numerotation_type: str = 'alphabet'):
+        if numerotation_type.lower() == 'alphabet':
+            numerotation = string.ascii_lowercase
+        elif numerotation_type.lower() == 'roman':
+            numerotation = [int_to_roman(idx) for idx in range(1, 26)]
+        elif numerotation_type.lower() == 'numbering':
+            numerotation = [int_to_roman(idx) for idx in range(1, 26)]
 
-    # def __add__(self, other):
-    #     assert isinstance(other, SceneMatrix), f"Cannot add two different classes {self.__class__} and {other.__class__}"
-    #     for ax in other._axis:
-    #         self.append_axis(ax)
-
-    #     return self
+        for letter, ax in zip(numerotation, self):
+            ax.add_ax_annotation(
+                text=f'({letter})',
+                font_weight='bold',
+                font_size=18
+            )
 
 
 @dataclass

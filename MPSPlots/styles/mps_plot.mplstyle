@@ -12,7 +12,6 @@ axes.grid           : True     # display grid or not
 axes.titlesize      : x-large  # fontsize of the axes title
 axes.labelsize      : large    # fontsize of the x any y labels
 axes.labelcolor     : black
-axes.grid.which: both
 axes.axisbelow      : True     # whether axis gridlines and ticks are below
 axes.prop_cycle     : cycler('color', ['348ABD', '7A68A6', 'A60628', '467821', 'CF4457', '188487', 'E24A33'])
 
@@ -51,8 +50,10 @@ figure.edgecolor : black  # figure edgecolor
 figure.subplot.hspace  : 0.5    # the amount of height reserved for white space between subplots
 
 ## FONT
-font.family: ['serif']
+font.family: serif
 font.sans-serif: Overpass, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
+
+font.serif: Times New Roman, DejaVu Serif, Bitstream Vera Serif, Computer Modern Roman, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times, Palatino, Charter, serif
 
 mathtext.fontset: dejavuserif
 

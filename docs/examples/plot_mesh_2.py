@@ -46,7 +46,7 @@ ax_2 = figure.append_ax(
     column=1,
     x_label='x data',
     y_label='y data',
-    show_legend=False
+    show_legend=False,
 )
 
 # %%
@@ -77,11 +77,11 @@ _ = ax_2.add_mesh(
     show_colorbar=True
 )
 
-
+# %%
+# Extra decoration of the axes
 figure.show_colorbar = False
-
+figure.annotate_axis()
 
 # %%
 # Showing the figure
 _ = figure.show()
-

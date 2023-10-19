@@ -20,6 +20,6 @@ def use_default_style():
     plt.rcParams["font.family"] = "serif"
 
 
-use_ggplot_style()  # default
+use_mpsplots_style()  # default
 
 # -
