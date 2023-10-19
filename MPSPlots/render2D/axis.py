@@ -63,6 +63,10 @@ class Axis:
     """ Text font size """
     tick_size: int = 10
     """ Ticks font size """
+    y_tick_position: str = 'left'
+    """ Ticks position for the y axis, must be in ['left', 'right'] """
+    x_tick_position: str = 'left'
+    """ Ticks position for the x axis, must be in ['top', 'bottom'] """
     show_ticks: bool = True
     """ Show x and y ticks or not """
     show_colorbar: bool = None
@@ -291,6 +295,22 @@ class Axis:
 
         if self.y_label is not None:
             self._ax.set_ylabel(self.y_label, fontsize=self.font_size)
+
+        if self.x_tick_position.lower() == 'top':
+            self._ax.xaxis.tick_top()
+            self._ax.xaxis.set_label_position("top")
+
+        elif self.x_tick_position.lower() == 'bottom':
+            self._ax.xaxis.tick_bottom()
+            self._ax.xaxis.set_label_position("bottom")
+
+        if self.y_tick_position.lower() == 'right':
+            self._ax.yaxis.tick_right()
+            self._ax.yaxis.set_label_position("right")
+
+        elif self.y_tick_position.lower() == 'left':
+            self._ax.yaxis.tick_left()
+            self._ax.yaxis.set_label_position("left")
 
         if self.title is not None:
             self._ax.set_title(self.title, fontsize=self.font_size)

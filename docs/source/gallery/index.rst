@@ -16,7 +16,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_FillLine_thumb.png
-    :alt: Fill Line
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_FillLine.py`
 
@@ -33,7 +33,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_Line_thumb.png
-    :alt: Simple Line
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_Line.py`
 
@@ -50,7 +50,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_STDLine_thumb.png
-    :alt: STD line
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_STDLine.py`
 
@@ -62,18 +62,18 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Mesh">
+    <div class="sphx-glr-thumbcontainer" tooltip="Contour">
 
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_contour_thumb.png
-    :alt: Mesh
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_contour.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Mesh</div>
+      <div class="sphx-glr-thumbnail-title">Contour</div>
     </div>
 
 
@@ -84,7 +84,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_mesh_thumb.png
-    :alt: Mesh - Line
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_mesh.py`
 
@@ -101,7 +101,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_mesh_2_thumb.png
-    :alt: Mesh - Matrix
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_mesh_2.py`
 
@@ -113,18 +113,18 @@ Examples
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Multi ax">
+    <div class="sphx-glr-thumbcontainer" tooltip="Multi ax plots">
 
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_multi_axes_thumb.png
-    :alt: Multi ax
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_multi_axes.py`
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Multi ax</div>
+      <div class="sphx-glr-thumbnail-title">Multi ax plots</div>
     </div>
 
 
@@ -135,7 +135,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_patch_thumb.png
-    :alt: STD line
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_patch.py`
 
@@ -152,7 +152,7 @@ Examples
 .. only:: html
 
   .. image:: /gallery/images/thumb/sphx_glr_plot_scatter_thumb.png
-    :alt: Simple Line plus Scatter plot
+    :alt:
 
   :ref:`sphx_glr_gallery_plot_scatter.py`
 

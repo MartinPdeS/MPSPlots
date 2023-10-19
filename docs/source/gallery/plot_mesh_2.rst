@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_mesh_2.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_mesh_2.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -19,46 +19,74 @@
 
 
 Mesh - Matrix
-=============
+~~~~~~~~~~~~~
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-68
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
 
+Importing the script dependencies
 
-
-.. image-sg:: /gallery/images/sphx_glr_plot_mesh_2_001.png
-   :alt: random data simple lines
-   :srcset: /gallery/images/sphx_glr_plot_mesh_2_001.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    DSADASDS False
-    DSADASDS False
-    DSADASDS False
-
-
-
-
-
-
-|
+.. GENERATED FROM PYTHON SOURCE LINES 8-11
 
 .. code-block:: python3
-   :lineno-start: 6
-
+   :lineno-start: 8
 
     import numpy
-    from MPSPlots.Render2D import SceneMatrix
+    from MPSPlots.render2D import SceneMatrix
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-13
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-15
+
+.. code-block:: python3
+   :lineno-start: 13
 
     x, y, = numpy.mgrid[0:100, 0:100]
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 16-17
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 17-22
+
+.. code-block:: python3
+   :lineno-start: 17
 
     figure = SceneMatrix(
         unit_size=(4, 2),
         title='random data simple lines'
     )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
+
+Adding a first axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 24-32
+
+.. code-block:: python3
+   :lineno-start: 24
 
     ax_0 = figure.append_ax(
         row=0,
@@ -67,6 +95,22 @@ Mesh - Matrix
         y_label='y data',
         show_legend=False
     )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 33-34
+
+Adding a second axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-42
+
+.. code-block:: python3
+   :lineno-start: 34
 
     ax_1 = figure.append_ax(
         row=1,
@@ -77,6 +121,21 @@ Mesh - Matrix
     )
 
 
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
+
+Adding a third axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 44-52
+
+.. code-block:: python3
+   :lineno-start: 44
+
     ax_2 = figure.append_ax(
         row=1,
         column=1,
@@ -85,6 +144,22 @@ Mesh - Matrix
         show_legend=False
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 53-54
+
+Adding a Mesh artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 54-61
+
+.. code-block:: python3
+   :lineno-start: 54
+
     _ = ax_0.add_mesh(
         scalar=x + y,
         x=x,
@@ -92,12 +167,45 @@ Mesh - Matrix
         show_colorbar=True
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 62-63
+
+Adding a Mesh artist to second axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 63-71
+
+.. code-block:: python3
+   :lineno-start: 63
+
     _ = ax_1.add_mesh(
         scalar=(x - 50)**2 + (y - 50)**2,
         x=x,
         y=y,
         show_colorbar=True
     )
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 72-73
+
+Adding a Mesh artist to third axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 73-84
+
+.. code-block:: python3
+   :lineno-start: 73
 
     _ = ax_2.add_mesh(
         scalar=x**2 + y**2,
@@ -109,14 +217,41 @@ Mesh - Matrix
 
     figure.show_colorbar = False
 
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 85-86
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 86-88
+
+.. code-block:: python3
+   :lineno-start: 86
+
     _ = figure.show()
 
-    # -
+
+
+
+.. image-sg:: /gallery/images/sphx_glr_plot_mesh_2_001.png
+   :alt: random data simple lines
+   :srcset: /gallery/images/sphx_glr_plot_mesh_2_001.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.138 seconds)
+   **Total running time of the script:** (0 minutes 0.142 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh_2.py:
@@ -124,6 +259,8 @@ Mesh - Matrix
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

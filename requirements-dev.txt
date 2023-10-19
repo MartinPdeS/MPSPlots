@@ -11,3 +11,5 @@ sphinx-rtd-theme==1.0.0
 shapely >= 2.0.0
 coverage
 pytest
+pathvalidate
+pydata-sphinx-theme

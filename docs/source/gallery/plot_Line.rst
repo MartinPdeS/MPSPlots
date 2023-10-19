@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_Line.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_Line.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -19,9 +19,107 @@
 
 
 Simple Line
-===========
+~~~~~~~~~~~
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-30
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
+
+Importing the script dependencies
+
+.. GENERATED FROM PYTHON SOURCE LINES 8-12
+
+.. code-block:: python3
+   :lineno-start: 8
+
+    import numpy
+    from MPSPlots.render2D import SceneList
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-14
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 14-22
+
+.. code-block:: python3
+   :lineno-start: 14
+
+    x = numpy.linspace(-10, 10, 100)
+
+    figure = SceneList(
+        unit_size=(8, 4),
+        title='random data simple lines'
+    )
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 24-31
+
+.. code-block:: python3
+   :lineno-start: 24
+
+    ax = figure.append_ax(
+        x_label='x data',
+        y_label='y data',
+        show_legend=True,
+        line_width=2,
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 32-33
+
+Adding few Line artist to axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 33-39
+
+.. code-block:: python3
+   :lineno-start: 33
+
+    _ = ax.add_line(x=x, y=x**2, label=r'y=x^2', color='blue')
+
+    _ = ax.add_line(x=x, y=x**3, label=r'y=x^3', color='red')
+
+    _ = ax.add_line(x=x, y=x**4, label=r'y=x^4', color='green')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 40-41
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 41-42
+
+.. code-block:: python3
+   :lineno-start: 41
+
+    _ = figure.show()
 
 
 
@@ -34,39 +132,10 @@ Simple Line
 
 
 
-.. code-block:: python3
-   :lineno-start: 6
-
-
-    import numpy
-    from MPSPlots.Render2D import SceneList
-
-
-    x = numpy.arange(100)
-    y0 = numpy.random.rand(100)
-    y1 = numpy.random.rand(100)
-
-    figure = SceneList(
-        unit_size=(8, 4),
-        title='random data simple lines'
-    )
-
-    ax = figure.append_ax(
-        x_label='x data',
-        y_label='y data',
-        show_legend=True,
-        line_width=2
-    )
-
-    _ = ax.add_line(x=x, y=y0, label='line 0', color='blue')
-    _ = ax.add_line(x=x, y=y1, label='line 1', color='red')
-
-    _ = figure.show()
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.060 seconds)
+   **Total running time of the script:** (0 minutes 0.067 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_Line.py:
@@ -74,6 +143,8 @@ Simple Line
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

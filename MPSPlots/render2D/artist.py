@@ -86,6 +86,8 @@ class Contour():
     """ Scaling factor for the y axis """
     layer_position: int = 1
     """ Position of the layer """
+    fill_contour: bool = False
+    """ Fill the contour line with color """
 
     def __post_init__(self):
         if self.colormap is None:
@@ -96,20 +98,20 @@ class Contour():
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             self.scalar,
-            level=self.iso_values,
+            levels=self.iso_values,
             colors="black",
-            linewidth=.5,
             zorder=self.layer_position
         )
 
-        ax._ax.contourf(
-            self.x * self.x_scale_factor,
-            self.y * self.y_scale_factor,
-            self.scalar,
-            level=self.iso_values,
-            cmap=self.colormap,
-            zorder=self.layer_position
-        )
+        if self.fill_contour:
+            ax._ax.contourf(
+                self.x * self.x_scale_factor,
+                self.y * self.y_scale_factor,
+                self.scalar,
+                levels=self.iso_values,
+                cmap=self.colormap,
+                zorder=self.layer_position
+            )
 
 
 @dataclass

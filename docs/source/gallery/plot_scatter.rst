@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_scatter.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_scatter.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -21,7 +21,135 @@
 Simple Line plus Scatter plot
 =============================
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-30
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
+
+Importing the script dependencies
+
+.. GENERATED FROM PYTHON SOURCE LINES 8-11
+
+.. code-block:: python3
+   :lineno-start: 8
+
+    import numpy
+    from MPSPlots.render2D import SceneList
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-13
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-17
+
+.. code-block:: python3
+   :lineno-start: 13
+
+    x = numpy.arange(100)
+    y0 = numpy.random.rand(100)
+    y1 = numpy.random.rand(100)
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 18-19
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 19-24
+
+.. code-block:: python3
+   :lineno-start: 19
+
+    figure = SceneList(
+        unit_size=(8, 4),
+        title='random data simple lines'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
+
+Adding an axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 26-33
+
+.. code-block:: python3
+   :lineno-start: 26
+
+    ax = figure.append_ax(
+        x_label='x data',
+        y_label='y data',
+        show_legend=True,
+        line_width=2
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
+
+Adding a Line artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 35-37
+
+.. code-block:: python3
+   :lineno-start: 35
+
+    _ = ax.add_line(x=x, y=y0, label='line 0')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-39
+
+Adding a Scatter artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 39-41
+
+.. code-block:: python3
+   :lineno-start: 39
+
+    _ = ax.add_scatter(x=x, y=y0, label='line 1')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 42-43
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
+
+.. code-block:: python3
+   :lineno-start: 43
+
+    _ = figure.show()
 
 
 
@@ -34,39 +162,10 @@ Simple Line plus Scatter plot
 
 
 
-.. code-block:: python3
-   :lineno-start: 6
-
-
-    import numpy
-    from MPSPlots.Render2D import SceneList
-
-
-    x = numpy.arange(100)
-    y0 = numpy.random.rand(100)
-    y1 = numpy.random.rand(100)
-
-    figure = SceneList(
-        unit_size=(8, 4),
-        title='random data simple lines'
-    )
-
-    ax = figure.append_ax(
-        x_label='x data',
-        y_label='y data',
-        show_legend=True,
-        line_width=2
-    )
-
-    _ = ax.add_line(x=x, y=y0, label='line 0')
-    _ = ax.add_scatter(x=x, y=y0, label='line 1')
-
-    _ = figure.show()
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.054 seconds)
+   **Total running time of the script:** (0 minutes 0.063 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_scatter.py:
@@ -74,6 +173,8 @@ Simple Line plus Scatter plot
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 
 # Other imports
 import numpy
+from pathvalidate import sanitize_filepath
+from pathlib import Path
 from dataclasses import dataclass
 import MPSPlots
 from MPSPlots.render2D.axis import Axis
@@ -50,6 +52,14 @@ class SceneProperties:
 
     @ax_inherit
     def tick_size(self, value: int):
+        pass
+
+    @ax_inherit
+    def x_tick_position(self, value: str):
+        pass
+
+    @ax_inherit
+    def y_tick_position(self, value: str):
         pass
 
     @ax_inherit
@@ -109,6 +119,8 @@ class SceneProperties:
     line_style = property(None, line_style)
     legend_font_size = property(None, legend_font_size)
     tick_size = property(None, tick_size)
+    x_tick_position = property(None, x_tick_position)
+    y_tick_position = property(None, y_tick_position)
     x_limits = property(None, x_limits)
     y_limits = property(None, y_limits)
     x_scale_factor = property(None, x_scale_factor)
@@ -151,6 +163,10 @@ class SceneProperties:
         plt.close(self._mpl_figure)
 
     def save_figure(self, save_directory: str, **kwargs):
+        save_directory = Path(save_directory)
+
+        save_directory = sanitize_filepath(save_directory)
+
         plt.savefig(
             fname=save_directory,
             transparent=self.transparent_background,

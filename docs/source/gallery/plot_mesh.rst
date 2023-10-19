@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_mesh.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_mesh.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -19,45 +19,74 @@
 
 
 Mesh - Line
-===========
+~~~~~~~~~~~
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-46
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
 
+Importing the script dependencies
 
-
-.. image-sg:: /gallery/images/sphx_glr_plot_mesh_001.png
-   :alt: random data simple lines
-   :srcset: /gallery/images/sphx_glr_plot_mesh_001.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    DSADASDS True
-    DSADASDS True
-
-
-
-
-
-
-|
+.. GENERATED FROM PYTHON SOURCE LINES 8-11
 
 .. code-block:: python3
-   :lineno-start: 6
-
+   :lineno-start: 8
 
     import numpy
-    from MPSPlots.Render2D import SceneList
+    from MPSPlots.render2D import SceneList
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-13
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-15
+
+.. code-block:: python3
+   :lineno-start: 13
 
     x, y, = numpy.mgrid[0:100, 0:100]
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 16-17
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 17-22
+
+.. code-block:: python3
+   :lineno-start: 17
 
     figure = SceneList(
         unit_size=(8, 4),
         title='random data simple lines'
     )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 23-24
+
+Adding few axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 24-36
+
+.. code-block:: python3
+   :lineno-start: 24
 
     ax_0 = figure.append_ax(
         x_label='x data',
@@ -71,6 +100,22 @@ Mesh - Line
         show_legend=False
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 37-38
+
+Adding a Mesh artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 38-45
+
+.. code-block:: python3
+   :lineno-start: 38
+
     artist_0 = ax_0.add_mesh(
         scalar=x + y,
         x=x,
@@ -79,6 +124,21 @@ Mesh - Line
     )
 
 
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 46-47
+
+Adding a Mesh artist to second axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 47-54
+
+.. code-block:: python3
+   :lineno-start: 47
+
     artist_1 = ax_1.add_mesh(
         scalar=x**2,
         x=x,
@@ -86,14 +146,39 @@ Mesh - Line
         show_colorbar=True
     )
 
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 55-56
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 56-57
+
+.. code-block:: python3
+   :lineno-start: 56
+
     _ = figure.show()
 
-    # -
+
+
+.. image-sg:: /gallery/images/sphx_glr_plot_mesh_001.png
+   :alt: random data simple lines
+   :srcset: /gallery/images/sphx_glr_plot_mesh_001.png
+   :class: sphx-glr-single-img
+
+
+
+
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.210 seconds)
+   **Total running time of the script:** (0 minutes 0.158 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh.py:
@@ -101,6 +186,8 @@ Mesh - Line
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

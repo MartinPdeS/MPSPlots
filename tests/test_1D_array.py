@@ -17,7 +17,7 @@ def test_Line(patch=None):
 
     ax.add_line(x=x, y=y, label='single label')
 
-    figure.show()
+    figure.show(save_directory='unittest_figure.svg')
 
 
 @patch("matplotlib.pyplot.show")
@@ -32,7 +32,7 @@ def test_FillLine(patch=None):
 
     ax.add_fill_line(x=x, y0=y0, y1=y1)
 
-    figure.show()
+    figure.show(save_directory='unittest_figure.svg')
 
 
 @patch("matplotlib.pyplot.show")
@@ -48,6 +48,6 @@ def test_STDLine(patch=None):
 
     ax.add_std_line(x=x, y_mean=y_mean, y_std=y_std)
 
-    figure.show()
+    figure.show(save_directory='unittest_figure.svg')
 
 # -

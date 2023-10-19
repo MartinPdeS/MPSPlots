@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_multi_axes.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_multi_axes.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -18,10 +18,174 @@
 .. _sphx_glr_gallery_plot_multi_axes.py:
 
 
-Multi ax
-========
+Multi ax plots
+~~~~~~~~~~~~~~
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-51
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
+
+Importing the script dependencies
+
+.. GENERATED FROM PYTHON SOURCE LINES 8-11
+
+.. code-block:: python3
+   :lineno-start: 8
+
+    import numpy
+    from MPSPlots.render2D import SceneList
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-13
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-17
+
+.. code-block:: python3
+   :lineno-start: 13
+
+    x = numpy.arange(100)
+    y0 = numpy.random.rand(100) + x
+    y1 = numpy.random.rand(100) - x
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 18-19
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 19-24
+
+.. code-block:: python3
+   :lineno-start: 19
+
+    figure = SceneList(
+        unit_size=(8, 4),
+        title='random data simple lines'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
+
+Adding a first axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 26-34
+
+.. code-block:: python3
+   :lineno-start: 26
+
+    ax0 = figure.append_ax(
+        x_label='x data',
+        y_label='y data',
+        show_legend=True,
+        equal_limits=True,
+        water_mark='yoyo'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 35-36
+
+Adding a second axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 36-42
+
+.. code-block:: python3
+   :lineno-start: 36
+
+    ax1 = figure.append_ax(
+        x_label='x data',
+        y_label='y data',
+        show_legend=True
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
+
+Adding a FillLine artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 44-52
+
+.. code-block:: python3
+   :lineno-start: 44
+
+    _ = ax0.add_fill_line(
+        x=x,
+        y0=y0,
+        y1=y1,
+        label='Fill between lines',
+        show_outline=True
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 53-54
+
+Adding a FillLine artist to second axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 54-63
+
+.. code-block:: python3
+   :lineno-start: 54
+
+    _ = ax1.add_fill_line(
+        x=x,
+        y0=y0,
+        y1=y1,
+        label='Fill between lines',
+        show_outline=False,
+        color='red'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 64-65
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 65-66
+
+.. code-block:: python3
+   :lineno-start: 65
+
+    _ = figure.show()
 
 
 
@@ -34,60 +198,10 @@ Multi ax
 
 
 
-.. code-block:: python3
-   :lineno-start: 6
-
-
-    import numpy
-    from MPSPlots.Render2D import SceneList
-
-
-    x = numpy.arange(100)
-    y0 = numpy.random.rand(100) + x
-    y1 = numpy.random.rand(100) - x
-
-    figure = SceneList(
-        unit_size=(8, 4),
-        title='random data simple lines'
-    )
-
-    ax0 = figure.append_ax(
-        x_label='x data',
-        y_label='y data',
-        show_legend=True,
-        equal_limits=True,
-        water_mark='yoyo'
-    )
-
-    ax1 = figure.append_ax(
-        x_label='x data',
-        y_label='y data',
-        show_legend=True
-    )
-
-    _ = ax0.add_fill_line(
-        x=x,
-        y0=y0,
-        y1=y1,
-        label='Fill between lines',
-        show_outline=True
-    )
-
-    _ = ax1.add_fill_line(
-        x=x,
-        y0=y0,
-        y1=y1,
-        label='Fill between lines',
-        show_outline=False,
-        color='red'
-    )
-
-    _ = figure.show()
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.093 seconds)
+   **Total running time of the script:** (0 minutes 0.163 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_multi_axes.py:
@@ -95,6 +209,8 @@ Multi ax
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

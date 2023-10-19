@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_contour.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_contour.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -18,10 +18,126 @@
 .. _sphx_glr_gallery_plot_contour.py:
 
 
-Mesh
-====
+Contour
+~~~~~~~
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-33
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
+
+Importing the script dependencies
+
+.. GENERATED FROM PYTHON SOURCE LINES 8-12
+
+.. code-block:: python3
+   :lineno-start: 8
+
+    import numpy
+    from MPSPlots.render2D import SceneList
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-14
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 14-18
+
+.. code-block:: python3
+   :lineno-start: 14
+
+    x_grid, y_grid = numpy.mgrid[0:100, 0:100]
+    scalar = numpy.sqrt(x_grid**2 + y_grid**2)
+
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 19-20
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 20-25
+
+.. code-block:: python3
+   :lineno-start: 20
+
+    figure = SceneList(
+        unit_size=(8, 4),
+        title='random data contour line'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 26-27
+
+Adding an axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 27-33
+
+.. code-block:: python3
+   :lineno-start: 27
+
+    ax = figure.append_ax(
+        x_label='x data',
+        y_label='y data',
+        show_legend=False
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
+
+Adding a contour artist to axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 35-43
+
+.. code-block:: python3
+   :lineno-start: 35
+
+    _ = ax.add_contour(
+        scalar=scalar,
+        x=x_grid,
+        y=y_grid,
+        iso_values=numpy.linspace(0, 100, 20),
+        fill_contour=True
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 44-45
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 45-46
+
+.. code-block:: python3
+   :lineno-start: 45
+
+    _ = figure.show()
 
 
 
@@ -31,58 +147,13 @@ Mesh
    :class: sphx-glr-single-img
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /Users/martinpdes/Desktop/GitProject/MPSPlots/MPSPlots/render2D/artist.py:119: UserWarning: The following kwargs were not used by contour: 'level', 'linewidth'
-      ax._ax.contour(
-    /Users/martinpdes/Desktop/GitProject/MPSPlots/MPSPlots/render2D/artist.py:129: UserWarning: The following kwargs were not used by contour: 'level'
-      ax._ax.contourf(
 
 
-
-
-
-
-|
-
-.. code-block:: python3
-   :lineno-start: 6
-
-
-    import numpy
-    from MPSPlots.Render2D import SceneList
-
-    x_grid, y_grid = numpy.mgrid[0:100, 0:100]
-    scalar = x_grid**2 + y_grid**2
-
-    figure = SceneList(
-        unit_size=(8, 4),
-        title='random data contour line'
-    )
-
-    ax = figure.append_ax(
-        x_label='x data',
-        y_label='y data',
-        show_legend=False
-    )
-
-    _ = ax.add_contour(
-        scalar=scalar,
-        x=x_grid,
-        y=y_grid,
-        iso_values=0.1
-    )
-
-    _ = figure.show()
-
-    # -
 
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.080 seconds)
+   **Total running time of the script:** (0 minutes 0.063 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_contour.py:
@@ -90,6 +161,8 @@ Mesh
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python

@@ -10,7 +10,7 @@
     .. note::
         :class: sphx-glr-download-link-note
 
-        Click :ref:`here <sphx_glr_download_gallery_plot_STDLine.py>`
+        :ref:`Go to the end <sphx_glr_download_gallery_plot_STDLine.py>`
         to download the full example code
 
 .. rst-class:: sphx-glr-example-title
@@ -21,7 +21,122 @@
 STD line
 ========
 
-.. GENERATED FROM PYTHON SOURCE LINES 5-34
+.. GENERATED FROM PYTHON SOURCE LINES 7-8
+
+Importing the script dependencies
+
+.. GENERATED FROM PYTHON SOURCE LINES 8-11
+
+.. code-block:: python3
+   :lineno-start: 8
+
+    import numpy
+    from MPSPlots.render2D import SceneList
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 12-13
+
+Define data
+
+.. GENERATED FROM PYTHON SOURCE LINES 13-18
+
+.. code-block:: python3
+   :lineno-start: 13
+
+    x = numpy.arange(100)
+    y = numpy.random.rand(10, 100)
+    y_mean = numpy.mean(y, axis=0)
+    y_std = numpy.std(y, axis=0)
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 19-20
+
+Creating the Scene
+
+.. GENERATED FROM PYTHON SOURCE LINES 20-25
+
+.. code-block:: python3
+   :lineno-start: 20
+
+    figure = SceneList(
+        unit_size=(8, 4),
+        title='random data simple lines'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 26-27
+
+Adding an axis to the scene for the plots
+
+.. GENERATED FROM PYTHON SOURCE LINES 27-33
+
+.. code-block:: python3
+   :lineno-start: 27
+
+    ax = figure.append_ax(
+        x_label='x data',
+        y_label='y data',
+        show_legend=True
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
+
+Adding a STDLine artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 35-42
+
+.. code-block:: python3
+   :lineno-start: 35
+
+    _ = ax.add_std_line(
+        x=x,
+        y_mean=y_mean,
+        y_std=y_std,
+        label='Fill between lines',
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 43-44
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 44-45
+
+.. code-block:: python3
+   :lineno-start: 44
+
+    _ = figure.show()
 
 
 
@@ -34,43 +149,10 @@ STD line
 
 
 
-.. code-block:: python3
-   :lineno-start: 6
-
-
-    import numpy
-    from MPSPlots.Render2D import SceneList
-
-
-    x = numpy.arange(100)
-    y = numpy.random.rand(10, 100)
-    y_mean = numpy.mean(y, axis=0)
-    y_std = numpy.std(y, axis=0)
-
-    figure = SceneList(
-        unit_size=(8, 4),
-        title='random data simple lines'
-    )
-
-    ax = figure.append_ax(
-        x_label='x data',
-        y_label='y data',
-        show_legend=True
-    )
-
-    _ = ax.add_std_line(
-        x=x,
-        y_mean=y_mean,
-        y_std=y_std,
-        label='Fill between lines',
-    )
-
-    _ = figure.show()
-
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** ( 0 minutes  0.056 seconds)
+   **Total running time of the script:** (0 minutes 0.063 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_STDLine.py:
@@ -78,6 +160,8 @@ STD line
 .. only:: html
 
   .. container:: sphx-glr-footer sphx-glr-footer-example
+
+
 
 
     .. container:: sphx-glr-download sphx-glr-download-python
