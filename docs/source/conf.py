@@ -5,7 +5,7 @@ import os
 import sys
 from sphinx_gallery.sorting import FileNameSortKey
 from packaging.version import parse
-import MPSPlots
+from MPSPlots.styles import use_mpsplots_style
 
 from MPSPlots.tools.directories import (
     project_path,
@@ -43,6 +43,12 @@ extensions = [
     'sphinx_gallery.gen_gallery',
 ]
 
+
+
+def reset_mpl(gallery_conf, fname):
+    from matplotlib import style
+    style.use('ggplot')
+
 # try:
 #     import pyvista
 #     pyvista.start_xvfb()  # Works only on linux system!
@@ -57,6 +63,7 @@ sphinx_gallery_conf = {
     'plot_gallery': True,
     'thumbnail_size': [600, 600],
     'download_all_examples': False,
+    'reset_modules': (use_mpsplots_style),
     'line_numbers': False,
     'remove_config_comments': True,
     'within_subsection_order': FileNameSortKey,
