@@ -46,8 +46,7 @@ extensions = [
 
 
 def reset_mpl(gallery_conf, fname):
-    from matplotlib import style
-    style.use('ggplot')
+    use_mpsplots_style()
 
 # try:
 #     import pyvista
@@ -63,7 +62,7 @@ sphinx_gallery_conf = {
     'plot_gallery': True,
     'thumbnail_size': [600, 600],
     'download_all_examples': False,
-    'reset_modules': (use_mpsplots_style),
+    'reset_modules': (reset_mpl),
     'line_numbers': False,
     'remove_config_comments': True,
     'within_subsection_order': FileNameSortKey,
