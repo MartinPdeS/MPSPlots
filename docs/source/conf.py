@@ -5,6 +5,7 @@ import os
 import sys
 from sphinx_gallery.sorting import FileNameSortKey
 from packaging.version import parse
+import MPSPlots
 
 from MPSPlots.tools.directories import (
     project_path,

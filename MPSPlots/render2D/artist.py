@@ -383,8 +383,8 @@ class Line():
             y_real = self.y.real * self.y_scale_factor
             y_imag = self.y.imag * self.y_scale_factor
 
-            if ax.y_scale in ['log', 'logarithmic'] and (y.real.min() <= 0 or y.imag.min() <= 0):
-                raise ValueError('Cannot plot negative or zero value data on logarithmic scale!')
+            if ax.y_scale in ['log', 'logarithmic'] and (y_real.min() < 0 or y_imag.min() < 0):
+                raise ValueError('Cannot plot negative value data on logarithmic scale!')
 
             ax._ax.plot(
                 x,
@@ -410,8 +410,8 @@ class Line():
             x = self.x * self.x_scale_factor
             y = self.y * self.y_scale_factor
 
-            if ax.y_scale in ['log', 'logarithmic'] and self.y.real.min() <= 0:
-                raise ValueError('Cannot plot negative or zero value data on logarithmic scale!')
+            if ax.y_scale in ['log', 'logarithmic'] and self.y.real.min() < 0:
+                raise ValueError('Cannot plot negative value data on logarithmic scale!')
 
             ax._ax.plot(
                 x,
