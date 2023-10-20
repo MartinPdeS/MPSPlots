@@ -16,8 +16,7 @@ from dataclasses import dataclass
 import MPSPlots
 from MPSPlots.render2D.axis import Axis
 from MPSPlots.tools.utils import int_to_roman
-
-MPSPlots.use_ggplot_style()
+from MPSPlots.render2D.artist import AxAnnotation
 
 
 class SceneProperties:
@@ -219,7 +218,19 @@ class SceneProperties:
         self._mpl_figure = plt.figure(figsize=figure_size)
         self._mpl_figure.suptitle(self.title)
 
-    def annotate_axis(self, numerotation_type: str = 'alphabet'):
+    def annotate_axis(self, numerotation_type: str = 'alphabet', **kwargs) -> None:
+        """
+        Annotate each axis in the figure with a numbering system
+
+        :param      numerotation_type:  The numerotation type
+        :type       numerotation_type:  str
+        :param      kwargs:             The keywords arguments to be sent to each ax.add_ax_annotation
+        :type       kwargs:             dictionary
+
+        :returns:   { description_of_the_return_value }
+        :rtype:     None
+        """
+
         if numerotation_type.lower() == 'alphabet':
             numerotation = string.ascii_lowercase
         elif numerotation_type.lower() == 'roman':
@@ -227,12 +238,18 @@ class SceneProperties:
         elif numerotation_type.lower() == 'numbering':
             numerotation = [int_to_roman(idx) for idx in range(1, 26)]
 
+        def is_AxAnnotation(artist) -> bool:
+            if isinstance(artist, AxAnnotation):
+                return False
+            return True
+
+        for ax in self:
+            ax._artist_list = list(filter(is_AxAnnotation, ax._artist_list))
+
         for letter, ax in zip(numerotation, self):
             ax.add_ax_annotation(
                 text=f'({letter})',
-                font_weight='bold',
-                font_size=18,
-                position=(-0.1, 1.1)
+                **kwargs
             )
 
 

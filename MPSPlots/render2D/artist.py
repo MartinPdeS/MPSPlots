@@ -15,10 +15,7 @@ import numpy
 import shapely.geometry as geo
 from itertools import cycle
 from dataclasses import dataclass
-import MPSPlots
 from MPSPlots import colormaps
-
-MPSPlots.use_ggplot_style()
 
 linecycler = cycle(["-", "--", "-.", ":"])
 
@@ -553,8 +550,8 @@ class Text():
 @dataclass
 class AxAnnotation():
     text: str = ""
-    font_size: int = 12
-    font_weight: str = 'normal'
+    font_size: int = 18
+    font_weight: str = 'bold'
     position: tuple = (-0.08, 1.08)
 
     def _render_(self, ax) -> None:

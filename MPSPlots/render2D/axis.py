@@ -23,8 +23,6 @@ from MPSPlots.render2D.artist import (
     AxAnnotation
 )
 
-MPSPlots.use_ggplot_style()
-
 
 @dataclass
 class Axis:
