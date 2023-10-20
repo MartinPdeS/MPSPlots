@@ -52,5 +52,10 @@ artist_1 = ax_1.add_mesh(
 )
 
 # %%
+# Extra decoration of the axes
+figure.show_colorbar = False
+figure.annotate_axis(numerotation_type='roman')
+
+# %%
 # Showing the figure
 _ = figure.show()

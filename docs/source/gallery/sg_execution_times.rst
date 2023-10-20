@@ -6,24 +6,24 @@
 
 Computation times
 =================
-**00:00.837** total execution time for **gallery** files:
+**00:00.383** total execution time for **gallery** files:
 
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_multi_axes.py` (``plot_multi_axes.py``) | 00:00.163 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_mesh_2.py` (``plot_mesh_2.py``)         | 00:00.135 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_mesh.py` (``plot_mesh.py``)             | 00:00.158 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_mesh.py` (``plot_mesh.py``)             | 00:00.134 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_mesh_2.py` (``plot_mesh_2.py``)         | 00:00.142 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_multi_axes.py` (``plot_multi_axes.py``) | 00:00.114 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_FillLine.py` (``plot_FillLine.py``)     | 00:00.069 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_FillLine.py` (``plot_FillLine.py``)     | 00:00.000 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_Line.py` (``plot_Line.py``)             | 00:00.067 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_Line.py` (``plot_Line.py``)             | 00:00.000 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_contour.py` (``plot_contour.py``)       | 00:00.063 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_STDLine.py` (``plot_STDLine.py``)       | 00:00.000 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_scatter.py` (``plot_scatter.py``)       | 00:00.063 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_contour.py` (``plot_contour.py``)       | 00:00.000 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_STDLine.py` (``plot_STDLine.py``)       | 00:00.063 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_patch.py` (``plot_patch.py``)           | 00:00.000 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+
-| :ref:`sphx_glr_gallery_plot_patch.py` (``plot_patch.py``)           | 00:00.050 | 0.0 MB |
+| :ref:`sphx_glr_gallery_plot_scatter.py` (``plot_scatter.py``)       | 00:00.000 | 0.0 MB |
 +---------------------------------------------------------------------+-----------+--------+

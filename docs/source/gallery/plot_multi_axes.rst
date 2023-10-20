@@ -28,7 +28,6 @@ Importing the script dependencies
 .. GENERATED FROM PYTHON SOURCE LINES 8-11
 
 .. code-block:: python3
-   :lineno-start: 8
 
     import numpy
     from MPSPlots.render2D import SceneList
@@ -47,7 +46,6 @@ Define data
 .. GENERATED FROM PYTHON SOURCE LINES 13-17
 
 .. code-block:: python3
-   :lineno-start: 13
 
     x = numpy.arange(100)
     y0 = numpy.random.rand(100) + x
@@ -67,7 +65,6 @@ Creating the Scene
 .. GENERATED FROM PYTHON SOURCE LINES 19-24
 
 .. code-block:: python3
-   :lineno-start: 19
 
     figure = SceneList(
         unit_size=(8, 4),
@@ -88,7 +85,6 @@ Adding a first axis to the scene for the plots
 .. GENERATED FROM PYTHON SOURCE LINES 26-34
 
 .. code-block:: python3
-   :lineno-start: 26
 
     ax0 = figure.append_ax(
         x_label='x data',
@@ -112,7 +108,6 @@ Adding a second axis to the scene for the plots
 .. GENERATED FROM PYTHON SOURCE LINES 36-42
 
 .. code-block:: python3
-   :lineno-start: 36
 
     ax1 = figure.append_ax(
         x_label='x data',
@@ -131,17 +126,17 @@ Adding a second axis to the scene for the plots
 
 Adding a FillLine artist to first axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-52
+.. GENERATED FROM PYTHON SOURCE LINES 44-53
 
 .. code-block:: python3
-   :lineno-start: 44
 
     _ = ax0.add_fill_line(
         x=x,
         y0=y0,
         y1=y1,
         label='Fill between lines',
-        show_outline=True
+        show_outline=True,
+        line_width=3
     )
 
 
@@ -151,14 +146,13 @@ Adding a FillLine artist to first axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-54
+.. GENERATED FROM PYTHON SOURCE LINES 54-55
 
 Adding a FillLine artist to second axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-63
+.. GENERATED FROM PYTHON SOURCE LINES 55-65
 
 .. code-block:: python3
-   :lineno-start: 54
 
     _ = ax1.add_fill_line(
         x=x,
@@ -166,7 +160,8 @@ Adding a FillLine artist to second axis
         y1=y1,
         label='Fill between lines',
         show_outline=False,
-        color='red'
+        color='red',
+        line_width=2
     )
 
 
@@ -176,14 +171,33 @@ Adding a FillLine artist to second axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-65
+.. GENERATED FROM PYTHON SOURCE LINES 66-67
+
+Extra decoration of the axes
+
+.. GENERATED FROM PYTHON SOURCE LINES 67-72
+
+.. code-block:: python3
+
+    figure.annotate_axis('roman')
+    figure.font_size = 40
+    figure.legend_font_size = 20
+    figure.tick_size = 13
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 73-74
 
 Showing the figure
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-66
+.. GENERATED FROM PYTHON SOURCE LINES 74-75
 
 .. code-block:: python3
-   :lineno-start: 65
 
     _ = figure.show()
 
@@ -201,7 +215,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.163 seconds)
+   **Total running time of the script:** (0 minutes 0.114 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_multi_axes.py:

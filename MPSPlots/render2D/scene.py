@@ -231,7 +231,8 @@ class SceneProperties:
             ax.add_ax_annotation(
                 text=f'({letter})',
                 font_weight='bold',
-                font_size=18
+                font_size=18,
+                position=(-0.1, 1.1)
             )
 
 

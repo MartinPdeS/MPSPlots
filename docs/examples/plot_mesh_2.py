@@ -8,6 +8,7 @@ Mesh - Matrix
 import numpy
 from MPSPlots.render2D import SceneMatrix
 
+
 # %%
 # Define data
 x, y, = numpy.mgrid[0:100, 0:100]

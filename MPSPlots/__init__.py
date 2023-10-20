@@ -1,3 +1,4 @@
+from MPSPlots import fonts
 from MPSPlots.tools.directories import style_directory
 import matplotlib.pyplot as plt
 

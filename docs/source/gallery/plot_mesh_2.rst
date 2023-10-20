@@ -25,13 +25,13 @@ Mesh - Matrix
 
 Importing the script dependencies
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-11
+.. GENERATED FROM PYTHON SOURCE LINES 8-13
 
 .. code-block:: python3
-   :lineno-start: 8
 
     import numpy
     from MPSPlots.render2D import SceneMatrix
+    from MPSPlots import fonts
 
 
 
@@ -40,14 +40,14 @@ Importing the script dependencies
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 12-13
+
+.. GENERATED FROM PYTHON SOURCE LINES 14-15
 
 Define data
 
-.. GENERATED FROM PYTHON SOURCE LINES 13-15
+.. GENERATED FROM PYTHON SOURCE LINES 15-17
 
 .. code-block:: python3
-   :lineno-start: 13
 
     x, y, = numpy.mgrid[0:100, 0:100]
 
@@ -58,14 +58,13 @@ Define data
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 16-17
+.. GENERATED FROM PYTHON SOURCE LINES 18-19
 
 Creating the Scene
 
-.. GENERATED FROM PYTHON SOURCE LINES 17-22
+.. GENERATED FROM PYTHON SOURCE LINES 19-24
 
 .. code-block:: python3
-   :lineno-start: 17
 
     figure = SceneMatrix(
         unit_size=(4, 2),
@@ -79,14 +78,13 @@ Creating the Scene
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 23-24
+.. GENERATED FROM PYTHON SOURCE LINES 25-26
 
 Adding a first axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 24-32
+.. GENERATED FROM PYTHON SOURCE LINES 26-34
 
 .. code-block:: python3
-   :lineno-start: 24
 
     ax_0 = figure.append_ax(
         row=0,
@@ -103,14 +101,13 @@ Adding a first axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 33-34
+.. GENERATED FROM PYTHON SOURCE LINES 35-36
 
 Adding a second axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 34-42
+.. GENERATED FROM PYTHON SOURCE LINES 36-44
 
 .. code-block:: python3
-   :lineno-start: 34
 
     ax_1 = figure.append_ax(
         row=1,
@@ -127,21 +124,20 @@ Adding a second axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 43-44
+.. GENERATED FROM PYTHON SOURCE LINES 45-46
 
 Adding a third axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-52
+.. GENERATED FROM PYTHON SOURCE LINES 46-54
 
 .. code-block:: python3
-   :lineno-start: 44
 
     ax_2 = figure.append_ax(
         row=1,
         column=1,
         x_label='x data',
         y_label='y data',
-        show_legend=False
+        show_legend=False,
     )
 
 
@@ -151,14 +147,13 @@ Adding a third axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 53-54
+.. GENERATED FROM PYTHON SOURCE LINES 55-56
 
 Adding a Mesh artist to first axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 54-61
+.. GENERATED FROM PYTHON SOURCE LINES 56-63
 
 .. code-block:: python3
-   :lineno-start: 54
 
     _ = ax_0.add_mesh(
         scalar=x + y,
@@ -174,14 +169,13 @@ Adding a Mesh artist to first axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 62-63
+.. GENERATED FROM PYTHON SOURCE LINES 64-65
 
 Adding a Mesh artist to second axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 63-71
+.. GENERATED FROM PYTHON SOURCE LINES 65-73
 
 .. code-block:: python3
-   :lineno-start: 63
 
     _ = ax_1.add_mesh(
         scalar=(x - 50)**2 + (y - 50)**2,
@@ -198,14 +192,13 @@ Adding a Mesh artist to second axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 72-73
+.. GENERATED FROM PYTHON SOURCE LINES 74-75
 
 Adding a Mesh artist to third axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-84
+.. GENERATED FROM PYTHON SOURCE LINES 75-82
 
 .. code-block:: python3
-   :lineno-start: 73
 
     _ = ax_2.add_mesh(
         scalar=x**2 + y**2,
@@ -215,7 +208,22 @@ Adding a Mesh artist to third axis
     )
 
 
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 83-84
+
+Extra decoration of the axes
+
+.. GENERATED FROM PYTHON SOURCE LINES 84-87
+
+.. code-block:: python3
+
     figure.show_colorbar = False
+    figure.annotate_axis()
 
 
 
@@ -224,18 +232,15 @@ Adding a Mesh artist to third axis
 
 
 
-
-.. GENERATED FROM PYTHON SOURCE LINES 85-86
+.. GENERATED FROM PYTHON SOURCE LINES 88-89
 
 Showing the figure
 
-.. GENERATED FROM PYTHON SOURCE LINES 86-88
+.. GENERATED FROM PYTHON SOURCE LINES 89-90
 
 .. code-block:: python3
-   :lineno-start: 86
 
     _ = figure.show()
-
 
 
 
@@ -251,7 +256,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.142 seconds)
+   **Total running time of the script:** (0 minutes 0.135 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh_2.py:

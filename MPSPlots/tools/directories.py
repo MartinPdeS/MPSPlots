@@ -27,6 +27,8 @@ doc_path = root_path.parents[0].joinpath('docs')
 
 doc_css_path = doc_path.joinpath('source/_static/default.css')
 
+fonts_directory = root_path.joinpath('fonts')
+
 style_directory = root_path.joinpath('styles')
 
 logo_path = doc_path.joinpath('images/logo.png')

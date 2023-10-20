@@ -28,7 +28,6 @@ Importing the script dependencies
 .. GENERATED FROM PYTHON SOURCE LINES 8-11
 
 .. code-block:: python3
-   :lineno-start: 8
 
     import numpy
     from MPSPlots.render2D import SceneList
@@ -47,7 +46,6 @@ Define data
 .. GENERATED FROM PYTHON SOURCE LINES 13-15
 
 .. code-block:: python3
-   :lineno-start: 13
 
     x, y, = numpy.mgrid[0:100, 0:100]
 
@@ -65,7 +63,6 @@ Creating the Scene
 .. GENERATED FROM PYTHON SOURCE LINES 17-22
 
 .. code-block:: python3
-   :lineno-start: 17
 
     figure = SceneList(
         unit_size=(8, 4),
@@ -86,7 +83,6 @@ Adding few axis to the scene for the plots
 .. GENERATED FROM PYTHON SOURCE LINES 24-36
 
 .. code-block:: python3
-   :lineno-start: 24
 
     ax_0 = figure.append_ax(
         x_label='x data',
@@ -114,7 +110,6 @@ Adding a Mesh artist to first axis
 .. GENERATED FROM PYTHON SOURCE LINES 38-45
 
 .. code-block:: python3
-   :lineno-start: 38
 
     artist_0 = ax_0.add_mesh(
         scalar=x + y,
@@ -137,7 +132,6 @@ Adding a Mesh artist to second axis
 .. GENERATED FROM PYTHON SOURCE LINES 47-54
 
 .. code-block:: python3
-   :lineno-start: 47
 
     artist_1 = ax_1.add_mesh(
         scalar=x**2,
@@ -155,12 +149,29 @@ Adding a Mesh artist to second axis
 
 .. GENERATED FROM PYTHON SOURCE LINES 55-56
 
-Showing the figure
+Extra decoration of the axes
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-57
+.. GENERATED FROM PYTHON SOURCE LINES 56-59
 
 .. code-block:: python3
-   :lineno-start: 56
+
+    figure.show_colorbar = False
+    figure.annotate_axis(numerotation_type='roman')
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 60-61
+
+Showing the figure
+
+.. GENERATED FROM PYTHON SOURCE LINES 61-62
+
+.. code-block:: python3
 
     _ = figure.show()
 
@@ -178,7 +189,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.158 seconds)
+   **Total running time of the script:** (0 minutes 0.134 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh.py:

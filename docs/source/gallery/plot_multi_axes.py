@@ -46,7 +46,8 @@ _ = ax0.add_fill_line(
     y0=y0,
     y1=y1,
     label='Fill between lines',
-    show_outline=True
+    show_outline=True,
+    line_width=3
 )
 
 # %%
@@ -57,8 +58,16 @@ _ = ax1.add_fill_line(
     y1=y1,
     label='Fill between lines',
     show_outline=False,
-    color='red'
+    color='red',
+    line_width=2
 )
+
+# %%
+# Extra decoration of the axes
+figure.annotate_axis('roman')
+figure.font_size = 40
+figure.legend_font_size = 20
+figure.tick_size = 13
 
 # %%
 # Showing the figure
