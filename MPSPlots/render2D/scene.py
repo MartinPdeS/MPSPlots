@@ -19,93 +19,46 @@ from MPSPlots.tools.utils import int_to_roman
 from MPSPlots.render2D.artist import AxAnnotation
 
 
+@dataclass
 class SceneProperties:
-    def ax_inherit(function):
-        def wrapper(self, value):
+    unit_size: tuple = (10, 3)
+    tight_layout: bool = True
+    transparent_background: bool = False
+    title: str = ""
+
+    ax_inherit_list = [
+        'font_size',
+        'x_scale_factor',
+        'y_scale_factor',
+        'line_width',
+        'line_style',
+        'legend_font_size',
+        'tick_size',
+        'x_tick_position',
+        'y_tick_position',
+        'x_limits',
+        'y_limits',
+        'x_label',
+        'y_label',
+        'water_mark',
+        'equal',
+        'equal_limits',
+        'show_legend',
+        'show_grid',
+        'show_ticks',
+        'show_colorbar',
+    ]
+
+    def __post_init__(self):
+        self._mpl_axis_list = []
+        self._axis_generated = False
+
+    def __setattr__(self, name, value):
+        if name in self.ax_inherit_list:
             for ax in self:
-                setattr(ax, function.__name__, value)
-
-        return wrapper
-
-    @ax_inherit
-    def x_scale_factor(self, value: int):
-        pass
-
-    @ax_inherit
-    def y_scale_factor(self, value: int):
-        pass
-
-    @ax_inherit
-    def font_size(self, value: int):
-        pass
-
-    @ax_inherit
-    def line_width(self, value: int):
-        pass
-
-    @ax_inherit
-    def line_style(self, value: int):
-        pass
-
-    @ax_inherit
-    def legend_font_size(self, value: int):
-        pass
-
-    @ax_inherit
-    def tick_size(self, value: int):
-        pass
-
-    @ax_inherit
-    def x_tick_position(self, value: str):
-        pass
-
-    @ax_inherit
-    def y_tick_position(self, value: str):
-        pass
-
-    @ax_inherit
-    def x_limits(self, value: list):
-        pass
-
-    @ax_inherit
-    def y_limits(self, value: list):
-        pass
-
-    @ax_inherit
-    def x_label(self, value: list):
-        pass
-
-    @ax_inherit
-    def y_label(self, value: list):
-        pass
-
-    @ax_inherit
-    def water_mark(self, value: str):
-        pass
-
-    @ax_inherit
-    def equal(self, value: bool):
-        pass
-
-    @ax_inherit
-    def equal_limits(self, value: bool):
-        pass
-
-    @ax_inherit
-    def show_legend(self, value: bool):
-        pass
-
-    @ax_inherit
-    def show_grid(self, value: bool):
-        pass
-
-    @ax_inherit
-    def show_ticks(self, value: bool):
-        pass
-
-    @ax_inherit
-    def show_colorbar(self, value: int):
-        pass
+                setattr(ax, name, value)
+        else:
+            super(SceneProperties, self).__setattr__(name, value)
 
     def colorbar_n_ticks(self, value: int):
         for ax in self:
@@ -114,29 +67,6 @@ class SceneProperties:
     def colorbar_label_size(self, value: int):
         for ax in self:
             ax.colorbar.label_size = value
-
-    font_size = property(None, font_size)
-    line_width = property(None, line_width)
-    line_style = property(None, line_style)
-    legend_font_size = property(None, legend_font_size)
-    tick_size = property(None, tick_size)
-    x_tick_position = property(None, x_tick_position)
-    y_tick_position = property(None, y_tick_position)
-    x_limits = property(None, x_limits)
-    y_limits = property(None, y_limits)
-    x_scale_factor = property(None, x_scale_factor)
-    y_scale_factor = property(None, y_scale_factor)
-    x_label = property(None, x_label)
-    y_label = property(None, y_label)
-    water_mark = property(None, water_mark)
-    equal = property(None, equal)
-    equal_limits = property(None, equal_limits)
-    show_legend = property(None, show_legend)
-    show_grid = property(None, show_grid)
-    show_ticks = property(None, show_ticks)
-    show_colorbar = property(None, show_colorbar)
-    colorbar_n_ticks = property(None, colorbar_n_ticks)
-    colorbar_label_size = property(None, colorbar_label_size)
 
     @property
     def shape(self) -> numpy.ndarray:
@@ -154,10 +84,22 @@ class SceneProperties:
 
     @property
     def number_of_column(self) -> int:
+        """
+        Return the number of column for axis in the figure
+
+        :returns:   number of column
+        :rtype:     int
+        """
         return self.maximum_column_value + 1
 
     @property
     def number_of_row(self) -> int:
+        """
+        Return the number of row for axis in the figure
+
+        :returns:   number of row
+        :rtype:     int
+        """
         return self.maximum_row_value + 1
 
     def close(self) -> None:
@@ -176,11 +118,9 @@ class SceneProperties:
 
     def show(self, save_directory: str = None, **kwargs):
         self._render_()
+
         if save_directory is not None:
             self.save_figure(save_directory=save_directory, **kwargs)
-
-        # plt.legend(["algo1", "algo2", "algo3"], loc=1)
-        # plt.legend(handles=None, labels=["hello there"], loc=2)
 
         plt.show()
 
@@ -255,15 +195,9 @@ class SceneProperties:
 
 @dataclass
 class SceneList(SceneProperties):
-    unit_size: tuple = (10, 3)
-    tight_layout: bool = True
-    transparent_background: bool = False
-    title: str = ""
     ax_orientation: str = 'vertical'
 
-    def __post_init__(self):
-        self._mpl_axis_list = []
-        self._axis_generated = False
+
 
     @property
     def next_row_number(self) -> int:
@@ -327,15 +261,6 @@ class SceneList(SceneProperties):
 
 @dataclass
 class SceneMatrix(SceneProperties):
-    unit_size: tuple = (10, 3)
-    tight_layout: bool = True
-    transparent_background: bool = False
-    title: str = ""
-
-    def __post_init__(self):
-        self._mpl_axis_list = []
-        self._axis_generated = False
-
     def set_axis_row(self, value) -> None:
         for ax in self._mpl_axis_list:
             ax.row = value

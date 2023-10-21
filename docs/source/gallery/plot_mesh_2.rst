@@ -25,13 +25,12 @@ Mesh - Matrix
 
 Importing the script dependencies
 
-.. GENERATED FROM PYTHON SOURCE LINES 8-13
+.. GENERATED FROM PYTHON SOURCE LINES 8-12
 
 .. code-block:: python3
 
     import numpy
     from MPSPlots.render2D import SceneMatrix
-    from MPSPlots import fonts
 
 
 
@@ -41,11 +40,11 @@ Importing the script dependencies
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 14-15
+.. GENERATED FROM PYTHON SOURCE LINES 13-14
 
 Define data
 
-.. GENERATED FROM PYTHON SOURCE LINES 15-17
+.. GENERATED FROM PYTHON SOURCE LINES 14-16
 
 .. code-block:: python3
 
@@ -58,11 +57,11 @@ Define data
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 18-19
+.. GENERATED FROM PYTHON SOURCE LINES 17-18
 
 Creating the Scene
 
-.. GENERATED FROM PYTHON SOURCE LINES 19-24
+.. GENERATED FROM PYTHON SOURCE LINES 18-23
 
 .. code-block:: python3
 
@@ -78,11 +77,11 @@ Creating the Scene
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 25-26
+.. GENERATED FROM PYTHON SOURCE LINES 24-25
 
 Adding a first axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 26-34
+.. GENERATED FROM PYTHON SOURCE LINES 25-33
 
 .. code-block:: python3
 
@@ -101,11 +100,11 @@ Adding a first axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 35-36
+.. GENERATED FROM PYTHON SOURCE LINES 34-35
 
 Adding a second axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-44
+.. GENERATED FROM PYTHON SOURCE LINES 35-43
 
 .. code-block:: python3
 
@@ -124,11 +123,11 @@ Adding a second axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-46
+.. GENERATED FROM PYTHON SOURCE LINES 44-45
 
 Adding a third axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 46-54
+.. GENERATED FROM PYTHON SOURCE LINES 45-53
 
 .. code-block:: python3
 
@@ -147,11 +146,11 @@ Adding a third axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 55-56
+.. GENERATED FROM PYTHON SOURCE LINES 54-55
 
 Adding a Mesh artist to first axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 56-63
+.. GENERATED FROM PYTHON SOURCE LINES 55-62
 
 .. code-block:: python3
 
@@ -169,11 +168,11 @@ Adding a Mesh artist to first axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 64-65
+.. GENERATED FROM PYTHON SOURCE LINES 63-64
 
 Adding a Mesh artist to second axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 65-73
+.. GENERATED FROM PYTHON SOURCE LINES 64-72
 
 .. code-block:: python3
 
@@ -192,11 +191,11 @@ Adding a Mesh artist to second axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-75
+.. GENERATED FROM PYTHON SOURCE LINES 73-74
 
 Adding a Mesh artist to third axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 75-82
+.. GENERATED FROM PYTHON SOURCE LINES 74-81
 
 .. code-block:: python3
 
@@ -214,11 +213,11 @@ Adding a Mesh artist to third axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 83-84
+.. GENERATED FROM PYTHON SOURCE LINES 82-83
 
 Extra decoration of the axes
 
-.. GENERATED FROM PYTHON SOURCE LINES 84-87
+.. GENERATED FROM PYTHON SOURCE LINES 83-86
 
 .. code-block:: python3
 
@@ -232,11 +231,11 @@ Extra decoration of the axes
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 88-89
+.. GENERATED FROM PYTHON SOURCE LINES 87-88
 
 Showing the figure
 
-.. GENERATED FROM PYTHON SOURCE LINES 89-90
+.. GENERATED FROM PYTHON SOURCE LINES 88-89
 
 .. code-block:: python3
 
@@ -256,7 +255,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.135 seconds)
+   **Total running time of the script:** (0 minutes 0.233 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh_2.py:

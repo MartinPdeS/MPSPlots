@@ -6,7 +6,7 @@ lines.antialiased : True         # render lines in antialised (no jaggies)
 text.color          : black
 axes.unicode_minus  : False
 axes.formatter.use_mathtext: True
-axes.facecolor      : bcbcbc   # axes background color
+axes.facecolor      : E5E5E5   # axes background color
 axes.edgecolor      : black    # axes edge color
 axes.linewidth      : 1        # edge linewidth
 axes.grid           : True     # display grid or not

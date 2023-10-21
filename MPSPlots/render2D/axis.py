@@ -58,9 +58,9 @@ class Axis:
     """ Watermark to add to axis """
     projection: str = None
     """ Projection of the plot [Polar, normal] """
-    font_size: int = 10
+    font_size: int = 16
     """ Text font size """
-    tick_size: int = 10
+    tick_size: int = 14
     """ Ticks font size """
     y_tick_position: str = 'left'
     """ Ticks position for the y axis, must be in ['left', 'right'] """
@@ -70,7 +70,7 @@ class Axis:
     """ Show x and y ticks or not """
     show_colorbar: bool = None
     """ Show colorbar or not """
-    legend_font_size: bool = 12
+    legend_font_size: bool = 14
     """  Font size of the legend text """
     line_width: float = None
     """ Line width of the contained artists. """
@@ -261,7 +261,10 @@ class Axis:
                 fontsize=self.legend_font_size - 4
             )
 
-    def add_watermark(self, text: str = None, font_size: int = 30, alpha: float = 0.2) -> None:
+    def add_watermark(self,
+            text: str = None,
+            font_size: int = 30,
+            alpha: float = 0.2) -> None:
         """
         Adds a watermark to ax.
 

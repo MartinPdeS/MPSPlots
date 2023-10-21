@@ -7,7 +7,6 @@ Mesh - Matrix
 # Importing the script dependencies
 import numpy
 from MPSPlots.render2D import SceneMatrix
-from MPSPlots import fonts
 
 
 # %%

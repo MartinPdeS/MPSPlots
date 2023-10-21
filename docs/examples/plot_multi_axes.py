@@ -65,9 +65,7 @@ _ = ax1.add_fill_line(
 # %%
 # Extra decoration of the axes
 figure.annotate_axis('roman')
-figure.font_size = 40
-figure.legend_font_size = 20
-figure.tick_size = 13
+figure.font_size = 20
 
 # %%
 # Showing the figure

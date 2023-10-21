@@ -175,14 +175,12 @@ Adding a FillLine artist to second axis
 
 Extra decoration of the axes
 
-.. GENERATED FROM PYTHON SOURCE LINES 67-72
+.. GENERATED FROM PYTHON SOURCE LINES 67-70
 
 .. code-block:: python3
 
     figure.annotate_axis('roman')
-    figure.font_size = 40
-    figure.legend_font_size = 20
-    figure.tick_size = 13
+    figure.font_size = 20
 
 
 
@@ -191,11 +189,11 @@ Extra decoration of the axes
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 73-74
+.. GENERATED FROM PYTHON SOURCE LINES 71-72
 
 Showing the figure
 
-.. GENERATED FROM PYTHON SOURCE LINES 74-75
+.. GENERATED FROM PYTHON SOURCE LINES 72-73
 
 .. code-block:: python3
 
@@ -215,7 +213,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.114 seconds)
+   **Total running time of the script:** (0 minutes 0.174 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_multi_axes.py:
