@@ -197,8 +197,6 @@ class SceneProperties:
 class SceneList(SceneProperties):
     ax_orientation: str = 'vertical'
 
-
-
     @property
     def next_row_number(self) -> int:
         if self.ax_orientation == 'horizontal':
