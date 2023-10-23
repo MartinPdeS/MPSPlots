@@ -80,8 +80,6 @@ class Axis:
     """ Scaling factor for the x axis """
     y_scale_factor: float = None
     """ Scaling factor for the y axis """
-    annotate_ax: str = None
-    """ Annotate the axes with text or number """
 
     def __post_init__(self):
         self._artist_list = []
@@ -489,7 +487,7 @@ class Axis:
 
         return artist
 
-    def add_ax_annotation(self, **kwargs: dict) -> Colorbar:
+    def add_ax_annotation(self, text: str, **kwargs: dict) -> Colorbar:
         """
         Adds a Colorbar artist to ax.
 
@@ -499,7 +497,7 @@ class Axis:
         :returns:   The artist object
         :rtype:     Colorbar
         """
-        artist = AxAnnotation(**kwargs)
+        artist = AxAnnotation(text, **kwargs)
         self.add_artist(artist)
 
         return artist

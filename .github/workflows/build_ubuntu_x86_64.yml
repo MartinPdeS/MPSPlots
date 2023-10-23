@@ -43,7 +43,7 @@ jobs:
       - name: "Run: Tests"
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e .[develpment]
+          python -m pip install -e .[development]
           pytest -s
           python setup.py bdist_wheel
 
