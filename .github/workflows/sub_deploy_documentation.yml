@@ -7,7 +7,7 @@ permissions:
 on:
   workflow_call:
     inputs:
-      python_version:
+      python-version:
         type: string
         required: true
         default: "3.10"
@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: MartinPdeS/MPSActions/install_package_on_manylinux@master
         with:
-          python_version: ${{ inputs.python_version }}
+          python-version: ${{ inputs.python-version }}
           package_name: MPSPlots
 
       - uses: MartinPdeS/MPSActions/publish_documentation@master
