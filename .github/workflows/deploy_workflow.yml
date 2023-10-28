@@ -2,16 +2,16 @@ name: Deploy
 
 on:
     push:
-        branches: [ "main" ]
+        branches: [ "master" ]
     pull_request:
-        branches: [ "main" ]
+        branches: [ "master" ]
 
 permissions:
     contents: write
 
 jobs:
     Ubuntu_x86_64:
-        uses: MartinPdeS/MPSPlots/.github/workflows/build_ubuntu_x86_64.yml@main
+        uses: MartinPdeS/MPSPlots/.github/workflows/build_ubuntu_x86_64.yml@master
         secrets: inherit
         with:
             python_version_list: "['3.10']"
@@ -19,7 +19,7 @@ jobs:
     job_post_coverage:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [Ubuntu_x86_64]
-        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_coverage_badge.yml@main
+        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_coverage_badge.yml@master
         secrets: inherit
         with:
             python_version: "3.10"
@@ -27,7 +27,7 @@ jobs:
     job_build_documentation:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [Ubuntu_x86_64]
-        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_documentation.yml@main
+        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_documentation.yml@master
         secrets: inherit
         with:
             python_version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
@@ -35,7 +35,7 @@ jobs:
     job_publish_wheel:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [Ubuntu_x86_64, job_build_documentation, job_post_coverage]
-        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_pypi.yml@main
+        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_pypi.yml@master
         secrets: inherit
         with:
             python_version: "3.10"
