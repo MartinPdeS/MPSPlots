@@ -40,11 +40,6 @@ jobs:
               package_name: MPSPlots
               python-version: "3.10"
 
-        uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_documentation.yml@master
-        secrets: inherit
-        with:
-            python-version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
-
     job_publish_wheel:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [build_pure_python, job_build_documentation, job_post_coverage]
