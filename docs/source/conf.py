@@ -44,7 +44,6 @@ extensions = [
 ]
 
 
-
 def reset_mpl(gallery_conf, fname):
     use_mpsplots_style()
 
@@ -54,6 +53,7 @@ def reset_mpl(gallery_conf, fname):
 # except ImportError:
 #     print('Could not load pyvista library for 3D rendering')
 
+
 sphinx_gallery_conf = {
     'examples_dirs': '../examples',
     'gallery_dirs': "gallery",
@@ -62,7 +62,7 @@ sphinx_gallery_conf = {
     'plot_gallery': True,
     'thumbnail_size': [600, 600],
     'download_all_examples': False,
-    'reset_modules': (reset_mpl),
+    'reset_modules': reset_mpl,
     'line_numbers': False,
     'remove_config_comments': True,
     'within_subsection_order': FileNameSortKey,
