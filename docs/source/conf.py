@@ -113,6 +113,7 @@ else:
     binder_branch = f"v{major}.{minor}.x"
 
 html_theme_options = {
+    'navigation_with_keys': True,
     # Navigation bar
     "logo": {
         "alt_text": "MPSPlots's logo",
