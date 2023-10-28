@@ -17,11 +17,7 @@ jobs:
     name: "Publish documentation to RTD"
     runs-on: ubuntu-latest
     steps:
-      - uses: MartinPdeS/MPSActions/install_package_on_manylinux@master
-        with:
-          python-version: ${{ inputs.python-version }}
-          package_name: MPSPlots
-
       - uses: MartinPdeS/MPSActions/publish_documentation@master
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          package_name: MPSPlots
