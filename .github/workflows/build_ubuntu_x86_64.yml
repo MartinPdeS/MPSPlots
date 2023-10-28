@@ -15,7 +15,6 @@ on:
 
 jobs:
     job_create_wheel:
-        name: "Python ${{ matrix.python_version }}"
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
@@ -32,11 +31,9 @@ jobs:
             with:
                 python_version: ${{ matrix.python_version }}
 
-          - name: "Set-up: Python ${{ matrix.python-version[1] }}"
             uses: actions/setup-python@v4
             with:
-                python-version: ${{ matrix.python-version[0] }}
-                python-version: env.PYTHON_CP_VERSION
+                python-version: env.PYTHON_DOTTED_VERSION
 
           - name: "Install: Dependencies"
             run: |
@@ -57,7 +54,7 @@ jobs:
             if: ${{ inputs.publish_wheel == true }}"
             uses: actions/upload-artifact@v3
             with:
-                name: "manylinux_wheel_python${{ matrix.python-version[1] }}"
+                name: "manylinux_wheel_python${{ env.PYTHON_CP_VERSION }}"
                 path: ./dist/*
 
 
