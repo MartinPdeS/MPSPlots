@@ -17,7 +17,7 @@ jobs:
             with:
                 python-version: '3.10'
 
-    job_post_coverage:
+    publish_coverage:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [build_pure_python]
         runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
                 auth: ${{ secrets.MPdS_gist_token }}
                 gistID: c4f12a9ab97461a9453d9a174ae88e17
 
-    job_build_documentation:
+    publish_documentation:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [build_pure_python]
         runs-on: ubuntu-latest
@@ -39,9 +39,9 @@ jobs:
               package-name: MPSPlots
               python-version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
 
-    job_publish_wheel:
+    publish_wheel:
         if: "contains(github.event.head_commit.message, '[publish]')"
-        needs: [build_pure_python, job_build_documentation, job_post_coverage]
+        needs: [build_pure_python, publish_documentation, publish_coverage]
         runs-on: ubuntu-latest
         steps:
           - uses: MartinPdeS/MPSActions/publish_pypi@master
