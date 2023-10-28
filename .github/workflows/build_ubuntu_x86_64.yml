@@ -33,7 +33,7 @@ jobs:
 
           - uses: actions/setup-python@v4
             with:
-                python-version: ${{ env.PYTHON_DOTTED_VERSION }}
+                python-version: ${{ env.dotted_python_version }}
 
           - name: "Run: Tests"
             run: |
