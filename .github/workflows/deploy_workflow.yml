@@ -45,7 +45,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - uses: MartinPdeS/MPSActions/publish_pypi@master
-            secrets: inherit
             with:
               python-version: "3.10"
-              password: lol
+              password: secrets.PYPI_API_TOKEN
