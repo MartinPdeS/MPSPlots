@@ -31,7 +31,7 @@ jobs:
             with:
                 python_version: ${{ matrix.python_version }}
 
-            uses: actions/setup-python@v4
+          - uses: actions/setup-python@v4
             with:
                 python-version: env.PYTHON_DOTTED_VERSION
 
