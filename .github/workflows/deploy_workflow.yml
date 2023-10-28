@@ -28,7 +28,6 @@ jobs:
                 auth: ${{ secrets.MPdS_gist_token }}
                 gistID: c4f12a9ab97461a9453d9a174ae88e17
 
-
     job_build_documentation:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [build_pure_python]
