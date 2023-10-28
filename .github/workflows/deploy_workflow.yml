@@ -32,6 +32,14 @@ jobs:
     job_build_documentation:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [build_pure_python]
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/publish_documentation@master
+            with:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              package_name: MPSPlots
+              python-version: "3.10"
+
         uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_documentation.yml@master
         secrets: inherit
         with:
