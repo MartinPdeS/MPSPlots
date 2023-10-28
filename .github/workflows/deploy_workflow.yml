@@ -34,7 +34,7 @@ jobs:
 
     job_publish_wheel:
         if: "contains(github.event.head_commit.message, '[publish]')"
-        needs: [Ubuntu_x86_64]
+        needs: [Ubuntu_x86_64, job_build_documentation, job_post_coverage]
         uses: MartinPdeS/MPSPlots/.github/workflows/sub_deploy_pypi.yml@main
         secrets: inherit
         with:
