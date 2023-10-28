@@ -18,8 +18,8 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
-        matrix:
-            python_version: ${{ fromJson(inputs.python_version_list) }}
+            matrix:
+                python_version: ${{ fromJson(inputs.python_version_list) }}
 
         steps:
           - uses: actions/checkout@v3
