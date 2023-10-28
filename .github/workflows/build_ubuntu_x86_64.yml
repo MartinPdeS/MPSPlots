@@ -22,8 +22,7 @@ jobs:
             python_version: ${{ fromJson(inputs.python_version_list) }}
 
         steps:
-          - name: "Checkout repository"
-            uses: actions/checkout@v3
+          - uses: actions/checkout@v3
             with:
                 submodules: 'true'
 
@@ -41,7 +40,6 @@ jobs:
                 python -m pip install -e .[development]
                 pytest -s
                 python setup.py bdist_wheel
-
 
           - name: "Upload: Wheel"
             uses: actions/upload-artifact@v3
