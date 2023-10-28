@@ -23,7 +23,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
           - uses: MartinPdeS/MPSActions/compute_unittest_coverage@master
-            secrets: inherit
             with:
               python-version: "3.10"
               auth: ${{ secrets.MPdS_gist_token }}
