@@ -10,11 +10,12 @@ permissions:
     contents: write
 
 jobs:
-    Ubuntu_x86_64:
-        uses: MartinPdeS/MPSPlots/.github/workflows/build_ubuntu_x86_64.yml@master
-        secrets: inherit
-        with:
-            python_version_list: "['3.10']"
+    build_pure_python:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/build_pure_python_package@master
+            with:
+                python-version: '3.10'
 
     job_post_coverage:
         if: "contains(github.event.head_commit.message, '[publish]')"
