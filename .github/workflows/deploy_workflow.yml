@@ -25,7 +25,6 @@ jobs:
           - uses: MartinPdeS/MPSActions/publish_coverage@master
             with:
                 python-version: "3.10"
-                package-name: MPSPlots
                 auth: ${{ secrets.MPdS_gist_token }}
                 gistID: c4f12a9ab97461a9453d9a174ae88e17
 
@@ -36,14 +35,16 @@ jobs:
         steps:
           - uses: MartinPdeS/MPSActions/publish_documentation@master
             with:
-              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              package-name: MPSPlots
-              python-version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                package-name: MPSPlots
+                python-version: "3.10" #no documentation for python 3.7 (pickle5 not present˘)
 
     publish_wheel:
         if: "contains(github.event.head_commit.message, '[publish]')"
         needs: [build_pure_python, publish_documentation, publish_coverage]
-        uses: MartinPdeS/MPSActions/publish_pypi@master
-        with:
-            python-version: "3.10"
-            password: ${{ secrets.PYPI_API_TOKEN }}
+        runs-on: ubuntu-latest
+        steps:
+          - uses: MartinPdeS/MPSActions/publish_pypi@master
+            with:
+                python-version: "3.10"
+                password: ${{ secrets.PYPI_API_TOKEN }}
