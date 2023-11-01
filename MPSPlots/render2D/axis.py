@@ -337,6 +337,12 @@ class Axis:
 
         self.add_watermark(text=self.water_mark)
 
+        if self.show_colorbar:
+            if self.colorbar is None:
+                self.colorbar = Colorbar()
+
+            self.colorbar._render_(ax=self)
+
     def add_fill_line(self, **kwargs: dict) -> FillLine:
         """
         Adds a FillLine artist to ax.
@@ -482,10 +488,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     Colorbar
         """
-        artist = Colorbar(**kwargs)
-        self.add_artist(artist)
+        self.colorbar = Colorbar(**kwargs)
 
-        return artist
+        return self.colorbar
 
     def add_ax_annotation(self, text: str, **kwargs: dict) -> Colorbar:
         """

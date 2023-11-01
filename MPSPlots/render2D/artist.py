@@ -9,6 +9,7 @@ from matplotlib.offsetbox import AnchoredText
 from matplotlib.patches import PathPatch
 from matplotlib.collections import PatchCollection
 from matplotlib.path import Path
+import matplotlib.colors as colors
 
 # Other imports
 import numpy
@@ -50,8 +51,10 @@ class Colorbar:
             pad=0.15
         )
 
+        mappable = ax._ax.collections[0]
+
         cbar = plt.colorbar(
-            mappable=ax._ax.collections[0],
+            mappable=mappable,
             norm=None,
             cax=colorbar_ax,
             orientation=self.orientation,
@@ -121,8 +124,6 @@ class Mesh():
     """ Array representing the x axis, if not defined a numpy arrange is used instead """
     y: numpy.ndarray = None
     """ Array representing the y axis, if not defined a numpy arrange is used instead """
-    show_colorbar: bool = False
-    """ Boolean option to show or not the colorbar of the mesh """
     x_scale_factor: float = 1
     """ Scaling factor for the x axis """
     y_scale_factor: float = 1
@@ -131,8 +132,6 @@ class Mesh():
     """ Position of the layer """
     colormap_norm: object = None
     """ Norm object for the colormap """
-    colorbar: Colorbar = None
-    """ Colorbar object for the mesh """
 
     def __post_init__(self):
         if self.x is None:
@@ -141,13 +140,13 @@ class Mesh():
         if self.y is None:
             self.y = numpy.arange(self.scalar.shape[0])
 
-        if self.colorbar is None:
-            self.colorbar = Colorbar()
-
         if self.colormap is None:
             self.colormap = colormaps.blue_black_red
 
     def _render_(self, ax):
+        if ax.colorbar is not None and ax.colorbar.symmetric:
+            self.colormap_norm = colors.CenteredNorm()
+
         image = ax._ax.pcolormesh(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
@@ -159,11 +158,6 @@ class Mesh():
         )
 
         image.set_edgecolor('face')
-
-        if self.show_colorbar:
-
-            self.colorbar._render_(ax=ax)
-            return image, ax.colorbar
 
         return image
 

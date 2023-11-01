@@ -127,7 +127,7 @@ html_theme_options = {
         },
         {
             "name": "PyPI",
-            "url": "https://pypi.org/project/supymode/",
+            "url": "https://pypi.org/project/mpsplots/",
             "icon": "fa-solid fa-box",
         },
     ],
