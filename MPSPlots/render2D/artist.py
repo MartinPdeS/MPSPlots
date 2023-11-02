@@ -57,8 +57,6 @@ class Colorbar:
         )
 
         mappable = ax._ax.collections[-1]
-        print(dir(mappable))
-        # dsa
 
         cbar = plt.colorbar(
             mappable=mappable,
