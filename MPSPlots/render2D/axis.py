@@ -489,6 +489,7 @@ class Axis:
         :rtype:     Colorbar
         """
         self.colorbar = Colorbar(**kwargs)
+        self.show_colorbar = True
 
         return self.colorbar
 

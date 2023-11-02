@@ -33,7 +33,7 @@ class Colorbar:
     """ Set symmetric colormap """
     log_norm: bool = False
     """ Log normalization of the colorbar """
-    numeric_format: str = '%.3f'
+    numeric_format: str = None
     """ Format for the ticks on the colorbar """
     n_ticks: int = None
     """ Number of ticks for the colorbar """
@@ -43,6 +43,11 @@ class Colorbar:
     """ Width of the colorbar """
 
     def _render_(self, ax) -> None:
+        if self.symmetric:
+            self.colormap_norm = colors.CenteredNorm()
+        else:
+            self.colormap_norm = None
+
         divider = make_axes_locatable(ax._ax)
 
         colorbar_ax = divider.append_axes(
@@ -51,11 +56,13 @@ class Colorbar:
             pad=0.15
         )
 
-        mappable = ax._ax.collections[0]
+        mappable = ax._ax.collections[-1]
+        print(dir(mappable))
+        # dsa
 
         cbar = plt.colorbar(
             mappable=mappable,
-            norm=None,
+            norm=self.colormap_norm,
             cax=colorbar_ax,
             orientation=self.orientation,
             format=self.numeric_format
@@ -144,9 +151,6 @@ class Mesh():
             self.colormap = colormaps.blue_black_red
 
     def _render_(self, ax):
-        if ax.colorbar is not None and ax.colorbar.symmetric:
-            self.colormap_norm = colors.CenteredNorm()
-
         image = ax._ax.pcolormesh(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
@@ -154,7 +158,7 @@ class Mesh():
             cmap=self.colormap,
             shading='auto',
             zorder=self.layer_position,
-            norm=self.colormap_norm
+            # norm=self.colormap_norm
         )
 
         image.set_edgecolor('face')
