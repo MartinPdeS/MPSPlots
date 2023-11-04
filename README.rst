@@ -4,6 +4,7 @@ MPSPlots
 
 |python|
 |docs|
+|unittest|
 |PyPi|
 
 
@@ -33,3 +34,5 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
 .. |docs| image:: https://readthedocs.org/projects/mpsplots/badge/?version=master
    :target: https://mpsplots.readthedocs.io/en/latest/
    :alt: Documentation Status
+
+.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/8187f1d56dee6f004428f4d4298d024d/raw/f835afd55a4a0164a440f6681f8f332973afb815/coverage_badge.json

@@ -52,7 +52,7 @@ class Colorbar:
 
         colorbar_ax = divider.append_axes(
             self.position,
-            size=self.size,
+            size=len(self),
             pad=0.15
         )
 
@@ -365,7 +365,7 @@ class Line():
 
     def __post_init__(self):
         if self.x is None:
-            self.x = numpy.arange(self.y.size)
+            self.x = numpy.arange(len(self.y))
 
         self.y = numpy.asarray(self.y)
         self.x = numpy.asarray(self.x)
@@ -490,7 +490,7 @@ class Scatter():
 
     def __post_init__(self):
         if self.x is None:
-            self.x = numpy.arange(self.y.size)
+            self.x = numpy.arange(len(self.y))
 
         self.y = numpy.asarray(self.y)
         self.x = numpy.asarray(self.x)
