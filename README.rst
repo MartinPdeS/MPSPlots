@@ -35,4 +35,4 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: https://mpsplots.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/fdbae2f798d47a3a4585cdb53229c937/raw/6a09bc37a80b076dd04c73e4c2ba959aeead9e3c/coverage_badge.json
+.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/f0955be398d59efac69042c1b0fbece2/raw/eb09c1c1b232dba9560ed698d8059a087a5c7b6b/MPSPlotscoverage_badge.json
