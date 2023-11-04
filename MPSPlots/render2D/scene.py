@@ -13,7 +13,6 @@ import string
 from pathvalidate import sanitize_filepath
 from pathlib import Path
 from dataclasses import dataclass
-import MPSPlots
 from MPSPlots.render2D.axis import Axis
 from MPSPlots.tools.utils import int_to_roman
 from MPSPlots.render2D.artist import AxAnnotation

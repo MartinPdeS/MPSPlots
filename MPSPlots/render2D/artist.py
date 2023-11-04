@@ -52,7 +52,7 @@ class Colorbar:
 
         colorbar_ax = divider.append_axes(
             self.position,
-            size=len(self),
+            size=self.size,
             pad=0.15
         )
 
