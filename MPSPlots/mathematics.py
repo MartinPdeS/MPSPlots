@@ -2,13 +2,6 @@ import numpy
 from scipy import ndimage
 
 
-def Deg2Rad(Value):
-    if Value is None:
-        return numpy.nan
-    else:
-        return numpy.deg2rad(Value)
-
-
 def Norm(Scalar):
     return numpy.sqrt(numpy.sum(numpy.abs(Scalar)**2))
 

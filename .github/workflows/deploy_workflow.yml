@@ -27,7 +27,7 @@ jobs:
                 package-name: MPSPlots
                 python-version: "3.10"
                 auth: ${{ secrets.GIST_TOKEN }}
-                gistID: fdbae2f798d47a3a4585cdb53229c937
+                gistID: f0955be398d59efac69042c1b0fbece2
 
     publish_documentation:
         if: "contains(github.event.head_commit.message, '[publish]')"
