@@ -16,3 +16,4 @@ cmake_install.cmake
 
 .pytest_cache
 coverage_report.json
+.coverage
