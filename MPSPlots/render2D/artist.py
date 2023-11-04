@@ -513,6 +513,8 @@ class Scatter():
 
 @dataclass
 class Text():
+    text: str
+    """ String to be plotted """
     position: tuple = (0.0, 0.0)
     """ Box position of the text """
     font_size: int = 8
@@ -521,8 +523,6 @@ class Text():
     """ Weight of the text """
     color: str = 'black'
     """ Color of the text """
-    text: str = ''
-    """ String to be plotted """
     add_box: bool = False
     """ Boolean to enable a box around the text """
     layer_position: int = 1
@@ -536,7 +536,7 @@ class Text():
             prop=dict(size=self.font_size, color=self.color, weight=self.weight, position=(0, 0)),
             frameon=self.add_box,
             bbox_to_anchor=self.position,
-            # bbox_transform=ax._ax.transAxes,#ax._ax.transData,
+            bbox_transform=ax._ax.transData,#ax._ax.transAxes,
             borderpad=0,
         )
 

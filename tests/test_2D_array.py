@@ -89,8 +89,8 @@ def test_Mesh(patch):
     figure.show()
 
 
-# @patch("matplotlib.pyplot.show")
-def test_Contour():
+@patch("matplotlib.pyplot.show")
+def test_contour(patch):
     x, y = numpy.mgrid[-100:100, -100:100]
     scalar = numpy.sqrt(x**2 + y**2)
 
@@ -101,7 +101,7 @@ def test_Contour():
         column=0,
         x_label='x data',
         y_label='y data',
-        # show_legend=True
+        show_legend=True
     )
 
     iso_values = numpy.linspace(scalar.min(), scalar.max(), 10)
@@ -116,5 +116,72 @@ def test_Contour():
 
     figure.show()
 
-test_Contour()
+
+@patch("matplotlib.pyplot.show")
+def test_vertical_line(patch):
+    figure = SceneMatrix(unit_size=(4, 4), title='random data simple line')
+
+    ax = figure.append_ax(
+        row=0,
+        column=0,
+        x_label='x data',
+        y_label='y data',
+        show_legend=True
+    )
+
+    ax.add_vertical_line(
+        x=numpy.linspace(0, 10, 10),
+        y_min=0,
+        y_max=1,
+        label='vertical line'
+    )
+
+    figure.show()
+
+
+@patch("matplotlib.pyplot.show")
+def test_scatter(patch):
+    figure = SceneMatrix(title='Random text')
+
+    ax = figure.append_ax(
+        row=0,
+        column=0,
+        x_label='x data',
+        y_label='y data',
+        show_legend=True
+    )
+
+    ax.add_scatter(
+        x=[0, 1, 2, 3],
+        y=[0, 1, 2, 3],
+        marker='o',
+        label='test',
+        color='black',
+        marker_size=100,
+        edge_color='red',
+        line_width=3
+    )
+
+    figure.show()
+
+
+@patch("matplotlib.pyplot.show")
+def test_text(patch):
+    figure = SceneMatrix(title='Random text')
+
+    ax = figure.append_ax(
+        row=0,
+        column=0,
+        x_label='x data',
+        y_label='y data',
+        show_legend=True
+    )
+
+    ax.add_text(
+        text='this is a text',
+        position=(0.5, 0.5),
+    )
+
+    figure.show()
+
 # -
