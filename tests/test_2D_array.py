@@ -23,7 +23,7 @@ def test_Line(patch):
 
     ax.add_line(x=x, y=y, label='test label')
 
-    figure.show(save_directory='unittest_figure.svg')
+    figure.show()
 
 
 @patch("matplotlib.pyplot.show")
@@ -44,7 +44,7 @@ def test_FillLine(patch):
 
     ax.add_fill_line(x=x, y0=y0, y1=y1, label='test label')
 
-    figure.show(save_directory='unittest_figure.svg')
+    figure.show()
 
 
 @patch("matplotlib.pyplot.show")
@@ -66,7 +66,7 @@ def test_STDLine(patch):
 
     ax.add_std_line(x=x, y_mean=y_mean, y_std=y_std)
 
-    figure.show(save_directory='unittest_figure.svg')
+    figure.show()
 
 
 @patch("matplotlib.pyplot.show")
@@ -86,6 +86,35 @@ def test_Mesh(patch):
 
     ax.add_mesh(x=x, y=y, scalar=scalar)
 
-    figure.show(save_directory='unittest_figure.png')
+    figure.show()
 
+
+# @patch("matplotlib.pyplot.show")
+def test_Contour():
+    x, y = numpy.mgrid[-100:100, -100:100]
+    scalar = numpy.sqrt(x**2 + y**2)
+
+    figure = SceneMatrix(unit_size=(4, 4), title='random data simple line')
+
+    ax = figure.append_ax(
+        row=0,
+        column=0,
+        x_label='x data',
+        y_label='y data',
+        # show_legend=True
+    )
+
+    iso_values = numpy.linspace(scalar.min(), scalar.max(), 10)
+
+    ax.add_contour(
+        x=x,
+        y=y,
+        scalar=scalar,
+        iso_values=iso_values,
+        fill_contour=True
+    )
+
+    figure.show()
+
+test_Contour()
 # -
