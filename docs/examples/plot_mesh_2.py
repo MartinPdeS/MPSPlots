@@ -56,7 +56,6 @@ _ = ax_0.add_mesh(
     scalar=x + y,
     x=x,
     y=y,
-    show_colorbar=True
 )
 
 # %%
@@ -65,7 +64,6 @@ _ = ax_1.add_mesh(
     scalar=(x - 50)**2 + (y - 50)**2,
     x=x,
     y=y,
-    show_colorbar=True
 )
 
 
@@ -75,7 +73,6 @@ _ = ax_2.add_mesh(
     scalar=x**2 + y**2,
     x=x,
     y=y,
-    show_colorbar=True
 )
 
 # %%

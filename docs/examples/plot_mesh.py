@@ -39,7 +39,6 @@ artist_0 = ax_0.add_mesh(
     scalar=x + y,
     x=x,
     y=y,
-    show_colorbar=True
 )
 
 # %%
@@ -48,7 +47,6 @@ artist_1 = ax_1.add_mesh(
     scalar=x**2,
     x=x,
     y=y,
-    show_colorbar=True
 )
 
 # %%
