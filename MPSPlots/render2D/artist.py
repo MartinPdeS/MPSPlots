@@ -443,8 +443,8 @@ class Table():
     text_position: str = 'center'
 
     def __post_init__(self):
-        self.table_values = numpy.atleast_2d(self.table_values)
-        n_rows, n_columns = self.table_values.shape
+        # self.table_values = numpy.atleast_2d(self.table_values)
+        n_rows, n_columns = numpy.shape(self.table_values)
 
         if self.row_labels is None:
             self.row_labels = [''] * n_rows

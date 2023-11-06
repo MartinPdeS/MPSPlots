@@ -8,7 +8,6 @@ from matplotlib.backends.backend_pdf import PdfPages
 # Other imports
 import numpy
 from dataclasses import dataclass
-import MPSPlots
 from MPSPlots.render2D.artist import (
     Line,
     FillLine,
