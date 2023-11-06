@@ -21,7 +21,7 @@ from MPSPlots.render2D.artist import AxAnnotation
 @dataclass
 class SceneProperties:
     unit_size: tuple = (10, 3)
-    tight_layout: bool = True
+    tight_layout: bool = False
     transparent_background: bool = False
     title: str = ""
 

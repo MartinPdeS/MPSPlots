@@ -20,7 +20,8 @@ from MPSPlots.render2D.artist import (
     Text,
     PatchPolygon,
     Colorbar,
-    AxAnnotation
+    AxAnnotation,
+    Table
 )
 
 
@@ -384,6 +385,21 @@ class Axis:
         :rtype:     Scatter
         """
         artist = Scatter(**kwargs)
+        self.add_artist(artist)
+
+        return artist
+
+    def add_table(self, **kwargs: dict) -> Table:
+        """
+        Adds a Table artist to ax.
+
+        :param      kwargs:  The keywords arguments to be sent to Table class
+        :type       kwargs:  dict
+
+        :returns:   The artist object
+        :rtype:     Table
+        """
+        artist = Table(**kwargs)
         self.add_artist(artist)
 
         return artist

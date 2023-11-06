@@ -19,7 +19,7 @@ y1 = numpy.random.rand(100) - x
 # Creating the Scene
 figure = SceneList(
     unit_size=(8, 4),
-    title='random data simple lines'
+    title=''
 )
 
 # %%
@@ -39,6 +39,12 @@ _ = ax.add_fill_line(
     y1=y1,
     label='Fill between lines',
     show_outline=True
+)
+
+# %%
+# Adding a Table artist to axis
+ax.add_table(
+    table_values=['1', '2', '3', '4'],
 )
 
 # %%

@@ -384,24 +384,20 @@ class Line():
         if self.x is None:
             self.x = numpy.arange(len(self.y))
 
-        self.y = numpy.asarray(self.y)
-        self.x = numpy.asarray(self.x)
+        self.y = numpy.asarray(self.y) * self.y_scale_factor
+        self.x = numpy.asarray(self.x) * self.x_scale_factor
 
     def _render_(self, ax):
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
         if numpy.iscomplexobj(self.y):
-            x = self.x * self.x_scale_factor
-            y_real = self.y.real * self.y_scale_factor
-            y_imag = self.y.imag * self.y_scale_factor
-
-            if ax.y_scale in ['log', 'logarithmic'] and (y_real.min() < 0 or y_imag.min() < 0):
+            if ax.y_scale in ['log', 'logarithmic'] and (self.y.real.min() < 0 or self.y.imag.min() < 0):
                 raise ValueError('Cannot plot negative value data on logarithmic scale!')
 
             ax._ax.plot(
-                x,
-                y_real,
+                self.x,
+                self.y.real,
                 label=self.label + "[real]",
                 color=self.color,
                 linestyle=self.line_style,
@@ -410,8 +406,8 @@ class Line():
             )
 
             ax._ax.plot(
-                x,
-                y_imag,
+                self.x,
+                self.y.imag,
                 label=self.label + "[imag]",
                 color=self.color,
                 linestyle=self.line_style,
@@ -435,6 +431,38 @@ class Line():
                 linewidth=self.line_width,
                 zorder=self.layer_position
             )
+
+
+@dataclass
+class Table():
+    table_values: list
+    column_labels: list = None
+    row_labels: list = None
+    position: str = 'top'
+    cell_color: str = None
+    text_position: str = 'center'
+
+    def __post_init__(self):
+        self.table_values = numpy.atleast_2d(self.table_values)
+        n_rows, n_columns = self.table_values.shape
+
+        if self.row_labels is None:
+            self.row_labels = [''] * n_rows
+
+        if self.column_labels is None:
+            self.column_labels = [''] * n_columns
+
+    def _render_(self, ax):
+        table = ax._ax.table(
+            cellText=self.table_values,
+            rowLabels=self.row_labels,
+            colLabels=self.column_labels,
+            loc=self.position,
+            cellColours=self.cell_color,
+            cellLoc=self.text_position,
+        )
+
+        return table
 
 
 @dataclass
