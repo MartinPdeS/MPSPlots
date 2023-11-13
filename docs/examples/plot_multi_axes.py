@@ -28,7 +28,7 @@ ax0 = figure.append_ax(
     y_label='y data',
     show_legend=True,
     equal_limits=True,
-    water_mark='yoyo'
+    water_mark='watermark'
 )
 
 # %%

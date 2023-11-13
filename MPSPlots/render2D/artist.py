@@ -15,7 +15,7 @@ import matplotlib.colors as colors
 import numpy
 import shapely.geometry as geo
 from itertools import cycle
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from MPSPlots import colormaps
 
 linecycler = cycle(["-", "--", "-.", ":"])
@@ -40,10 +40,14 @@ __all__ = [
 
 @dataclass
 class Colorbar:
+    artist: numpy.ndarray = None
+    """ The artist to map """
     discreet: bool = False
     """ Buggy feature """
     position: str = 'right'
     """ Position of the colorbar """
+    colormap: str = field(default_factory=lambda: colormaps.blue_black_red)
+    """ Colormap to be used for the plot """
     orientation: str = "vertical"
     """ Orientation of the colorbar """
     symmetric: bool = False
@@ -56,38 +60,51 @@ class Colorbar:
     """ Number of ticks for the colorbar """
     label_size: int = None
     """ Label size of the colorbar """
-    size: str = "10%"
+    width: str = "10%"
     """ Width of the colorbar """
+    padding: float = 0.10
+    """ Padding between the plot and the colorbar """
 
-    def _render_(self, ax) -> None:
+    def __post_init__(self):
         if self.symmetric:
-            self.colormap_norm = colors.CenteredNorm()
+            self.norm = colors.CenteredNorm()
         else:
-            self.colormap_norm = None
+            self.norm = None
 
+        if self.artist is None:
+            self.mappable = None
+        else:
+            self.mappable = plt.cm.ScalarMappable(cmap=self.colormap, norm=self.norm)
+
+            self.mappable.set_array(self.artist.scalar)
+
+    def create_sub_ax(self, ax) -> object:
         divider = make_axes_locatable(ax._ax)
 
         colorbar_ax = divider.append_axes(
             self.position,
-            size=self.size,
-            pad=0.15
+            size=self.width,
+            pad=self.padding
         )
 
-        mappable = ax._ax.collections[-1]
+        return colorbar_ax
 
-        cbar = plt.colorbar(
-            mappable=mappable,
-            norm=self.colormap_norm,
+    def _render_(self, ax) -> None:
+        colorbar_ax = self.create_sub_ax(ax=ax)
+
+        colorbar = plt.colorbar(
+            mappable=self.mappable,
+            norm=self.norm,
+            ax=ax._ax,
             cax=colorbar_ax,
             orientation=self.orientation,
-            format=self.numeric_format
+            format=self.numeric_format,
+            extend='both'
         )
 
         if self.n_ticks is not None:
-            cbar.ax.locator_params(nbins=self.n_ticks)
-
-        if self.n_ticks is not None:
-            cbar.ax.tick_params(labelsize=self.label_size)
+            colorbar.ax.locator_params(nbins=self.n_ticks)
+            colorbar.ax.tick_params(labelsize=self.label_size)
 
 
 @dataclass
@@ -140,8 +157,6 @@ class Contour():
 class Mesh():
     scalar: numpy.ndarray
     """ 2 dimensional numpy array representing the mesh to be plotted """
-    colormap: str = None
-    """ Colormap to be used for the plot """
     x: numpy.ndarray = None
     """ Array representing the x axis, if not defined a numpy arrange is used instead """
     y: numpy.ndarray = None
@@ -152,8 +167,6 @@ class Mesh():
     """ Scaling factor for the y axis """
     layer_position: int = 1
     """ Position of the layer """
-    colormap_norm: object = None
-    """ Norm object for the colormap """
 
     def __post_init__(self):
         if self.x is None:
@@ -162,18 +175,15 @@ class Mesh():
         if self.y is None:
             self.y = numpy.arange(self.scalar.shape[0])
 
-        if self.colormap is None:
-            self.colormap = colormaps.blue_black_red
-
     def _render_(self, ax):
         image = ax._ax.pcolormesh(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             self.scalar,
-            cmap=self.colormap,
             shading='auto',
             zorder=self.layer_position,
-            # norm=self.colormap_norm
+            norm=ax.colorbar.norm,
+            cmap=ax.colorbar.colormap,
         )
 
         image.set_edgecolor('face')

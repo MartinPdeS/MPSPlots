@@ -52,8 +52,6 @@ class Axis:
     """ Set equal limits to x and y axis, override x_limits and y_limits """
     equal: bool = False
     """ Set aspect ratio to equal """
-    colorbar: Colorbar = None
-    """ Colorbar to add to ax """
     water_mark: str = ''
     """ Watermark to add to axis """
     projection: str = None
@@ -84,6 +82,7 @@ class Axis:
     def __post_init__(self):
         self._artist_list = []
         self._ax = None
+        self.colorbar = Colorbar()
 
     def __getitem__(self, idx):
         return self._artist_list[idx]
@@ -222,9 +221,6 @@ class Axis:
             if self.y_scale_factor is not None:
                 artist.y_scale_factor = self.y_scale_factor
 
-            if self.show_colorbar is not None:
-                artist.show_colorbar = self.show_colorbar
-
             if self.line_width is not None:
                 artist.line_width = self.line_width
 
@@ -338,9 +334,6 @@ class Axis:
         self.add_watermark(text=self.water_mark)
 
         if self.show_colorbar:
-            if self.colorbar is None:
-                self.colorbar = Colorbar()
-
             self.colorbar._render_(ax=self)
 
     def add_fill_line(self, **kwargs: dict) -> FillLine:

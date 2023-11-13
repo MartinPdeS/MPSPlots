@@ -21,9 +21,15 @@ from MPSPlots.render2D.artist import AxAnnotation
 @dataclass
 class SceneProperties:
     unit_size: tuple = (10, 3)
-    tight_layout: bool = False
+    """ Size of each of the sub axis """
+    tight_layout: bool = True
+    """ Tight layout enable or not """
     transparent_background: bool = False
+    """ Set to transparent or not the saved figure """
     title: str = ""
+    """ Title of the figure """
+    padding: float = 1.0
+    """ Padding between the axis if tight layout is True """
 
     ax_inherit_list = [
         'font_size',
@@ -136,7 +142,7 @@ class SceneProperties:
             ax._render_()
 
         if self.tight_layout:
-            plt.tight_layout()
+            plt.tight_layout(pad=self.padding)
 
         return self
 
