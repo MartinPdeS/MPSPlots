@@ -92,6 +92,16 @@ class Axis:
         self._artist_list += other._artist_list
         return self
 
+    @staticmethod
+    def add_artist_to_ax(function):
+        def wrapper(self, *args, **kwargs):
+            artist = function(self, *args, **kwargs)
+            self._artist_list.append(artist)
+
+            return artist
+
+        return wrapper
+
     @property
     def style(self):
         return {
@@ -337,6 +347,7 @@ class Axis:
         if self.show_colorbar:
             self.colorbar._render_(ax=self)
 
+    @add_artist_to_ax
     def add_fill_line(self, **kwargs: dict) -> FillLine:
         """
         Adds a FillLine artist to ax.
@@ -347,11 +358,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     FillLine
         """
-        artist = FillLine(**kwargs)
-        self.add_artist(artist)
+        return FillLine(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_std_line(self, **kwargs: dict) -> STDLine:
         """
         Adds a STDLine artist to ax.
@@ -362,11 +371,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     STDLine
         """
-        artist = STDLine(**kwargs)
-        self.add_artist(artist)
+        return STDLine(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_scatter(self, **kwargs: dict) -> Scatter:
         """
         Adds a Scatter artist to ax.
@@ -377,10 +384,7 @@ class Axis:
         :returns:   The artist object
         :rtype:     Scatter
         """
-        artist = Scatter(**kwargs)
-        self.add_artist(artist)
-
-        return artist
+        return Scatter(**kwargs)
 
     def add_table(self, **kwargs: dict) -> Table:
         """
@@ -392,11 +396,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     Table
         """
-        artist = Table(**kwargs)
-        self.add_artist(artist)
+        return Table(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_mesh(self, **kwargs: dict) -> Mesh:
         """
         Adds a Mesh artist to ax.
@@ -412,6 +414,7 @@ class Axis:
 
         return artist
 
+    @add_artist_to_ax
     def add_contour(self, **kwargs: dict) -> Contour:
         """
         Adds a Contour artist to ax.
@@ -422,11 +425,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     Contour
         """
-        artist = Contour(**kwargs)
-        self.add_artist(artist)
+        return Contour(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_line(self, **kwargs: dict) -> Line:
         """
         Adds a Line artist to ax.
@@ -437,11 +438,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     Line
         """
-        artist = Line(**kwargs)
-        self.add_artist(artist)
+        return Line(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_vertical_line(self, **kwargs: dict) -> VerticalLine:
         """
         Adds a VerticalLine artist to ax.
@@ -452,11 +451,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     VerticalLine
         """
-        artist = VerticalLine(**kwargs)
-        self.add_artist(artist)
+        return VerticalLine(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_horizontal_line(self, **kwargs: dict) -> HorizontalLine:
         """
         Adds a HorizontalLine artist to ax.
@@ -467,11 +464,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     VerticalLine
         """
-        artist = HorizontalLine(**kwargs)
-        self.add_artist(artist)
+        return HorizontalLine(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_text(self, **kwargs: dict) -> Text:
         """
         Adds a Text artist to ax.
@@ -482,11 +477,9 @@ class Axis:
         :returns:   The artist object
         :rtype:     Text
         """
-        artist = Text(**kwargs)
-        self.add_artist(artist)
+        return Text(**kwargs)
 
-        return artist
-
+    @add_artist_to_ax
     def add_polygon(self, **kwargs: dict) -> Text:
         """
         Adds a Text artist to ax.
@@ -497,10 +490,7 @@ class Axis:
         :returns:   The artist object
         :rtype:     Text
         """
-        artist = PatchPolygon(**kwargs)
-        self.add_artist(artist)
-
-        return artist
+        return PatchPolygon(**kwargs)
 
     def add_colorbar(self, **kwargs: dict) -> Colorbar:
         """
@@ -517,6 +507,7 @@ class Axis:
 
         return self.colorbar
 
+    @add_artist_to_ax
     def add_ax_annotation(self, text: str, **kwargs: dict) -> Colorbar:
         """
         Adds a Colorbar artist to ax.
@@ -527,10 +518,7 @@ class Axis:
         :returns:   The artist object
         :rtype:     Colorbar
         """
-        artist = AxAnnotation(text, **kwargs)
-        self.add_artist(artist)
-
-        return artist
+        return AxAnnotation(text, **kwargs)
 
 
 def Multipage(filename, figs=None, dpi=200):

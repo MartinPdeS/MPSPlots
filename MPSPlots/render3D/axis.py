@@ -3,7 +3,17 @@
 
 from dataclasses import dataclass
 
-from MPSPlots.render3D.artist import UnstructuredMesh, UnitSphere, UnitAxis
+from MPSPlots.render3D.artist import (
+    UnstructuredMesh,
+    UnitSphere,
+    UnitAxis,
+    UnitThetaVector,
+    UnitPhiVector,
+    UnitRadialVector,
+    Mesh,
+    Text,
+    ColorBar
+)
 
 
 @dataclass
@@ -11,32 +21,66 @@ class Axis():
     plot_number: tuple
     scene: object
 
+    @property
+    def row(self) -> int:
+        return self.plot_number[0]
+
+    @property
+    def column(self) -> int:
+        return self.plot_number[1]
+
+    @staticmethod
+    def add_artist_to_ax(function):
+        def wrapper(self, *args, **kwargs):
+            artist = function(self, *args, **kwargs)
+            self.artist_list.append(artist)
+
+            return artist
+
+        return wrapper
+
     def __post_init__(self) -> None:
         self.artist_list = []
 
+    @add_artist_to_ax
     def add_unstructured_mesh(self, *args, **kwargs) -> UnstructuredMesh:
-        artist = UnstructuredMesh(*args, **kwargs)
+        return UnstructuredMesh(*args, **kwargs)
 
-        self.artist_list.append(artist)
-
-        return artist
-
+    @add_artist_to_ax
     def add_unit_sphere(self, *args, **kwargs) -> UnitSphere:
-        artist = UnitSphere(*args, **kwargs)
+        return UnitSphere(*args, **kwargs)
 
-        self.artist_list.append(artist)
-
-        return artist
-
+    @add_artist_to_ax
     def add_unit_axis(self, *args, **kwargs) -> UnitAxis:
-        artist = UnitAxis(*args, **kwargs)
+        return UnitAxis(*args, **kwargs)
 
-        self.artist_list.append(artist)
+    @add_artist_to_ax
+    def add_unit_theta_vector(self, *args, **kwargs) -> UnitThetaVector:
+        return UnitThetaVector(*args, **kwargs)
 
-        return artist
+    @add_artist_to_ax
+    def add_unit_phi_vector(self, *args, **kwargs) -> UnitPhiVector:
+        return UnitPhiVector(*args, **kwargs)
+
+    @add_artist_to_ax
+    def add_unit_radial_vector(self, *args, **kwargs) -> UnitRadialVector:
+        return UnitRadialVector(*args, **kwargs)
+
+    @add_artist_to_ax
+    def add_mesh(self, *args, **kwargs) -> Mesh:
+        return Mesh(*args, **kwargs)
+
+    @add_artist_to_ax
+    def add_text(self, *args, **kwargs) -> Text:
+        return Text(*args, **kwargs)
+
+    def add_colorbar(self, *args, **kwargs) -> ColorBar:
+        self.colorbar = ColorBar(*args, **kwargs)
 
     def _render_(self):
         for artist in self.artist_list:
             artist._render_(ax=self)
+
+        self.colorbar._render_(ax=self)
 
 # -

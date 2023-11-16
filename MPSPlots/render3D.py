@@ -131,6 +131,16 @@ class Scene3D:
             cmap='white'
         )
 
+
+
+
+
+
+
+
+
+
+
     def add_mesh(self,
             x: numpy.ndarray,
             y: numpy.ndarray,
@@ -155,6 +165,11 @@ class Scene3D:
 
         return self.figure
 
+
+
+
+
+
     def get_spherical_vector_from_coordinates(self, phi: numpy.ndarray, theta: numpy.ndarray, component: str, radius: float = 1.0):
         if component.lower() == 'theta':
             vector = [1, 0, 0]
@@ -166,6 +181,21 @@ class Scene3D:
         x, y, z = pyvista.transform_vectors_sph_to_cart(theta, phi, radius, *vector)
 
         return numpy.c_[x.ravel(), y.ravel(), z.ravel()]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def add_spherical_component_vector_to_ax(self, 
             plot_number: tuple,
@@ -194,6 +224,23 @@ class Scene3D:
         )
 
         self.figure.add_mesh(vectors, color='k')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     def add_theta_vector_field(self, plot_number: list, radius: float = 1.03 / 2) -> None:
         theta = numpy.arange(0, 360, 10)
@@ -251,6 +298,12 @@ class Scene3D:
         )
 
         return self
+
+
+
+
+
+
 
     def close(self):
         self.figure.close()
