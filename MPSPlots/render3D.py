@@ -47,11 +47,11 @@ class UnstructuredMesh():
 
 class Scene3D:
     def __init__(self,
-                 shape: tuple = (1, 1),
-                 unit_size: tuple = (800, 800),
-                 window_size: tuple = None,
-                 background_color: str = 'white',
-                 **kwargs):
+            shape: tuple = (1, 1),
+            unit_size: tuple = (800, 800),
+            window_size: tuple = None,
+            background_color: str = 'white',
+            **kwargs):
 
         if window_size is None:
             window_size = (unit_size[1] * shape[1], unit_size[0] * shape[0])
@@ -96,12 +96,12 @@ class Scene3D:
         return color_map_limit
 
     def add_unstructured_mesh_with_scalar(self,
-                                          coordinates: numpy.ndarray,
-                                          scalar: numpy.ndarray = None,
-                                          plot_number: tuple = (0, 0),
-                                          color_map: str = colormaps.blue_black_red,
-                                          scalar_bar_args: dict = None,
-                                          symmetric_map: bool = True) -> None:
+            coordinates: numpy.ndarray,
+            scalar: numpy.ndarray = None,
+            plot_number: tuple = (0, 0),
+            color_map: str = colormaps.blue_black_red,
+            scalar_bar_args: dict = None,
+            symmetric_map: bool = True) -> None:
 
         self.figure.subplot(*plot_number)
 
@@ -132,12 +132,12 @@ class Scene3D:
         )
 
     def add_mesh(self,
-                 x: numpy.ndarray,
-                 y: numpy.ndarray,
-                 z: numpy.ndarray,
-                 plot_number: tuple = (0, 0),
-                 color_map: str = colormaps.blue_black_red,
-                 **kwargs) -> None:
+            x: numpy.ndarray,
+            y: numpy.ndarray,
+            z: numpy.ndarray,
+            plot_number: tuple = (0, 0),
+            color_map: str = colormaps.blue_black_red,
+            **kwargs) -> None:
 
         if isinstance(color_map, str):  # works only for matplotlib 3.6.1
             color_map = matplotlib.colormaps[color_map]
@@ -167,11 +167,13 @@ class Scene3D:
 
         return numpy.c_[x.ravel(), y.ravel(), z.ravel()]
 
-    def add_spherical_component_vector_to_ax(self, plot_number: tuple,
-                                                   component: str,
-                                                   theta: numpy.ndarray,
-                                                   phi: numpy.ndarray,
-                                                   radius: float = 1.03 / 2) -> None:
+    def add_spherical_component_vector_to_ax(self, 
+            plot_number: tuple,
+            component: str,
+            theta: numpy.ndarray,
+            phi: numpy.ndarray,
+            radius: float = 1.03 / 2) -> None:
+
         self.figure.subplot(*plot_number)
 
         vector = self.get_spherical_vector_from_coordinates(
