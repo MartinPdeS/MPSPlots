@@ -1,7 +1,7 @@
 #   !/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from MPSPlots.render3D.artist import (
     UnstructuredMesh,
@@ -20,6 +20,7 @@ from MPSPlots.render3D.artist import (
 class Axis():
     plot_number: tuple
     scene: object
+    colorbar: object = None
 
     @property
     def row(self) -> int:
@@ -81,6 +82,7 @@ class Axis():
         for artist in self.artist_list:
             artist._render_(ax=self)
 
-        self.colorbar._render_(ax=self)
+        if self.colorbar is not None:
+            self.colorbar._render_(ax=self)
 
 # -
