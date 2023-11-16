@@ -187,7 +187,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.161 seconds)
+   **Total running time of the script:** (0 minutes 0.189 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh.py:
