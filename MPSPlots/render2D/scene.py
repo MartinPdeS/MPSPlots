@@ -56,7 +56,7 @@ class SceneProperties:
 
     def __post_init__(self):
         self._mpl_axis_list = []
-        self._axis_generated = False
+        self.mpl_axis_generated = False
 
     def __setattr__(self, name, value):
         if name in self.ax_inherit_list:
@@ -135,7 +135,7 @@ class SceneProperties:
         """
         Renders the object.
         """
-        if not self._axis_generated:
+        if not self.mpl_axis_generated:
             self._generate_axis_()
 
         for ax in self._mpl_axis_list:
@@ -255,7 +255,7 @@ class SceneList(SceneProperties):
                 projection=axis.projection
             )
 
-            axis._ax = subplot
+            axis.mpl_ax = subplot
 
         self.axis_generated = True
 
@@ -323,7 +323,7 @@ class SceneMatrix(SceneProperties):
         for axis in self._mpl_axis_list:
             subplot = self._mpl_figure.add_subplot(grid[axis.row, axis.col], projection=axis.projection)
             ax_matrix[axis.row, axis.col] = subplot
-            axis._ax = subplot
+            axis.mpl_ax = subplot
 
         self.axis_generated = True
 

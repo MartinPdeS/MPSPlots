@@ -16,6 +16,7 @@ from MPSPlots.render2D.artist import (
     Scatter,
     Contour,
     VerticalLine,
+    HorizontalLine,
     Text,
     PatchPolygon,
     Colorbar,
@@ -81,7 +82,7 @@ class Axis:
 
     def __post_init__(self):
         self._artist_list = []
-        self._ax = None
+        self.mpl_ax = None
         self.colorbar = Colorbar()
 
     def __getitem__(self, idx):
@@ -195,17 +196,17 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        self._ax.set_xlim(self.x_limits)
+        self.mpl_ax.set_xlim(self.x_limits)
 
-        self._ax.set_ylim(self.y_limits)
+        self.mpl_ax.set_ylim(self.y_limits)
 
         if self.equal_limits:
-            xy_limits = [*self._ax.get_xlim(), *self._ax.get_ylim()]
+            xy_limits = [*self.mpl_ax.get_xlim(), *self.mpl_ax.get_ylim()]
             min_xy_limit = numpy.min(xy_limits)
             max_xy_limit = numpy.max(xy_limits)
 
-            self._ax.set_xlim([min_xy_limit, max_xy_limit])
-            self._ax.set_ylim([min_xy_limit, max_xy_limit])
+            self.mpl_ax.set_xlim([min_xy_limit, max_xy_limit])
+            self.mpl_ax.set_ylim([min_xy_limit, max_xy_limit])
 
     def _render_(self) -> None:
         """
@@ -241,12 +242,12 @@ class Axis:
         :rtype:     None
         """
         if self.show_legend:
-            self._ax.legend()
-            handles, labels = self._ax.get_legend_handles_labels()
+            self.mpl_ax.legend()
+            handles, labels = self.mpl_ax.get_legend_handles_labels()
 
             by_label = dict(zip(labels, handles))
 
-            self._ax.legend(
+            self.mpl_ax.legend(
                 by_label.values(),
                 by_label.keys(),
                 edgecolor='k',
@@ -273,11 +274,11 @@ class Axis:
         :rtype:     None
         """
         if text is not None:
-            self._ax.text(
+            self.mpl_ax.text(
                 0.5,
                 0.1,
                 text,
-                transform=self._ax.transAxes,
+                transform=self.mpl_ax.transAxes,
                 fontsize=font_size,
                 color='white',
                 alpha=alpha,
@@ -289,47 +290,47 @@ class Axis:
         self.generate_legend()
 
         if self.x_label is not None:
-            self._ax.set_xlabel(self.x_label, fontsize=self.font_size)
+            self.mpl_ax.set_xlabel(self.x_label, fontsize=self.font_size)
 
         if self.y_label is not None:
-            self._ax.set_ylabel(self.y_label, fontsize=self.font_size)
+            self.mpl_ax.set_ylabel(self.y_label, fontsize=self.font_size)
 
         if self.x_tick_position.lower() == 'top':
-            self._ax.xaxis.tick_top()
-            self._ax.xaxis.set_label_position("top")
+            self.mpl_ax.xaxis.tick_top()
+            self.mpl_ax.xaxis.set_label_position("top")
 
         elif self.x_tick_position.lower() == 'bottom':
-            self._ax.xaxis.tick_bottom()
-            self._ax.xaxis.set_label_position("bottom")
+            self.mpl_ax.xaxis.tick_bottom()
+            self.mpl_ax.xaxis.set_label_position("bottom")
 
         if self.y_tick_position.lower() == 'right':
-            self._ax.yaxis.tick_right()
-            self._ax.yaxis.set_label_position("right")
+            self.mpl_ax.yaxis.tick_right()
+            self.mpl_ax.yaxis.set_label_position("right")
 
         elif self.y_tick_position.lower() == 'left':
-            self._ax.yaxis.tick_left()
-            self._ax.yaxis.set_label_position("left")
+            self.mpl_ax.yaxis.tick_left()
+            self.mpl_ax.yaxis.set_label_position("left")
 
         if self.title is not None:
-            self._ax.set_title(self.title, fontsize=self.font_size)
+            self.mpl_ax.set_title(self.title, fontsize=self.font_size)
 
         if self.x_scale is not None:
-            self._ax.set_xscale(self.x_scale)
+            self.mpl_ax.set_xscale(self.x_scale)
 
         if self.y_scale is not None:
-            self._ax.set_yscale(self.y_scale)
+            self.mpl_ax.set_yscale(self.y_scale)
 
         if self.tick_size is not None:
-            self._ax.tick_params(labelsize=self.tick_size)
+            self.mpl_ax.tick_params(labelsize=self.tick_size)
 
         if self.equal:
-            self._ax.set_aspect("equal")
+            self.mpl_ax.set_aspect("equal")
 
         if self.show_grid:
-            self._ax.grid(self.show_grid)
+            self.mpl_ax.grid(self.show_grid)
 
-        self._ax.axes.get_xaxis().set_visible(self.show_ticks)
-        self._ax.axes.get_yaxis().set_visible(self.show_ticks)
+        self.mpl_ax.axes.get_xaxis().set_visible(self.show_ticks)
+        self.mpl_ax.axes.get_yaxis().set_visible(self.show_ticks)
 
         self.add_watermark(text=self.water_mark)
 
@@ -452,6 +453,21 @@ class Axis:
         :rtype:     VerticalLine
         """
         artist = VerticalLine(**kwargs)
+        self.add_artist(artist)
+
+        return artist
+
+    def add_horizontal_line(self, **kwargs: dict) -> HorizontalLine:
+        """
+        Adds a HorizontalLine artist to ax.
+
+        :param      kwargs:  The keywords arguments to be sent to HorizontalLine class
+        :type       kwargs:  dict
+
+        :returns:   The artist object
+        :rtype:     VerticalLine
+        """
+        artist = HorizontalLine(**kwargs)
         self.add_artist(artist)
 
         return artist

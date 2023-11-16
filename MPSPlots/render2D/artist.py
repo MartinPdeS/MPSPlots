@@ -64,12 +64,11 @@ class Colorbar:
     """ Width of the colorbar """
     padding: float = 0.10
     """ Padding between the plot and the colorbar """
+    norm: object = None
+    """ Matplotlib norm """
 
     def __post_init__(self):
-        if self.symmetric:
-            self.norm = colors.CenteredNorm()
-        else:
-            self.norm = None
+        self.norm = self.get_norm()
 
         if self.artist is None:
             self.mappable = None
@@ -78,8 +77,17 @@ class Colorbar:
 
             self.mappable.set_array(self.artist.scalar)
 
+    def get_norm(self):
+        if self.norm is not None:
+            return self.norm
+
+        if self.symmetric:
+            self.norm = colors.CenteredNorm()
+
+        return None
+
     def create_sub_ax(self, ax) -> object:
-        divider = make_axes_locatable(ax._ax)
+        divider = make_axes_locatable(ax.mpl_ax)
 
         colorbar_ax = divider.append_axes(
             self.position,
@@ -90,12 +98,15 @@ class Colorbar:
         return colorbar_ax
 
     def _render_(self, ax) -> None:
+        if self.mappable is None:
+            return None
+
         colorbar_ax = self.create_sub_ax(ax=ax)
 
         colorbar = plt.colorbar(
             mappable=self.mappable,
             norm=self.norm,
-            ax=ax._ax,
+            ax=ax.mpl_ax,
             cax=colorbar_ax,
             orientation=self.orientation,
             format=self.numeric_format,
@@ -133,7 +144,7 @@ class Contour():
             self.colormap = colormaps.blue_black_red
 
     def _render_(self, ax) -> None:
-        ax._ax.contour(
+        ax.mpl_ax.contour(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             self.scalar,
@@ -143,7 +154,7 @@ class Contour():
         )
 
         if self.fill_contour:
-            ax._ax.contourf(
+            ax.mpl_ax.contourf(
                 self.x * self.x_scale_factor,
                 self.y * self.y_scale_factor,
                 self.scalar,
@@ -176,7 +187,7 @@ class Mesh():
             self.y = numpy.arange(self.scalar.shape[0])
 
     def _render_(self, ax):
-        image = ax._ax.pcolormesh(
+        image = ax.mpl_ax.pcolormesh(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             self.scalar,
@@ -221,13 +232,13 @@ class Polygon():
     def add_polygon_to_ax(self, polygon, ax, add_name: str = None):
         collection = self.get_polygon_path(polygon)
 
-        ax._ax.add_collection(collection, autolim=True)
+        ax.mpl_ax.add_collection(collection, autolim=True)
 
-        ax._ax.autoscale_view()
+        ax.mpl_ax.autoscale_view()
 
         if add_name:
-            ax._ax.scatter(polygon.centroid.x, polygon.centroid.y)
-            ax._ax.text(polygon.centroid.x, polygon.centroid.y, self.name)
+            ax.mpl_ax.scatter(polygon.centroid.x, polygon.centroid.y)
+            ax.mpl_ax.text(polygon.centroid.x, polygon.centroid.y, self.name)
 
     def get_polygon_path(self, polygon):
         exterior_coordinate = numpy.asarray(polygon.exterior.coords)
@@ -287,7 +298,7 @@ class FillLine():
         if self.line_style is None:
             self.line_style = next(linecycler)
 
-        ax._ax.fill_between(
+        ax.mpl_ax.fill_between(
             self.x * self.x_scale_factor,
             self.y0 * self.y_scale_factor,
             self.y1 * self.y_scale_factor,
@@ -299,7 +310,7 @@ class FillLine():
         )
 
         if self.show_outline:
-            ax._ax.plot(
+            ax.mpl_ax.plot(
                 self.x * self.x_scale_factor,
                 self.y1 * self.y_scale_factor,
                 color='k',
@@ -308,7 +319,7 @@ class FillLine():
                 zorder=self.layer_position
             )
 
-            ax._ax.plot(
+            ax.mpl_ax.plot(
                 self.x * self.x_scale_factor,
                 self.y0 * self.y_scale_factor,
                 color='k',
@@ -348,7 +359,7 @@ class STDLine():
         y0 = self.y_mean - self.y_std / 2
         y1 = self.y_mean + self.y_std / 2
 
-        line = ax._ax.plot(
+        line = ax.mpl_ax.plot(
             self.x * self.x_scale_factor,
             self.y_mean * self.y_scale_factor,
             color=self.color,
@@ -357,7 +368,7 @@ class STDLine():
             zorder=self.layer_position
         )
 
-        ax._ax.fill_between(
+        ax.mpl_ax.fill_between(
             self.x * self.x_scale_factor,
             y0 * self.y_scale_factor,
             y1 * self.y_scale_factor,
@@ -405,7 +416,7 @@ class Line():
             if ax.y_scale in ['log', 'logarithmic'] and (self.y.real.min() < 0 or self.y.imag.min() < 0):
                 raise ValueError('Cannot plot negative value data on logarithmic scale!')
 
-            ax._ax.plot(
+            ax.mpl_ax.plot(
                 self.x,
                 self.y.real,
                 label=self.label + "[real]",
@@ -415,7 +426,7 @@ class Line():
                 zorder=self.layer_position
             )
 
-            ax._ax.plot(
+            ax.mpl_ax.plot(
                 self.x,
                 self.y.imag,
                 label=self.label + "[imag]",
@@ -432,7 +443,7 @@ class Line():
             if ax.y_scale in ['log', 'logarithmic'] and self.y.real.min() < 0:
                 raise ValueError('Cannot plot negative value data on logarithmic scale!')
 
-            ax._ax.plot(
+            ax.mpl_ax.plot(
                 x,
                 y,
                 label=self.label,
@@ -464,7 +475,7 @@ class Table():
             self.column_labels = [''] * n_columns
 
     def _render_(self, ax):
-        table = ax._ax.table(
+        table = ax.mpl_ax.table(
             cellText=self.table_values,
             rowLabels=self.row_labels,
             colLabels=self.column_labels,
@@ -503,10 +514,49 @@ class VerticalLine():
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
-        ax._ax.vlines(
+        ax.mpl_ax.vlines(
             x=self.x * self.x_scale_factor,
             ymin=self.y_min,
             ymax=self.y_max,
+            colors=self.color,
+            label=self.label,
+            linestyle=self.line_style,
+            linewidth=self.line_width,
+            zorder=self.layer_position
+        )
+
+
+@dataclass
+class HorizontalLine():
+    y: float
+    """ Array representing the x axis, if not defined a numpy arrange is used instead """
+    x_min: float = None
+    """ Array representing the x axis """
+    x_max: float = None
+    """ Array representing the x axis """
+    label: str = None
+    """ Label to be added to the plot """
+    color: str = 'black'
+    """ Color for the artist to be ploted """
+    line_style: str = '-'
+    """ Line style for the unique line default is next in cycle """
+    line_width: float = 1
+    """ Line width of the artists """
+    x_scale_factor: float = 1
+    """ Scaling factor for the x axis """
+    y_scale_factor: float = 1
+    """ Scaling factor for the y axis """
+    layer_position: int = 1
+    """ Position of the layer """
+
+    def _render_(self, ax):
+        if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
+            self.line_style = next(linecycler)
+
+        ax.mpl_ax.hlines(
+            y=self.y * self.y_scale_factor,
+            xmin=self.x_min,
+            xmax=self.x_max,
             colors=self.color,
             label=self.label,
             linestyle=self.line_style,
@@ -552,7 +602,7 @@ class Scatter():
         self.x = numpy.asarray(self.x)
 
     def _render_(self, ax):
-        ax._ax.scatter(
+        ax.mpl_ax.scatter(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             label=self.label,
@@ -592,11 +642,11 @@ class Text():
             prop=dict(size=self.font_size, color=self.color, weight=self.weight, position=(0, 0)),
             frameon=self.add_box,
             bbox_to_anchor=self.position,
-            bbox_transform=ax._ax.transData,#ax._ax.transAxes,
+            bbox_transform=ax.mpl_ax.transData,#ax.mpl_ax.transAxes,
             borderpad=0,
         )
 
-        ax._ax.get_figure().add_artist(artist)
+        ax.mpl_ax.get_figure().add_artist(artist)
 
 
 @dataclass
@@ -607,10 +657,10 @@ class AxAnnotation():
     position: tuple = (-0.08, 1.08)
 
     def _render_(self, ax) -> None:
-        ax._ax.text(
+        ax.mpl_ax.text(
             *self.position,
             self.text,
-            transform=ax._ax.transAxes,
+            transform=ax.mpl_ax.transAxes,
             size=self.font_size,
             weight=self.font_weight
         )
@@ -650,51 +700,7 @@ class PatchPolygon():
             label=self.label
         )
 
-        ax._ax.add_patch(polygon)
+        ax.mpl_ax.add_patch(polygon)
 
-        ax._ax.autoscale_view()
+        ax.mpl_ax.autoscale_view()
 
-
-if __name__ == '__main__':
-    from MPSPlots.render2D import SceneList
-    figure = SceneList(tight_layout=True)
-
-    ax = figure.append_ax(y_label='Y label')
-
-    ax.add_scatter(
-        x=[0, 1, 2, 3],
-        y=[0, 1, 2, 3],
-        marker='o',
-        label='test',
-        color='black',
-        marker_size=100,
-        edge_color='red',
-        line_width=3
-
-    )
-
-    ax.add_line(
-        x=[0, 1, 2, 3],
-        y=[0, 1, 2, 3],
-        label='test',
-        color='black',
-        line_width=3
-
-    )
-
-    ax.add_text(
-        position=(1, 0),
-        text='test text',
-        add_box=True,
-        color='red',
-        weight='bold'
-
-    )
-
-    ax.add_polygon(
-        coordinates=[[0.15, 0.15], [0.35, 0.4], [0.2, 0.6]],
-        x_scale_factor=2,
-    )
-
-    figure.show()
-# -

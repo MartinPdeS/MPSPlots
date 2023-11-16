@@ -1,4 +1,6 @@
-from MPSPlots import fonts
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from MPSPlots.tools.directories import style_directory
 import matplotlib.pyplot as plt
 
