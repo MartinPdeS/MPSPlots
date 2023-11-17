@@ -92,7 +92,6 @@ class Axis:
         self._artist_list += other._artist_list
         return self
 
-    @staticmethod
     def add_artist_to_ax(function):
         def wrapper(self, *args, **kwargs):
             artist = function(self, *args, **kwargs)
