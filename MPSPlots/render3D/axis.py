@@ -30,7 +30,6 @@ class Axis():
     def column(self) -> int:
         return self.plot_number[1]
 
-    @staticmethod
     def add_artist_to_ax(function):
         def wrapper(self, *args, **kwargs):
             artist = function(self, *args, **kwargs)
