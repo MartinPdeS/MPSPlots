@@ -103,7 +103,7 @@ class Mesh():
 
         colormap_limits = self.get_colormap_limits()
 
-        ax.scene.figure.add_mesh(
+        self.mapper = ax.scene.figure.add_mesh(
             mesh=mesh,
             cmap=self.colormap,
             scalars=self.scalar_coloring,

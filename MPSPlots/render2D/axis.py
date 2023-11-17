@@ -242,6 +242,9 @@ class Axis:
 
         self._decorate_ax_()
 
+        if self.show_colorbar:
+            self.colorbar._render_(ax=self)
+
         self.set_ax_limits()
 
     def generate_legend(self) -> None:
@@ -313,9 +316,6 @@ class Axis:
         self.mpl_ax.axes.get_yaxis().set_visible(self.show_ticks)
 
         self.add_watermark(text=self.water_mark)
-
-        if self.show_colorbar:
-            self.colorbar._render_(ax=self)
 
     @add_artist_to_ax
     def add_fill_line(self, **kwargs: dict) -> FillLine:
