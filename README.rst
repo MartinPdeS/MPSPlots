@@ -22,10 +22,10 @@ Testing
 To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
 
 .. code:: console
-   :caption: Running coverage of unittests
+  :caption: Running coverage of unittests
 
-      pip install -r requirements/requirements.txt
-      coverage run --source=<package> --module pytest --verbose <test-files-dirs> coverage report --show-missing
+   pip install -r requirements/requirements.txt
+   coverage run --source=<package> --module pytest --verbose <test-files-dirs> coverage report --show-missing
 
 ----
 
