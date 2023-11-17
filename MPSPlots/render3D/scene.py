@@ -11,10 +11,8 @@ from MPSPlots.render3D.axis import Axis
 
 @dataclass
 class SceneList:
-    unit_size: tuple = (500, 500)
+    unit_size: tuple = (600, 600)
     """ Kindof the same as below """
-    window_size: tuple = None
-    """ Size of the output windows """
     background_color: str = 'white'
     """ Background of the rendering """
     ax_orientation: str = 'horizontal'
@@ -63,8 +61,7 @@ class SceneList:
     def show(self, save_directory: str = None):
         shape = self.get_shape()
 
-        if self.window_size is None:
-            self.window_size = (self.unit_size[1] * shape[1], self.unit_size[0] * shape[0])
+        self.window_size = (self.unit_size[1] * shape[1], self.unit_size[0] * shape[0])
 
         self.figure = pyvista.Plotter(
             theme=pyvista.themes.DocumentTheme(),
