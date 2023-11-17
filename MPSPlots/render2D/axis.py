@@ -21,7 +21,8 @@ from MPSPlots.render2D.artist import (
     PatchPolygon,
     Colorbar,
     AxAnnotation,
-    Table
+    Table,
+    WaterMark
 )
 
 
@@ -265,36 +266,6 @@ class Axis:
                 fontsize=self.legend_font_size - 4
             )
 
-    def add_watermark(self,
-            text: str = None,
-            font_size: int = 30,
-            alpha: float = 0.2) -> None:
-        """
-        Adds a watermark to ax.
-
-        :param      text:       The text to add
-        :type       text:       str
-        :param      font_size:  The text font size
-        :type       font_size:  int
-        :param      alpha:      The alpha parameter for opacity
-        :type       alpha:      float
-
-        :returns:   No returns
-        :rtype:     None
-        """
-        if text is not None:
-            self.mpl_ax.text(
-                0.5,
-                0.1,
-                text,
-                transform=self.mpl_ax.transAxes,
-                fontsize=font_size,
-                color='white',
-                alpha=alpha,
-                ha='center',
-                va='baseline'
-            )
-
     def _decorate_ax_(self):
         self.generate_legend()
 
@@ -477,6 +448,19 @@ class Axis:
         :rtype:     Text
         """
         return Text(**kwargs)
+
+    @add_artist_to_ax
+    def add_watermark(self, **kwargs: dict) -> WaterMark:
+        """
+        Adds a WaterMark artist to ax.
+
+        :param      kwargs:  The keywords arguments to be sent to WaterMark class
+        :type       kwargs:  dict
+
+        :returns:   The artist object
+        :rtype:     Text
+        """
+        return WaterMark(**kwargs)
 
     @add_artist_to_ax
     def add_polygon(self, **kwargs: dict) -> Text:

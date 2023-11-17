@@ -51,7 +51,7 @@ def reset_mpl(gallery_conf, fname):
 try:
     import pyvista
     pyvista.start_xvfb()  # Works only on linux system!
-except ImportError:
+except:
     print('Could not load pyvista library for 3D rendering')
 
 

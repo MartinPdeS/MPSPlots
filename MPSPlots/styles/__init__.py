@@ -14,7 +14,6 @@ def use_new_age_style():
 
 
 def use_ggplot_style():
-    # plt.style.use('ggplot')
     plt.style.use(style_directory.joinpath('ggplot.mplstyle'))
 
 

@@ -8,7 +8,6 @@ import MPSPlots
 __all__ = [
     'root_path',
     'project_path',
-    'example_directory',
     'doc_path',
     'doc_css_path',
     'style_directory',
@@ -20,8 +19,6 @@ __all__ = [
 root_path = Path(MPSPlots.__path__[0])
 
 project_path = root_path.parents[0]
-
-example_directory = root_path.joinpath('examples')
 
 doc_path = root_path.parents[0].joinpath('docs')
 
@@ -35,7 +32,7 @@ logo_path = doc_path.joinpath('images/logo.png')
 
 version_path = root_path.joinpath('VERSION')
 
-examples_path = root_path.joinpath('examples')
+examples_path = doc_path.joinpath('examples')
 
 
 if __name__ == '__main__':

@@ -634,6 +634,7 @@ class Text():
     layer_position: int = 1
     """ Position of the layer """
     localisation: str = 'lower right'
+    """ Localisation of the text """
 
     def _render_(self, ax):
         artist = AnchoredText(
@@ -642,11 +643,45 @@ class Text():
             prop=dict(size=self.font_size, color=self.color, weight=self.weight, position=(0, 0)),
             frameon=self.add_box,
             bbox_to_anchor=self.position,
-            bbox_transform=ax.mpl_ax.transData,#ax.mpl_ax.transAxes,
+            bbox_transform=ax.mpl_ax.transData,  # ax.mpl_ax.transAxes,
             borderpad=0,
         )
 
         ax.mpl_ax.get_figure().add_artist(artist)
+
+
+@dataclass
+class WaterMark():
+    text: str
+    """ String to be plotted """
+    position: tuple = (0.5, 0.1)
+    """ Box position of the text """
+    font_size: int = 30
+    """ Font size of the text """
+    weight: str = 'normal'
+    """ Weight of the text """
+    color: str = 'black'
+    """ Color of the text """
+    add_box: bool = False
+    """ Boolean to enable a box around the text """
+    layer_position: int = 1
+    """ Position of the layer """
+    localisation: str = 'lower right'
+    """ Localisation of the text """
+    alpha: float = 0.2
+    """ Transparency of the text"""
+
+    def _render_(self, ax) -> None:
+        ax.mpl_ax.text(
+            *self.position,
+            self.text,
+            transform=self.mpl_ax.transAxes,
+            fontsize=self.font_size,
+            color='white',
+            alpha=self.alpha,
+            ha='center',
+            va='baseline'
+        )
 
 
 @dataclass
