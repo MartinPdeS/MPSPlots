@@ -47,17 +47,18 @@ extensions = [
 def reset_mpl(gallery_conf, fname):
     use_mpsplots_style()
 
-# try:
-#     import pyvista
-#     pyvista.start_xvfb()  # Works only on linux system!
-# except ImportError:
-#     print('Could not load pyvista library for 3D rendering')
+
+try:
+    import pyvista
+    pyvista.start_xvfb()  # Works only on linux system!
+except ImportError:
+    print('Could not load pyvista library for 3D rendering')
 
 
 sphinx_gallery_conf = {
     'examples_dirs': '../examples',
     'gallery_dirs': "gallery",
-    'image_scrapers': ('matplotlib'),
+    'image_scrapers': ('matplotlib', 'pyvista'),
     'ignore_pattern': '/__',
     'plot_gallery': True,
     'thumbnail_size': [600, 600],
