@@ -21,11 +21,12 @@ Testing
 
 To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
 
-.. code:: console
-  :caption: Running coverage of unittests
+.. code-block::
+   :caption: A cool example
 
-   pip install -r requirements/requirements.txt
-   coverage run --source=<package> --module pytest --verbose <test-files-dirs> coverage report --show-missing
+       The output of this line starts with four spaces.
+
+
 
 ----
 
