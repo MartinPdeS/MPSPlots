@@ -7,7 +7,6 @@ MPSPlots
 |unittest|
 |PyPi|
 |PyPi_download|
-|wheel|
 
 
 The library
@@ -24,8 +23,8 @@ To test localy (with cloning the GitHub repository) you'll need to install the d
 
 .. code:: console
 
-   pip install -r requirements/requirements.txt
-   coverage run --source=<package> --module pytest --verbose <test-files-dirs> coverage report --show-missing
+   >>> pip install -r requirements/requirements.txt
+   >>> coverage run --source=MPSPlots --module pytest --verbose tests coverage report --show-missing
 
 ----
 
@@ -46,7 +45,7 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :alt: PyPi package
    :target: https://pypi.org/project/MPSPlots/
 
-.. |docs| image:: https://readthedocs.org/projects/mpsplots/badge/?version=master
+.. |docs| image:: https://readthedocs.org/projects/mpsplots/badge/?
    :target: https://mpsplots.readthedocs.io/en/latest/
    :alt: Documentation Status
 
