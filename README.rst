@@ -6,13 +6,14 @@ MPSPlots
 |docs|
 |unittest|
 |PyPi|
+|PyPi_download|
 |wheel|
 
 
 The library
 ***********
 
-My personal Matplotlib wrapper. Its aim is to offer a good compromise between ease-of-use and flexibility. I have started this library in order to uniformise my plots for scientific journal and as of today I continue to update and distribute the code.
+My personal Matplotlib[2D]/PyVista[3D] wrapper. Its aim is to offer a good compromise between ease-of-use and flexibility. I have started this library in order to uniformise my plots for scientific journal and as of today I continue to update and distribute the code.
 
 ----
 
@@ -31,15 +32,14 @@ To test localy (with cloning the GitHub repository) you'll need to install the d
 Contact Information
 *******************
 
-As of 2021 the project is still under development if you want to collaborate it would be a pleasure. I encourage you to contact me.
+As of 2023 the project is still under development if you want to collaborate it would be a pleasure! I encourage you to contact me.
 
 MPSPlots was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdS>`_  .
 
 Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@polymtl.ca?subject=MPSPlots>`_ .
 
 
-.. |python| image:: https://img.shields.io/badge/Made%20with-Python-1f425f.svg
-   :alt: Python implementation
+.. |python| image:: https://img.shields.io/pypi/pyversions/mpsplots.svg
    :target: https://www.python.org/
 
 .. |PyPi| image:: https://badge.fury.io/py/MPSPlots.svg
@@ -57,3 +57,6 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
 .. |wheel| image:: https://img.shields.io/pypi/wheel/mpsplots.svg
     :alt: PyPI Wheel
     :target: https://pypi.org/project/mpsplots
+
+.. |PyPi_download| image:: https://img.shields.io/pypi/dm/MPSPlots.svg
+   :target: https://pypi.org/project/MPSPlots/
