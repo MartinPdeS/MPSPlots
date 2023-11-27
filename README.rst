@@ -22,9 +22,11 @@ Testing
 To test localy (with cloning the GitHub repository) you'll need to install the dependencies and run the coverage command as
 
 .. code:: console
-
+   >>> git clone https://github.com/MartinPdeS/MPSPlots.git
+   >>> cd MPSPlots
    >>> pip install -r requirements/requirements.txt
-   >>> coverage run --source=MPSPlots --module pytest --verbose tests coverage report --show-missing
+   >>> coverage run --source=MPSPlots --module pytest --verbose tests
+   >>> coverage report --show-missing
 
 ----
 
@@ -33,7 +35,7 @@ Contact Information
 
 As of 2023 the project is still under development if you want to collaborate it would be a pleasure! I encourage you to contact me.
 
-MPSPlots was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdS>`_  .
+MPSPlots was written by `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdeS>`_  .
 
 Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@polymtl.ca?subject=MPSPlots>`_ .
 

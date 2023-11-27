@@ -82,9 +82,7 @@ class Colorbar:
             return self.norm
 
         if self.symmetric:
-            self.norm = colors.CenteredNorm()
-
-        return None
+            return colors.CenteredNorm()
 
     def create_sub_ax(self, ax) -> object:
         divider = make_axes_locatable(ax.mpl_ax)
