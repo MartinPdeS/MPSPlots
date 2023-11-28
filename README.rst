@@ -56,9 +56,5 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :alt: Unittest coverage
    :target: https://github.com/MartinPdeS/MPSPlots/actions
 
-.. |wheel| image:: https://img.shields.io/pypi/wheel/mpsplots.svg
-    :alt: PyPI Wheel
-    :target: https://pypi.org/project/mpsplots
-
 .. |PyPi_download| image:: https://img.shields.io/pypi/dm/MPSPlots.svg
-   :target: https://pypi.org/project/MPSPlots/
+   :target: https://pypistats.org/packages/mpsplots
