@@ -14,7 +14,9 @@ axes.titlesize      : x-large  # fontsize of the axes title
 axes.labelsize      : large    # fontsize of the x any y labels
 axes.labelcolor     : black
 axes.axisbelow      : True     # whether axis gridlines and ticks are below
-axes.prop_cycle     : cycler('color', ['348ABD', '7A68A6', 'A60628', '467821', 'CF4457', '188487', 'E24A33'])
+axes.prop_cycle     : cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
+
+
 
 xtick.major.size     : 2      # major tick size in points
 xtick.minor.size     : 2      # minor tick size in points
@@ -43,6 +45,9 @@ axes.grid.which  : both
 
 legend.fancybox : True  # if True, use a rounded box for the
 legend.facecolor: white
+legend.framealpha: 0.8
+legend.frameon: True
+legend.loc: best
 
 #figure.figsize   : 11, 8  # figure size in inches
 figure.dpi       : 100    # figure dots per inch
@@ -56,4 +61,7 @@ font.family: serif
 font.sans-serif: Overpass, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
 
 font.serif: cmr10, Times New Roman, DejaVu Serif, Bitstream Vera Serif, Computer Modern Roman, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times, Palatino, Charter, serif
+
+savefig.edgecolor: auto
+savefig.facecolor: auto
 
