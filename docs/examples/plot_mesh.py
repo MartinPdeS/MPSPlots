@@ -41,6 +41,8 @@ artist_0 = ax_0.add_mesh(
     y=y,
 )
 
+ax_0.add_colorbar(artist=artist_0)
+
 # %%
 # Adding a Mesh artist to second axis
 artist_1 = ax_1.add_mesh(
@@ -51,7 +53,6 @@ artist_1 = ax_1.add_mesh(
 
 # %%
 # Extra decoration of the axes
-figure.show_colorbar = False
 figure.annotate_axis(numerotation_type='roman')
 
 # %%

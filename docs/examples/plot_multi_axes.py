@@ -28,8 +28,9 @@ ax0 = figure.append_ax(
     y_label='y data',
     show_legend=True,
     equal_limits=True,
-    water_mark='watermark'
 )
+
+ax0.add_watermark(text='Watermark', color='black')
 
 # %%
 # Adding a second axis to the scene for the plots
@@ -65,7 +66,7 @@ _ = ax1.add_fill_line(
 # %%
 # Extra decoration of the axes
 figure.annotate_axis('roman')
-figure.font_size = 20
+figure.set_axis_attributes(font_size=20)
 
 # %%
 # Showing the figure

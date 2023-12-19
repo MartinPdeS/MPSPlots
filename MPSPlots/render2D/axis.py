@@ -4,10 +4,13 @@
 
 # Matplotlib imports
 from matplotlib.backends.backend_pdf import PdfPages
+from matplotlib.pyplot import axis as MPLAxis
 
 # Other imports
 import numpy
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+from functools import wraps
+
 from MPSPlots.render2D.artist import (
     Line,
     FillLine,
@@ -26,7 +29,7 @@ from MPSPlots.render2D.artist import (
 )
 
 
-@dataclass
+@dataclass(slots=True)
 class Axis:
     row: int
     """ Row value of the ax """
@@ -54,8 +57,6 @@ class Axis:
     """ Set equal limits to x and y axis, override x_limits and y_limits """
     equal: bool = False
     """ Set aspect ratio to equal """
-    water_mark: str = ''
-    """ Watermark to add to axis """
     projection: str = None
     """ Projection of the plot [Polar, normal] """
     font_size: int = 16
@@ -64,7 +65,7 @@ class Axis:
     """ Ticks font size """
     y_tick_position: str = 'left'
     """ Ticks position for the y axis, must be in ['left', 'right'] """
-    x_tick_position: str = 'left'
+    x_tick_position: str = 'bottom'
     """ Ticks position for the x axis, must be in ['top', 'bottom'] """
     show_ticks: bool = True
     """ Show x and y ticks or not """
@@ -81,10 +82,9 @@ class Axis:
     y_scale_factor: float = None
     """ Scaling factor for the y axis """
 
-    def __post_init__(self):
-        self._artist_list = []
-        self.mpl_ax = None
-        self.colorbar = Colorbar()
+    _artist_list: list = field(default_factory=lambda: [], init=False)
+    mpl_ax: MPLAxis = field(default=None, init=False)
+    colorbar: Colorbar = field(default_factory=lambda: Colorbar(), init=False)
 
     def __getitem__(self, idx):
         return self._artist_list[idx]
@@ -94,6 +94,7 @@ class Axis:
         return self
 
     def add_artist_to_ax(function):
+        @wraps(function)
         def wrapper(self, *args, **kwargs):
             artist = function(self, *args, **kwargs)
             self._artist_list.append(artist)
@@ -116,8 +117,6 @@ class Axis:
             'y_limits': self.y_limits,
             'equal_limits': self.equal_limits,
             'equal': self.equal,
-            'colorbar': self.colorbar,
-            'water_mark': self.water_mark,
             'projection': self.projection,
             'font_size': self.font_size,
             'legend_font_size': self.legend_font_size,
@@ -218,6 +217,80 @@ class Axis:
             self.mpl_ax.set_xlim([min_xy_limit, max_xy_limit])
             self.mpl_ax.set_ylim([min_xy_limit, max_xy_limit])
 
+    def scale_artist_x_axis(self, scale_factor: float) -> None:
+        """
+        Scales all the artist x axis by the provided factor
+
+        :param      scale_factor:  The scale factor
+        :type       scale_factor:  float
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        if scale_factor is None:
+            return
+
+        for artist in self._artist_list:
+            artist.x_scale_factor = scale_factor
+
+    def scale_artist_y_axis(self, scale_factor: float) -> None:
+        """
+        Scales all the artist x axis by the provided factor
+
+        :param      scale_factor:  The scale factor
+        :type       scale_factor:  float
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        if scale_factor is None:
+            return
+
+        for artist in self._artist_list:
+            artist.y_scale_factor = scale_factor
+
+    def set_artist_line_width(self, line_width: float) -> None:
+        """
+        Sets the artists line width.
+
+        :param      line_width:  The line width
+        :type       line_width:  float
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        if line_width is None:
+            return
+
+        for artist in self._artist_list:
+            artist.line_width = self.line_width
+
+    def set_artist_line_style(self, line_style: 'str') -> None:
+        """
+        Sets the artists line style.
+
+        :param      line_width:  The line style
+        :type       line_width:  float
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        if line_style is None:
+            return
+
+        for artist in self._artist_list:
+            artist.line_style = self.line_style
+
+    def render_artists(self) -> None:
+        """
+        Render artists
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        for artist in self._artist_list:
+            artist._render_(self)
+
     def _render_(self) -> None:
         """
         Renders the ax with each of its related artist.
@@ -225,22 +298,17 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        for artist in self._artist_list:
-            if self.x_scale_factor is not None:
-                artist.x_scale_factor = self.x_scale_factor
+        self.scale_artist_x_axis(self.x_scale_factor)
 
-            if self.y_scale_factor is not None:
-                artist.y_scale_factor = self.y_scale_factor
+        self.scale_artist_y_axis(self.y_scale_factor)
 
-            if self.line_width is not None:
-                artist.line_width = self.line_width
+        self.set_artist_line_width(line_width=self.line_width)
 
-            if self.line_style is not None:
-                artist.line_style = self.line_style
+        self.set_artist_line_style(line_style=self.line_style)
 
-            artist._render_(self)
+        self.render_artists()
 
-        self._decorate_ax_()
+        self.decorate_axis()
 
         if self.show_colorbar:
             self.colorbar._render_(ax=self)
@@ -269,53 +337,202 @@ class Axis:
                 fontsize=self.legend_font_size - 4
             )
 
-    def _decorate_ax_(self):
+    def set_x_ticks_position(self, position: str) -> None:
+        """
+        Sets the axis x ticks position.
+
+        :param      position:  The position
+        :type       position:  str
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        position = position.lower()
+
+        mpl_ticks = self.mpl_ax.xaxis
+        mpl_ticks.set_label_position(position)
+        tick_position_function = getattr(mpl_ticks, f"tick_{position}")
+
+        tick_position_function()
+
+        mpl_ticks.set_visible(self.show_ticks)
+
+        self.x_tick_position = position
+
+    def set_y_ticks_position(self, position: str) -> None:
+        """
+        Sets the axis y ticks position.
+
+        :param      position:  The position
+        :type       position:  str
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        position = position.lower()
+
+        mpl_ticks = self.mpl_ax.yaxis
+        mpl_ticks.set_label_position(position)
+        tick_position_function = getattr(mpl_ticks, f"tick_{position}")
+
+        tick_position_function()
+
+        mpl_ticks.set_visible(self.show_ticks)
+
+        self.y_tick_position = position
+
+    def set_title(self, title: str, font_size: int = None) -> None:
+        """
+        Sets the title of axis.
+
+        :param      title:      The title
+        :type       title:      str
+        :param      font_size:  The font size
+        :type       font_size:  int
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        font_size = self.font_size if font_size is None else font_size
+
+        self.title = title
+
+        self.mpl_ax.set_title(self.title, fontsize=font_size)
+
+    def set_tick_size(self, tick_size: int = None) -> None:
+        """
+        Sets the tick size.
+
+        :param      tick_size:  The tick size
+        :type       tick_size:  int
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        tick_size = self.tick_size if tick_size is None else tick_size
+
+        self.tick_size = tick_size
+
+        self.mpl_ax.tick_params(labelsize=tick_size)
+
+    def set_aspect(self, aspect: str = None) -> None:
+        """
+        Sets the aspect ratio for plot.
+
+        :param      aspect:  The aspect
+        :type       aspect:  str
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        aspect = 'equal' if aspect is None else aspect
+
+        self.mpl_ax.set_aspect(aspect)
+
+    def set_show_grid(self, show_grid: bool = None) -> None:
+        """
+        Sets the show grid.
+
+        :param      show_grid:  The show grid
+        :type       show_grid:  bool
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        show_grid = self.show_grid if show_grid is None else show_grid
+
+        self.mpl_ax.grid(show_grid)
+
+        self.show_grid = show_grid
+
+    def set_x_label(self, label: str, font_size: int = None) -> None:
+        """
+        Sets the x label.
+
+        :param      label:      The label
+        :type       label:      str
+        :param      font_size:  The font size
+        :type       font_size:  int
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        font_size = self.font_size if font_size is None else font_size
+
+        self.mpl_ax.set_xlabel(label, fontsize=font_size)
+
+    def set_y_label(self, label: str, font_size: int = None) -> None:
+        """
+        Sets the y label.
+
+        :param      label:      The label
+        :type       label:      str
+        :param      font_size:  The font size
+        :type       font_size:  int
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        font_size = self.font_size if font_size is None else font_size
+
+        self.mpl_ax.set_ylabel(label, fontsize=font_size)
+
+    def set_y_scale(self, scale: str = None) -> None:
+        """
+        Sets the y scale.
+
+        :param      label:      The scale
+        :type       label:      str
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        scale = self.x_scale if scale is None else scale
+
+        self.mpl_ax.set_yscale(scale)
+
+    def set_x_scale(self, scale: str = None) -> None:
+        """
+        Sets the x scale.
+
+        :param      label:      The scale
+        :type       label:      str
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        scale = self.y_scale if scale is None else scale
+
+        self.mpl_ax.set_xscale(scale)
+
+    def decorate_axis(self) -> None:
+        """
+        Add all the decoration to axis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         self.generate_legend()
 
-        if self.x_label is not None:
-            self.mpl_ax.set_xlabel(self.x_label, fontsize=self.font_size)
+        self.set_x_label(self.x_label)
 
-        if self.y_label is not None:
-            self.mpl_ax.set_ylabel(self.y_label, fontsize=self.font_size)
+        self.set_y_label(self.y_label)
 
-        if self.x_tick_position.lower() == 'top':
-            self.mpl_ax.xaxis.tick_top()
-            self.mpl_ax.xaxis.set_label_position("top")
+        self.set_x_ticks_position(position=self.x_tick_position)
 
-        elif self.x_tick_position.lower() == 'bottom':
-            self.mpl_ax.xaxis.tick_bottom()
-            self.mpl_ax.xaxis.set_label_position("bottom")
+        self.set_y_ticks_position(position=self.y_tick_position)
 
-        if self.y_tick_position.lower() == 'right':
-            self.mpl_ax.yaxis.tick_right()
-            self.mpl_ax.yaxis.set_label_position("right")
+        self.set_title(title=self.title)
 
-        elif self.y_tick_position.lower() == 'left':
-            self.mpl_ax.yaxis.tick_left()
-            self.mpl_ax.yaxis.set_label_position("left")
+        self.set_x_scale()
 
-        if self.title is not None:
-            self.mpl_ax.set_title(self.title, fontsize=self.font_size)
+        self.set_y_scale()
 
-        if self.x_scale is not None:
-            self.mpl_ax.set_xscale(self.x_scale)
+        self.set_tick_size()
 
-        if self.y_scale is not None:
-            self.mpl_ax.set_yscale(self.y_scale)
+        self.set_aspect()
 
-        if self.tick_size is not None:
-            self.mpl_ax.tick_params(labelsize=self.tick_size)
-
-        if self.equal:
-            self.mpl_ax.set_aspect("equal")
-
-        if self.show_grid:
-            self.mpl_ax.grid(self.show_grid)
-
-        self.mpl_ax.axes.get_xaxis().set_visible(self.show_ticks)
-        self.mpl_ax.axes.get_yaxis().set_visible(self.show_ticks)
-
-        self.add_watermark(text=self.water_mark)
+        self.set_show_grid()
 
     @add_artist_to_ax
     def add_fill_line(self, **kwargs: dict) -> FillLine:

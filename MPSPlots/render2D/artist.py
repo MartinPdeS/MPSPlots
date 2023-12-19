@@ -5,6 +5,7 @@
 # Matplotlib imports
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import axis as MPLAxis
 from matplotlib.offsetbox import AnchoredText
 from matplotlib.patches import PathPatch
 from matplotlib.collections import PatchCollection
@@ -38,7 +39,7 @@ __all__ = [
 ]
 
 
-@dataclass
+@dataclass()
 class Colorbar:
     artist: numpy.ndarray = None
     """ The artist to map """
@@ -66,6 +67,8 @@ class Colorbar:
     """ Padding between the plot and the colorbar """
     norm: object = None
     """ Matplotlib norm """
+    label: str = ""
+    """ Colorbar label text """
 
     def __post_init__(self):
         self.norm = self.get_norm()
@@ -95,7 +98,16 @@ class Colorbar:
 
         return colorbar_ax
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if self.mappable is None:
             return None
 
@@ -108,7 +120,8 @@ class Colorbar:
             cax=colorbar_ax,
             orientation=self.orientation,
             format=self.numeric_format,
-            extend='both'
+            extend='both',
+            label=self.label
         )
 
         if self.n_ticks is not None:
@@ -116,7 +129,7 @@ class Colorbar:
             colorbar.ax.tick_params(labelsize=self.label_size)
 
 
-@dataclass
+@dataclass(slots=True)
 class Contour():
     x: numpy.ndarray
     """ y axis, can be vector or 2D grid """
@@ -141,7 +154,16 @@ class Contour():
         if self.colormap is None:
             self.colormap = colormaps.blue_black_red
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         ax.mpl_ax.contour(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
@@ -162,7 +184,7 @@ class Contour():
             )
 
 
-@dataclass
+@dataclass(slots=True)
 class Mesh():
     scalar: numpy.ndarray
     """ 2 dimensional numpy array representing the mesh to be plotted """
@@ -184,7 +206,16 @@ class Mesh():
         if self.y is None:
             self.y = numpy.arange(self.scalar.shape[0])
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         image = ax.mpl_ax.pcolormesh(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
@@ -200,7 +231,7 @@ class Mesh():
         return image
 
 
-@dataclass
+@dataclass(slots=True)
 class Polygon():
     instance: object
     """ Shapely geo instance representing the polygone to be plotted """
@@ -219,7 +250,16 @@ class Polygon():
     layer_position: int = 1
     """ Position of the layer """
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if isinstance(self.instance, geo.MultiPolygon):
             for polygon in self.instance.geoms:
                 self.add_polygon_to_ax(polygon, ax)
@@ -268,7 +308,7 @@ class Polygon():
         return collection
 
 
-@dataclass
+@dataclass(slots=True)
 class FillLine():
     x: numpy.ndarray
     """ Array representing the x axis """
@@ -292,7 +332,16 @@ class FillLine():
     layer_position: int = 1
     """ Position of the layer """
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if self.line_style is None:
             self.line_style = next(linecycler)
 
@@ -327,7 +376,7 @@ class FillLine():
             )
 
 
-@dataclass
+@dataclass(slots=True)
 class STDLine():
     x: numpy.ndarray
     """ Array representing the x axis """
@@ -350,7 +399,16 @@ class STDLine():
     layer_position: int = 1
     """ Position of the layer """
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if self.line_style is None:
             self.line_style = '-'
 
@@ -406,7 +464,16 @@ class Line():
         self.y = numpy.asarray(self.y) * self.y_scale_factor
         self.x = numpy.asarray(self.x) * self.x_scale_factor
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
@@ -452,7 +519,7 @@ class Line():
             )
 
 
-@dataclass
+@dataclass(slots=True)
 class Table():
     table_values: list
     column_labels: list = None
@@ -472,7 +539,16 @@ class Table():
         if self.column_labels is None:
             self.column_labels = [''] * n_columns
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         table = ax.mpl_ax.table(
             cellText=self.table_values,
             rowLabels=self.row_labels,
@@ -485,7 +561,7 @@ class Table():
         return table
 
 
-@dataclass
+@dataclass(slots=True)
 class VerticalLine():
     x: float
     """ Array representing the x axis, if not defined a numpy arrange is used instead """
@@ -508,7 +584,16 @@ class VerticalLine():
     layer_position: int = 1
     """ Position of the layer """
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
@@ -524,7 +609,7 @@ class VerticalLine():
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class HorizontalLine():
     y: float
     """ Array representing the x axis, if not defined a numpy arrange is used instead """
@@ -547,7 +632,16 @@ class HorizontalLine():
     layer_position: int = 1
     """ Position of the layer """
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
@@ -563,7 +657,7 @@ class HorizontalLine():
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class Scatter():
     y: numpy.ndarray
     """ Array representing the y axis """
@@ -581,7 +675,7 @@ class Scatter():
     """ Line style for the unique line default is next in cycle """
     line_width: str = 1
     """ Line style for the unique line default is next in cycle """
-    alpha: float = 0.4
+    alpha: float = 0.7
     """ Opacity of the polygon to be plotted """
     edge_color: str = 'black'
     """ Scatter edge color """
@@ -599,7 +693,16 @@ class Scatter():
         self.y = numpy.asarray(self.y)
         self.x = numpy.asarray(self.x)
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         ax.mpl_ax.scatter(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
@@ -615,7 +718,7 @@ class Scatter():
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class Text():
     text: str
     """ String to be plotted """
@@ -634,7 +737,16 @@ class Text():
     localisation: str = 'lower right'
     """ Localisation of the text """
 
-    def _render_(self, ax):
+    def _render_(self, ax: MPLAxis):
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         artist = AnchoredText(
             self.text,
             loc=self.localisation,
@@ -648,7 +760,7 @@ class Text():
         ax.mpl_ax.get_figure().add_artist(artist)
 
 
-@dataclass
+@dataclass(slots=True)
 class WaterMark():
     text: str
     """ String to be plotted """
@@ -668,28 +780,50 @@ class WaterMark():
     """ Localisation of the text """
     alpha: float = 0.2
     """ Transparency of the text"""
+    rotation: float = 45
+    """ Rotation of the text """
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         ax.mpl_ax.text(
             *self.position,
             self.text,
-            transform=self.mpl_ax.transAxes,
+            transform=ax.mpl_ax.transAxes,
             fontsize=self.font_size,
-            color='white',
+            color=self.color,
             alpha=self.alpha,
+            rotation=self.rotation,
             ha='center',
-            va='baseline'
+            va='baseline',
+            zorder=-2
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class AxAnnotation():
     text: str = ""
     font_size: int = 18
     font_weight: str = 'bold'
     position: tuple = (-0.08, 1.08)
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         ax.mpl_ax.text(
             *self.position,
             self.text,
@@ -699,7 +833,7 @@ class AxAnnotation():
         )
 
 
-@dataclass
+@dataclass(slots=True)
 class PatchPolygon():
     coordinates: numpy.ndarray = None
     """ Coordinate of the vertices """
@@ -721,7 +855,16 @@ class PatchPolygon():
     def __post_init__(self):
         self.coordinates = numpy.asarray(self.coordinates)
 
-    def _render_(self, ax) -> None:
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
         self.coordinates[:, 0] *= self.x_scale_factor
         self.coordinates[:, 1] *= self.y_scale_factor
 
@@ -737,3 +880,4 @@ class PatchPolygon():
 
         ax.mpl_ax.autoscale_view()
 
+# -

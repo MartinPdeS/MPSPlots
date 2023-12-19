@@ -12,13 +12,13 @@ import numpy
 import string
 from pathvalidate import sanitize_filepath
 from pathlib import Path
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from MPSPlots.render2D.axis import Axis
 from MPSPlots.tools.utils import int_to_roman
 from MPSPlots.render2D.artist import AxAnnotation
 
 
-@dataclass
+@dataclass(slots=True)
 class SceneProperties:
     unit_size: tuple = (10, 3)
     """ Size of each of the sub axis """
@@ -31,43 +31,29 @@ class SceneProperties:
     padding: float = 1.0
     """ Padding between the axis if tight layout is True """
 
-    ax_inherit_list = [
-        'font_size',
-        'x_scale_factor',
-        'y_scale_factor',
-        'line_width',
-        'line_style',
-        'legend_font_size',
-        'tick_size',
-        'x_tick_position',
-        'y_tick_position',
-        'x_limits',
-        'y_limits',
-        'x_label',
-        'y_label',
-        'water_mark',
-        'equal',
-        'equal_limits',
-        'show_legend',
-        'show_grid',
-        'show_ticks',
-        'show_colorbar',
-    ]
+    _mpl_axis_list: float = field(default=tuple(), init=False)
+    _mpl_figure: float = field(default=None, init=False)
+
+    mpl_axis_generated: bool = field(default=False, init=False)
+    axis_generated: bool = field(default=False, init=False)
 
     def __post_init__(self):
         self._mpl_axis_list = []
         self.mpl_axis_generated = False
 
-    def __setattr__(self, name, value):
-        if name in self.ax_inherit_list:
-            for ax in self:
-                setattr(ax, name, value)
-        else:
-            super(SceneProperties, self).__setattr__(name, value)
+    def set_axis_attributes(self, **ax_kwargs: dict) -> None:
+        """
+        Sets all the sub-axis attributes.
 
-    def colorbar_n_ticks(self, value: int):
-        for ax in self:
-            ax.colorbar.n_ticks = value
+        :param      ax_kwargs:  The ax keywords arguments
+        :type       ax_kwargs:  dict
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        for attribute, value in ax_kwargs.items():
+            for ax in self:
+                setattr(ax, attribute, value)
 
     def colorbar_label_size(self, value: int):
         for ax in self:
@@ -198,7 +184,7 @@ class SceneProperties:
             )
 
 
-@dataclass
+@dataclass(slots=True)
 class SceneList(SceneProperties):
     ax_orientation: str = 'vertical'
 
@@ -262,7 +248,7 @@ class SceneList(SceneProperties):
         return self
 
 
-@dataclass
+@dataclass(slots=True)
 class SceneMatrix(SceneProperties):
     def set_axis_row(self, value) -> None:
         for ax in self._mpl_axis_list:

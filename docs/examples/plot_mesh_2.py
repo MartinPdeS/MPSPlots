@@ -52,11 +52,13 @@ ax_2 = figure.append_ax(
 
 # %%
 # Adding a Mesh artist to first axis
-_ = ax_0.add_mesh(
+artist_0 = ax_0.add_mesh(
     scalar=x + y,
     x=x,
     y=y,
 )
+
+ax_2.add_colorbar(artist=artist_0)
 
 # %%
 # Adding a Mesh artist to second axis
@@ -77,7 +79,6 @@ _ = ax_2.add_mesh(
 
 # %%
 # Extra decoration of the axes
-figure.show_colorbar = False
 figure.annotate_axis()
 
 # %%
