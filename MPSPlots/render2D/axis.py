@@ -55,8 +55,6 @@ class Axis:
     """ Set limits of y axis """
     equal_limits: bool = False
     """ Set equal limits to x and y axis, override x_limits and y_limits """
-    equal: bool = False
-    """ Set aspect ratio to equal """
     projection: str = None
     """ Projection of the plot [Polar, normal] """
     font_size: int = 16
@@ -81,6 +79,8 @@ class Axis:
     """ Scaling factor for the x axis """
     y_scale_factor: float = None
     """ Scaling factor for the y axis """
+    aspect_ratio: str = 'auto'
+    """ Aspect ratio of the axis """
 
     _artist_list: list = field(default_factory=lambda: [], init=False)
     mpl_ax: MPLAxis = field(default=None, init=False)
@@ -116,7 +116,7 @@ class Axis:
             'x_limits': self.x_limits,
             'y_limits': self.y_limits,
             'equal_limits': self.equal_limits,
-            'equal': self.equal,
+            'aspect_ratio': self.aspect_ratio,
             'projection': self.projection,
             'font_size': self.font_size,
             'legend_font_size': self.legend_font_size,
@@ -425,9 +425,9 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        aspect = 'equal' if aspect is None else aspect
+        aspect_ratio = self.aspect_ratio if aspect is None else aspect
 
-        self.mpl_ax.set_aspect(aspect)
+        self.mpl_ax.set_aspect(aspect_ratio)
 
     def set_show_grid(self, show_grid: bool = None) -> None:
         """
