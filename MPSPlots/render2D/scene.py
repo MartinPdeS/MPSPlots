@@ -31,14 +31,17 @@ class SceneProperties:
     padding: float = 1.0
     """ Padding between the axis if tight layout is True """
 
-    _mpl_axis_list: float = field(default=tuple(), init=False)
+    axis_list: float = field(default=tuple(), init=False)
     _mpl_figure: float = field(default=None, init=False)
 
     mpl_axis_generated: bool = field(default=False, init=False)
     axis_generated: bool = field(default=False, init=False)
 
+    def __repr__(self) -> str:
+        return str(self.__class__)
+
     def __post_init__(self):
-        self._mpl_axis_list = []
+        self.axis_list = []
         self.mpl_axis_generated = False
 
     def set_axis_attributes(self, **ax_kwargs: dict) -> None:
@@ -124,7 +127,7 @@ class SceneProperties:
         if not self.mpl_axis_generated:
             self._generate_axis_()
 
-        for ax in self._mpl_axis_list:
+        for ax in self.axis_list:
             ax._render_()
 
         if self.tight_layout:
@@ -142,7 +145,7 @@ class SceneProperties:
         :returns:   axis corresponding to idx
         :rtype:     Axis
         """
-        return self._mpl_axis_list[idx]
+        return self.axis_list[idx]
 
     def generate_mpl_figure(self) -> None:
         figure_size = self.shape * numpy.array(self.unit_size)
@@ -158,7 +161,7 @@ class SceneProperties:
         :param      kwargs:             The keywords arguments to be sent to each ax.add_ax_annotation
         :type       kwargs:             dictionary
 
-        :returns:   { description_of_the_return_value }
+        :returns:   No returnss
         :rtype:     None
         """
 
@@ -193,14 +196,14 @@ class SceneList(SceneProperties):
         if self.ax_orientation == 'horizontal':
             row_number = 0
         elif self.ax_orientation == 'vertical':
-            row_number = len(self._mpl_axis_list)
+            row_number = len(self.axis_list)
 
         return row_number
 
     @property
     def next_column_number(self) -> int:
         if self.ax_orientation == 'horizontal':
-            column_number = len(self._mpl_axis_list)
+            column_number = len(self.axis_list)
         elif self.ax_orientation == 'vertical':
             column_number = 0
 
@@ -222,7 +225,7 @@ class SceneList(SceneProperties):
             **ax_kwargs
         )
 
-        self._mpl_axis_list.append(axis)
+        self.axis_list.append(axis)
 
         return axis
 
@@ -235,7 +238,7 @@ class SceneList(SceneProperties):
             figure=self._mpl_figure
         )
 
-        for axis in self._mpl_axis_list:
+        for axis in self.axis_list:
             subplot = self._mpl_figure.add_subplot(
                 grid[axis.row, axis.col],
                 projection=axis.projection
@@ -251,11 +254,11 @@ class SceneList(SceneProperties):
 @dataclass(slots=True)
 class SceneMatrix(SceneProperties):
     def set_axis_row(self, value) -> None:
-        for ax in self._mpl_axis_list:
+        for ax in self.axis_list:
             ax.row = value
 
     def set_axis_col(self, value) -> None:
-        for ax in self._mpl_axis_list:
+        for ax in self.axis_list:
             ax.col = value
 
     def set_style(self, **style_dict):
@@ -267,7 +270,7 @@ class SceneMatrix(SceneProperties):
     @property
     def axis_matrix(self):
         ax_matrix = numpy.full(shape=(self.max_row + 1, self.max_col + 1), fill_value=None)
-        for ax in self._mpl_axis_list:
+        for ax in self.axis_list:
             ax_matrix[ax.row, ax.col] = ax
 
         return ax_matrix
@@ -288,7 +291,7 @@ class SceneMatrix(SceneProperties):
             **ax_kwargs
         )
 
-        self._mpl_axis_list.append(axis)
+        self.axis_list.append(axis)
 
         return axis
 
@@ -306,7 +309,7 @@ class SceneMatrix(SceneProperties):
             fill_value=None
         )
 
-        for axis in self._mpl_axis_list:
+        for axis in self.axis_list:
             subplot = self._mpl_figure.add_subplot(grid[axis.row, axis.col], projection=axis.projection)
             ax_matrix[axis.row, axis.col] = subplot
             axis.mpl_ax = subplot

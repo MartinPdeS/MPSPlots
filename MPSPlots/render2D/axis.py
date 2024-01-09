@@ -487,7 +487,7 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        scale = self.x_scale if scale is None else scale
+        scale = self.y_scale if scale is None else scale
 
         self.mpl_ax.set_yscale(scale)
 
@@ -501,7 +501,7 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        scale = self.y_scale if scale is None else scale
+        scale = self.x_scale if scale is None else scale
 
         self.mpl_ax.set_xscale(scale)
 

@@ -65,3 +65,4 @@ font.serif: cmr10, Times New Roman, DejaVu Serif, Bitstream Vera Serif, Computer
 savefig.edgecolor: auto
 savefig.facecolor: auto
 
+mathtext.default: regular
