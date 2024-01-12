@@ -12,7 +12,8 @@ from MPSPlots.render3D.artist import (
     UnitRadialVector,
     Mesh,
     Text,
-    ColorBar
+    ColorBar,
+    Cone
 )
 
 
@@ -52,6 +53,10 @@ class Axis():
     @add_artist_to_ax
     def add_unit_sphere(self, *args, **kwargs) -> UnitSphere:
         return UnitSphere(*args, **kwargs)
+
+    @add_artist_to_ax
+    def add_cone(self, *args, **kwargs) -> Cone:
+        return Cone(*args, **kwargs)
 
     @add_artist_to_ax
     def add_unit_axis(self, *args, **kwargs) -> UnitAxis:

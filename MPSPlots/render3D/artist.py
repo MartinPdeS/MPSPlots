@@ -138,6 +138,35 @@ class UnitSphere():
 
 
 @dataclass
+class Cone():
+    height: float
+    """ Radius of the sphere """
+    angle: float
+    """ Opacity of the object """
+    resolution: int = 100
+    """ Resolution of the side of the cone """
+    center: tuple = (0.0, 0.0, 0.0)
+    """ Center of the long ax of the cone """
+    direction: tuple = (1.0, 0.0, 0.0)
+    """ Direction of the cone ax """
+    color: str = 'black'
+    """ Color of the cone """
+    opacity: float = 1
+    """ Opacity of the object """
+
+    def _render_(self, ax) -> None:
+        ax.scene.figure.subplot(*ax.plot_number)
+        cone = pyvista.Cone(
+            center=self.center,
+            direction=self.direction,
+            height=self.height,
+            resolution=self.resolution,
+            angle=self.angle
+        )
+        ax.scene.figure.add_mesh(cone, color=self.color, opacity=self.opacity)
+
+
+@dataclass
 class UnitAxis():
     show_label: bool = False
     """ Is x, y, z printed or not """
@@ -292,6 +321,8 @@ class UnitRadialVector():
             color=self.color,
             opacity=self.opacity
         )
+
+
 
 
 @dataclass
