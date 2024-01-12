@@ -12,13 +12,16 @@ from MPSPlots.render3D.axis import Axis
 @dataclass
 class SceneList:
     unit_size: tuple = (600, 600)
-    """ Kindof the same as below """
+    """ Size of the individual axis composing the scene """
     background_color: str = 'white'
     """ Background of the rendering """
     ax_orientation: str = 'horizontal'
 
     def __post_init__(self) -> None:
         self.axis_list = []
+
+    def __repr__(self) -> str:
+        return f"3D scene:: Number of axis: {len(self.axis_list)}"
 
     def get_next_plot_number(self) -> tuple:
         if len(self.axis_list) == 0:

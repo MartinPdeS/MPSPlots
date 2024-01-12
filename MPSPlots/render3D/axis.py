@@ -22,6 +22,9 @@ class Axis():
     scene: object
     colorbar: object = None
 
+    def __repr__(self) -> str:
+        return f"3D axis:: Number of artists: {len(self.artist_list)}"
+
     @property
     def row(self) -> int:
         return self.plot_number[0]

@@ -1,6 +1,6 @@
 """
-3D Unstructured mesh
-~~~~~~~~~~~~~~~~~~~~
+3D Unstructured mesh & coloring
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 """
 
 # %%
@@ -45,6 +45,6 @@ scalar = (numpy.cos(phi))**2
 
 x, y, z = spherical_to_cartesian(phi=phi, theta=theta, r=scalar)
 
-ax.add_mesh(x=x, y=y, z=z)
+ax.add_mesh(x=x, y=y, z=z, scalar_coloring=scalar, colormap='viridis')
 
 _ = scene.show()

@@ -45,6 +45,8 @@ class Axis:
     """ Show the ax grid or not """
     show_legend: bool = False
     """ Show the legend or not """
+    legend_position: str = 'best'
+    """ Position of the legend """
     x_scale: str = 'linear'
     """ Set scale of x axis """
     y_scale: str = 'linear'
@@ -334,7 +336,8 @@ class Axis:
                 edgecolor='k',
                 facecolor='white',
                 fancybox=True,
-                fontsize=self.legend_font_size - 4
+                fontsize=self.legend_font_size - 4,
+                loc=self.legend_position,
             )
 
     def set_x_ticks_position(self, position: str) -> None:

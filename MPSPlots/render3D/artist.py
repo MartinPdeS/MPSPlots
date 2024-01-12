@@ -97,7 +97,8 @@ class Mesh():
     def _render_(self, ax) -> None:
         ax.scene.figure.subplot(*ax.plot_number)
 
-        self.scalar_coloring = self.scalar_coloring.ravel(order='f')
+        if self.scalar_coloring is not None:
+            self.scalar_coloring = self.scalar_coloring.ravel(order='f')
 
         mesh = pyvista.StructuredGrid(self.x, self.y, self.z)
 
