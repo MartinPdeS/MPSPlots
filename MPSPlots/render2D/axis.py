@@ -5,6 +5,7 @@
 # Matplotlib imports
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib.pyplot import axis as MPLAxis
+from matplotlib import ticker
 
 # Other imports
 import numpy
@@ -219,6 +220,22 @@ class Axis:
             self.mpl_ax.set_xlim([min_xy_limit, max_xy_limit])
             self.mpl_ax.set_ylim([min_xy_limit, max_xy_limit])
 
+        ticker.ScalarFormatter(
+            useOffset=False,
+            # useMathText=None,
+            # useLocale=None
+        )
+
+    def set_artist_parameter_value(self, parameter_str: str, value) -> None:
+        if value is None:
+            return
+
+        for artist in self._artist_list:
+            if not hasattr(artist, parameter_str):
+                continue
+
+            setattr(artist, parameter_str, value)
+
     def scale_artist_x_axis(self, scale_factor: float) -> None:
         """
         Scales all the artist x axis by the provided factor
@@ -229,11 +246,10 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        if scale_factor is None:
-            return
-
-        for artist in self._artist_list:
-            artist.x_scale_factor = scale_factor
+        self.set_artist_parameter_value(
+            parameter_str='scale_factor',
+            value=scale_factor
+        )
 
     def scale_artist_y_axis(self, scale_factor: float) -> None:
         """
@@ -245,11 +261,10 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        if scale_factor is None:
-            return
-
-        for artist in self._artist_list:
-            artist.y_scale_factor = scale_factor
+        self.set_artist_parameter_value(
+            parameter_str='y_scale_factor',
+            value=scale_factor
+        )
 
     def set_artist_line_width(self, line_width: float) -> None:
         """
@@ -261,11 +276,10 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        if line_width is None:
-            return
-
-        for artist in self._artist_list:
-            artist.line_width = self.line_width
+        self.set_artist_parameter_value(
+            parameter_str='line_width',
+            value=line_width
+        )
 
     def set_artist_line_style(self, line_style: 'str') -> None:
         """
@@ -277,11 +291,10 @@ class Axis:
         :returns:   No returns
         :rtype:     None
         """
-        if line_style is None:
-            return
-
-        for artist in self._artist_list:
-            artist.line_style = self.line_style
+        self.set_artist_parameter_value(
+            parameter_str='line_style',
+            value=line_style
+        )
 
     def render_artists(self) -> None:
         """

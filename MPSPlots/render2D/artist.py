@@ -442,7 +442,7 @@ class Line():
     """ Array representing the y axis """
     x: numpy.ndarray = None
     """ Array representing the x axis, if not defined a numpy arrange is used instead """
-    label: str = None
+    label: str = ""
     """ Label to be added to the plot """
     color: str = None
     """ Color for the artist to be ploted """

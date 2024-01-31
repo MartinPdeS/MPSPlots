@@ -44,6 +44,9 @@ class SceneProperties:
         self.axis_list = []
         self.mpl_axis_generated = False
 
+    def __getitem__(self, idx):
+        return self.axis_list[idx]
+
     def set_axis_attributes(self, **ax_kwargs: dict) -> None:
         """
         Sets all the sub-axis attributes.

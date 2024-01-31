@@ -32,13 +32,15 @@ class UnstructuredMesh():
     def _render_(self, ax) -> None:
         ax.scene.figure.subplot(*ax.plot_number)
 
-        self.scalar_coloring = self.scalar_coloring.ravel(order='f')
+        if self.scalar_coloring is not None:
+            self.scalar_coloring = self.scalar_coloring.ravel(order='f')
+            color_map_limit = self.get_colormap_limits()
+        else:
+            color_map_limit = None
 
         self.coordinates = numpy.array(self.coordinates).T
 
         points = pyvista.wrap(self.coordinates)
-
-        color_map_limit = self.get_colormap_limits()
 
         self.mapper = ax.scene.figure.add_points(
             points,
@@ -321,8 +323,6 @@ class UnitRadialVector():
             color=self.color,
             opacity=self.opacity
         )
-
-
 
 
 @dataclass
