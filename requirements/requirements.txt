@@ -1,7 +1,0 @@
-wheel
-numpy
-matplotlib
-pyvista==0.43.1
-shapely >= 2.0.0
-pathvalidate
-vtk

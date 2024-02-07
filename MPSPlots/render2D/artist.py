@@ -3,6 +3,7 @@
 
 
 # Matplotlib imports
+import matplotlib
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import axis as MPLAxis
@@ -868,7 +869,7 @@ class PatchPolygon():
         self.coordinates[:, 0] *= self.x_scale_factor
         self.coordinates[:, 1] *= self.y_scale_factor
 
-        polygon = plt.Polygon(
+        polygon = matplotlib.patches.Polygon(
             self.coordinates,
             facecolor=self.facecolor,
             alpha=self.alpha,
@@ -879,5 +880,57 @@ class PatchPolygon():
         ax.mpl_ax.add_patch(polygon)
 
         ax.mpl_ax.autoscale_view()
+
+
+@dataclass(slots=True)
+class PatchCircle():
+    position: tuple
+    """ Position of the center """
+    radius: float
+    """ Radius of the circle """
+    name: str = ''
+    """ Name to be added to the plot next to the polygon """
+    alpha: float = 0.4
+    """ Opacity of the polygon to be plotted """
+    facecolor: str = 'lightblue'
+    """ Color for the interior of the polygon """
+    edgecolor: str = 'black'
+    """ Color for the border of the polygon """
+    x_scale_factor: float = 1
+    """ Scaling factor for the x axis """
+    y_scale_factor: float = 1
+    """ Scaling factor for the y axis """
+    label: str = None
+    """ Label to be added to the plot """
+
+    def __post_init__(self):
+        self.position = numpy.asarray(self.position)
+
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the artist on the given ax.
+
+        :param      ax:   Matplotlib axis
+        :type       ax:   MPLAxis
+
+        :returns:   No returns
+        :rtype:     None
+        """
+        self.position[0] *= self.x_scale_factor
+        self.position[1] *= self.y_scale_factor
+
+        polygon = matplotlib.patches.Circle(
+            self.position,
+            self.radius,
+            facecolor=self.facecolor,
+            alpha=self.alpha,
+            edgecolor=self.edgecolor,
+            label=self.label
+        )
+
+        ax.mpl_ax.add_patch(polygon)
+
+        ax.mpl_ax.autoscale_view()
+
 
 # -

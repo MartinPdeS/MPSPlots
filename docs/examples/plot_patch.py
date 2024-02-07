@@ -27,15 +27,27 @@ figure = SceneList(
 ax = figure.append_ax(
     x_label='x data',
     y_label='y data',
-    show_legend=True
+    show_legend=True,
+    equal_limits=True,
+    aspect_ratio='equal'
 )
 
-coordinates = [(0, 0), (0, 1), (1, 1), (1, 1)]
+coordinates = [(0, -1), (0, 1), (4, 1), (4, -1)]
 
 # %%
 # Adding a Polygon artist to first axis
 _ = ax.add_polygon(
     coordinates=coordinates,
+    edgecolor='black',
+    facecolor='red'
+)
+
+
+# %%
+# Adding a Polygon artist to first axis
+_ = ax.add_circle(
+    position=(0, 1),
+    radius=1,
     edgecolor='black',
     facecolor='red'
 )

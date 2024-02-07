@@ -26,7 +26,8 @@ from MPSPlots.render2D.artist import (
     Colorbar,
     AxAnnotation,
     Table,
-    WaterMark
+    WaterMark,
+    PatchCircle
 )
 
 
@@ -247,7 +248,7 @@ class Axis:
         :rtype:     None
         """
         self.set_artist_parameter_value(
-            parameter_str='scale_factor',
+            parameter_str='x_scale_factor',
             value=scale_factor
         )
 
@@ -696,17 +697,30 @@ class Axis:
         return WaterMark(**kwargs)
 
     @add_artist_to_ax
-    def add_polygon(self, **kwargs: dict) -> Text:
+    def add_polygon(self, **kwargs: dict) -> PatchPolygon:
         """
-        Adds a Text artist to ax.
+        Adds a PatchPolygon artist to ax.
 
         :param      kwargs:  The keywords arguments to be sent to Text class
         :type       kwargs:  dict
 
         :returns:   The artist object
-        :rtype:     Text
+        :rtype:     PatchPolygon
         """
         return PatchPolygon(**kwargs)
+
+    @add_artist_to_ax
+    def add_circle(self, **kwargs: dict) -> PatchCircle:
+        """
+        Adds a PatchCircle artist to ax.
+
+        :param      kwargs:  The keywords arguments to be sent to Text class
+        :type       kwargs:  dict
+
+        :returns:   The artist object
+        :rtype:     PatchCircle
+        """
+        return PatchCircle(**kwargs)
 
     def add_colorbar(self, **kwargs: dict) -> Colorbar:
         """

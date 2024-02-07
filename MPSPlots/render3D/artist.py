@@ -23,6 +23,7 @@ class UnstructuredMesh():
     def get_colormap_limits(self):
         if self.scalar_coloring.std() == 0:
             return [-1, 1]
+
         if self.symmetric_colormap:
             max_abs = numpy.abs(self.scalar_coloring).max()
             return [-max_abs, max_abs]
