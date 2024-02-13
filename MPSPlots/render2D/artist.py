@@ -200,6 +200,8 @@ class Mesh():
     layer_position: int = 1
     """ Position of the layer """
 
+    mappable: object = field(init=False)
+
     def __post_init__(self):
         if self.x is None:
             self.x = numpy.arange(self.scalar.shape[1])
@@ -217,7 +219,7 @@ class Mesh():
         :returns:   No returns
         :rtype:     None
         """
-        image = ax.mpl_ax.pcolormesh(
+        self.mappable = ax.mpl_ax.pcolormesh(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             self.scalar,
@@ -227,9 +229,9 @@ class Mesh():
             cmap=ax.colorbar.colormap,
         )
 
-        image.set_edgecolor('face')
+        self.mappable.set_edgecolor('face')
 
-        return image
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -869,7 +871,7 @@ class PatchPolygon():
         self.coordinates[:, 0] *= self.x_scale_factor
         self.coordinates[:, 1] *= self.y_scale_factor
 
-        polygon = matplotlib.patches.Polygon(
+        self.mappable = matplotlib.patches.Polygon(
             self.coordinates,
             facecolor=self.facecolor,
             alpha=self.alpha,
@@ -877,9 +879,11 @@ class PatchPolygon():
             label=self.label
         )
 
-        ax.mpl_ax.add_patch(polygon)
+        ax.mpl_ax.add_patch(self.mappable)
 
         ax.mpl_ax.autoscale_view()
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -903,6 +907,8 @@ class PatchCircle():
     label: str = None
     """ Label to be added to the plot """
 
+    mappable: object = field(init=False)
+
     def __post_init__(self):
         self.position = numpy.asarray(self.position)
 
@@ -919,7 +925,7 @@ class PatchCircle():
         self.position[0] *= self.x_scale_factor
         self.position[1] *= self.y_scale_factor
 
-        polygon = matplotlib.patches.Circle(
+        self.mappable = matplotlib.patches.Circle(
             self.position,
             self.radius,
             facecolor=self.facecolor,
@@ -928,9 +934,11 @@ class PatchCircle():
             label=self.label
         )
 
-        ax.mpl_ax.add_patch(polygon)
+        ax.mpl_ax.add_patch(self.mappable)
 
         ax.mpl_ax.autoscale_view()
+
+        return self.mappable
 
 
 # -
