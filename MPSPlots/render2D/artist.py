@@ -40,7 +40,7 @@ __all__ = [
 ]
 
 
-@dataclass()
+@dataclass(slots=True)
 class Colorbar:
     artist: numpy.ndarray = None
     """ The artist to map """
@@ -70,6 +70,8 @@ class Colorbar:
     """ Matplotlib norm """
     label: str = ""
     """ Colorbar label text """
+
+    mappable: object = field(init=False)
 
     def __post_init__(self):
         self.norm = self.get_norm()
@@ -151,6 +153,8 @@ class Contour():
     fill_contour: bool = False
     """ Fill the contour line with color """
 
+    mappable: object = field(init=False)
+
     def __post_init__(self):
         if self.colormap is None:
             self.colormap = colormaps.blue_black_red
@@ -165,7 +169,7 @@ class Contour():
         :returns:   No returns
         :rtype:     None
         """
-        ax.mpl_ax.contour(
+        self.mappable = ax.mpl_ax.contour(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             self.scalar,
@@ -183,6 +187,8 @@ class Contour():
                 cmap=self.colormap,
                 zorder=self.layer_position
             )
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -252,6 +258,8 @@ class Polygon():
     """ Scaling factor for the y axis """
     layer_position: int = 1
     """ Position of the layer """
+
+    mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -335,6 +343,8 @@ class FillLine():
     layer_position: int = 1
     """ Position of the layer """
 
+    mappable: object = field(init=False)
+
     def _render_(self, ax: MPLAxis) -> None:
         """
         Renders the artist on the given ax.
@@ -348,7 +358,7 @@ class FillLine():
         if self.line_style is None:
             self.line_style = next(linecycler)
 
-        ax.mpl_ax.fill_between(
+        self.mappable = ax.mpl_ax.fill_between(
             self.x * self.x_scale_factor,
             self.y0 * self.y_scale_factor,
             self.y1 * self.y_scale_factor,
@@ -378,6 +388,8 @@ class FillLine():
                 zorder=self.layer_position
             )
 
+        return self.mappable
+
 
 @dataclass(slots=True)
 class STDLine():
@@ -401,6 +413,8 @@ class STDLine():
     """ Scaling factor for the y axis """
     layer_position: int = 1
     """ Position of the layer """
+
+    mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis):
         """
@@ -427,7 +441,7 @@ class STDLine():
             zorder=self.layer_position
         )
 
-        ax.mpl_ax.fill_between(
+        self.mappable = ax.mpl_ax.fill_between(
             self.x * self.x_scale_factor,
             y0 * self.y_scale_factor,
             y1 * self.y_scale_factor,
@@ -437,6 +451,8 @@ class STDLine():
             label=self.label,
             zorder=self.layer_position
         )
+
+        return self.mappable
 
 
 @dataclass
@@ -459,6 +475,8 @@ class Line():
     """ Scaling factor for the y axis """
     layer_position: int = 1
     """ Position of the layer """
+
+    mappable: object = field(init=False)
 
     def __post_init__(self):
         if self.x is None:
@@ -511,7 +529,7 @@ class Line():
             if ax.y_scale in ['log', 'logarithmic'] and self.y.real.min() < 0:
                 raise ValueError('Cannot plot negative value data on logarithmic scale!')
 
-            ax.mpl_ax.plot(
+            self.mappable = ax.mpl_ax.plot(
                 x,
                 y,
                 label=self.label,
@@ -520,6 +538,8 @@ class Line():
                 linewidth=self.line_width,
                 zorder=self.layer_position
             )
+
+            return self.mappable
 
 
 @dataclass(slots=True)
@@ -530,6 +550,8 @@ class Table():
     position: str = 'top'
     cell_color: str = None
     text_position: str = 'center'
+
+    mappable: object = field(init=False)
 
     def __post_init__(self):
         self.table_values = numpy.array(self.table_values, dtype=object)
@@ -552,7 +574,7 @@ class Table():
         :returns:   No returns
         :rtype:     None
         """
-        table = ax.mpl_ax.table(
+        self.mappable = ax.mpl_ax.table(
             cellText=self.table_values,
             rowLabels=self.row_labels,
             colLabels=self.column_labels,
@@ -561,7 +583,7 @@ class Table():
             cellLoc=self.text_position,
         )
 
-        return table
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -587,6 +609,8 @@ class VerticalLine():
     layer_position: int = 1
     """ Position of the layer """
 
+    mappable: object = field(init=False)
+
     def _render_(self, ax: MPLAxis):
         """
         Renders the artist on the given ax.
@@ -600,7 +624,7 @@ class VerticalLine():
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
-        ax.mpl_ax.vlines(
+        self.mappable = ax.mpl_ax.vlines(
             x=self.x * self.x_scale_factor,
             ymin=self.y_min,
             ymax=self.y_max,
@@ -610,6 +634,8 @@ class VerticalLine():
             linewidth=self.line_width,
             zorder=self.layer_position
         )
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -635,6 +661,8 @@ class HorizontalLine():
     layer_position: int = 1
     """ Position of the layer """
 
+    mappable: object = field(init=False)
+
     def _render_(self, ax: MPLAxis):
         """
         Renders the artist on the given ax.
@@ -648,7 +676,7 @@ class HorizontalLine():
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
 
-        ax.mpl_ax.hlines(
+        self.mappable = ax.mpl_ax.hlines(
             y=self.y * self.y_scale_factor,
             xmin=self.x_min,
             xmax=self.x_max,
@@ -658,6 +686,8 @@ class HorizontalLine():
             linewidth=self.line_width,
             zorder=self.layer_position
         )
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -689,6 +719,8 @@ class Scatter():
     layer_position: int = 1
     """ Position of the layer """
 
+    mappable: object = field(init=False)
+
     def __post_init__(self):
         if self.x is None:
             self.x = numpy.arange(len(self.y))
@@ -706,7 +738,7 @@ class Scatter():
         :returns:   No returns
         :rtype:     None
         """
-        ax.mpl_ax.scatter(
+        self.mappable = ax.mpl_ax.scatter(
             self.x * self.x_scale_factor,
             self.y * self.y_scale_factor,
             label=self.label,
@@ -719,6 +751,8 @@ class Scatter():
             alpha=self.alpha,
             zorder=self.layer_position
         )
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -740,6 +774,8 @@ class Text():
     localisation: str = 'lower right'
     """ Localisation of the text """
 
+    mappable: object = field(init=False)
+
     def _render_(self, ax: MPLAxis):
         """
         Renders the artist on the given ax.
@@ -750,7 +786,7 @@ class Text():
         :returns:   No returns
         :rtype:     None
         """
-        artist = AnchoredText(
+        self.mappable = AnchoredText(
             self.text,
             loc=self.localisation,
             prop=dict(size=self.font_size, color=self.color, weight=self.weight, position=(0, 0)),
@@ -760,7 +796,9 @@ class Text():
             borderpad=0,
         )
 
-        ax.mpl_ax.get_figure().add_artist(artist)
+        ax.mpl_ax.get_figure().add_artist(self.mappable)
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -786,6 +824,8 @@ class WaterMark():
     rotation: float = 45
     """ Rotation of the text """
 
+    mappable: object = field(init=False)
+
     def _render_(self, ax: MPLAxis) -> None:
         """
         Renders the artist on the given ax.
@@ -796,7 +836,7 @@ class WaterMark():
         :returns:   No returns
         :rtype:     None
         """
-        ax.mpl_ax.text(
+        self.mappable = ax.mpl_ax.text(
             *self.position,
             self.text,
             transform=ax.mpl_ax.transAxes,
@@ -809,6 +849,8 @@ class WaterMark():
             zorder=-2
         )
 
+        return self.mappable
+
 
 @dataclass(slots=True)
 class AxAnnotation():
@@ -816,6 +858,8 @@ class AxAnnotation():
     font_size: int = 18
     font_weight: str = 'bold'
     position: tuple = (-0.08, 1.08)
+
+    mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -827,13 +871,15 @@ class AxAnnotation():
         :returns:   No returns
         :rtype:     None
         """
-        ax.mpl_ax.text(
+        self.mappable = ax.mpl_ax.text(
             *self.position,
             self.text,
             transform=ax.mpl_ax.transAxes,
             size=self.font_size,
             weight=self.font_weight
         )
+
+        return self.mappable
 
 
 @dataclass(slots=True)
@@ -854,6 +900,8 @@ class PatchPolygon():
     """ Scaling factor for the y axis """
     label: str = None
     """ Label to be added to the plot """
+
+    mappable: object = field(init=False)
 
     def __post_init__(self):
         self.coordinates = numpy.asarray(self.coordinates)

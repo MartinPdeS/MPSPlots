@@ -83,17 +83,19 @@ Creating the Scene
 
 Adding an axis to the scene for the plots
 
-.. GENERATED FROM PYTHON SOURCE LINES 27-35
+.. GENERATED FROM PYTHON SOURCE LINES 27-37
 
 .. code-block:: python3
 
     ax = figure.append_ax(
         x_label='x data',
         y_label='y data',
-        show_legend=True
+        show_legend=True,
+        equal_limits=True,
+        aspect_ratio='equal'
     )
 
-    coordinates = [(0, 0), (0, 1), (1, 1), (1, 1)]
+    coordinates = [(0, -1), (0, 1), (4, 1), (4, -1)]
 
 
 
@@ -102,11 +104,11 @@ Adding an axis to the scene for the plots
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 36-37
+.. GENERATED FROM PYTHON SOURCE LINES 38-39
 
 Adding a Polygon artist to first axis
 
-.. GENERATED FROM PYTHON SOURCE LINES 37-43
+.. GENERATED FROM PYTHON SOURCE LINES 39-46
 
 .. code-block:: python3
 
@@ -123,11 +125,34 @@ Adding a Polygon artist to first axis
 
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 44-45
+
+.. GENERATED FROM PYTHON SOURCE LINES 47-48
+
+Adding a Polygon artist to first axis
+
+.. GENERATED FROM PYTHON SOURCE LINES 48-55
+
+.. code-block:: python3
+
+    _ = ax.add_circle(
+        position=(0, 1),
+        radius=1,
+        edgecolor='black',
+        facecolor='red'
+    )
+
+
+
+
+
+
+
+
+.. GENERATED FROM PYTHON SOURCE LINES 56-57
 
 Showing the figure
 
-.. GENERATED FROM PYTHON SOURCE LINES 45-46
+.. GENERATED FROM PYTHON SOURCE LINES 57-58
 
 .. code-block:: python3
 

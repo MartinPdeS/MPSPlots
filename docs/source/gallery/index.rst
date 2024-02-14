@@ -168,6 +168,40 @@ Examples
 
 .. only:: html
 
+  .. image:: /gallery/images/thumb/sphx_glr_plot_structured_mesh_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_gallery_plot_structured_mesh.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">3D Unstructured mesh</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="3D Unstructured mesh &amp; coloring">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_plot_structured_mesh_coloring_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_gallery_plot_structured_mesh_coloring.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">3D Unstructured mesh & coloring</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="3D Unstructured mesh">
+
+.. only:: html
+
   .. image:: /gallery/images/thumb/sphx_glr_plot_unstrictured_mesh_thumb.png
     :alt:
 
@@ -196,6 +230,8 @@ Examples
    /gallery/plot_multi_axes
    /gallery/plot_patch
    /gallery/plot_scatter
+   /gallery/plot_structured_mesh
+   /gallery/plot_structured_mesh_coloring
    /gallery/plot_unstrictured_mesh
 
 
