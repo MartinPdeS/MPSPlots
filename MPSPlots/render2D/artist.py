@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from typing import Union, Optional, List, Any, Tuple
+from pydantic.dataclasses import dataclass as _dataclass
 
 # Matplotlib imports
 import matplotlib
@@ -36,40 +38,47 @@ __all__ = [
     'Text',
     'AxAnnotation',
     'PatchPolygon',
+    'PatchCircle',
 
 ]
 
 
-@dataclass(slots=True)
-class Colorbar:
-    artist: numpy.ndarray = None
-    """ The artist to map """
-    discreet: bool = False
-    """ Buggy feature """
-    position: str = 'right'
-    """ Position of the colorbar """
-    colormap: str = field(default_factory=lambda: colormaps.blue_black_red)
-    """ Colormap to be used for the plot """
-    orientation: str = "vertical"
-    """ Orientation of the colorbar """
-    symmetric: bool = False
-    """ Set symmetric colormap """
-    log_norm: bool = False
-    """ Log normalization of the colorbar """
-    numeric_format: str = None
-    """ Format for the ticks on the colorbar """
-    n_ticks: int = None
-    """ Number of ticks for the colorbar """
-    label_size: int = None
-    """ Label size of the colorbar """
-    width: str = "10%"
-    """ Width of the colorbar """
-    padding: float = 0.10
-    """ Padding between the plot and the colorbar """
-    norm: object = None
-    """ Matplotlib norm """
-    label: str = ""
-    """ Colorbar label text """
+@_dataclass()
+class Colorbar():
+    """
+    A class to represent a colorbar for a plot.
+
+    Attributes:
+        artist (numpy.ndarray): The artist to map. Default is None.
+        discreet (bool): Flag for a discreet colorbar. Buggy feature. Default is False.
+        position (str): Position of the colorbar. Default is 'right'.
+        colormap (str): Colormap to be used for the plot. Default is 'blue_black_red'.
+        orientation (str): Orientation of the colorbar. Default is 'vertical'.
+        symmetric (bool): Flag to set a symmetric colormap. Default is False.
+        log_norm (bool): Flag to apply log normalization to the colorbar. Default is False.
+        numeric_format (str): Format for the ticks on the colorbar. Default is None.
+        n_ticks (int): Number of ticks for the colorbar. Default is None.
+        label_size (int): Size of the colorbar labels. Default is None.
+        width (str): Width of the colorbar. Default is '10%'.
+        padding (float): Padding between the plot and the colorbar. Default is 0.10.
+        norm (object): Matplotlib norm object. Default is None.
+        label (str): Text label for the colorbar. Default is an empty string.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+    artist: Optional[object] = None
+    discreet: Optional[bool] = False
+    position: Optional[str] = 'right'
+    colormap: Optional[str | object] = field(default_factory=lambda: colormaps.blue_black_red)
+    orientation: Optional[str] = "vertical"
+    symmetric: Optional[bool] = False
+    log_norm: Optional[bool] = False
+    numeric_format: Optional[str] = None
+    n_ticks: Optional[int] = None
+    label_size: Optional[int] = None
+    width: Optional[str] = "10%"
+    padding: Optional[float] = 0.10
+    norm: Optional[object] = None
+    label: Optional[str] = ""
 
     mappable: object = field(init=False)
 
@@ -132,42 +141,44 @@ class Colorbar:
             colorbar.ax.tick_params(labelsize=self.label_size)
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class Contour():
-    x: numpy.ndarray
-    """ y axis, can be vector or 2D grid """
-    y: numpy.ndarray
-    """ x axis, can be vector or 2D grid """
-    scalar: numpy.ndarray
-    """ Scalar 2D field """
-    iso_values: numpy.ndarray
-    """ Level values to which plot the iso contours """
-    colormap: str = None
-    """ Colormap to use for plottings """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
-    fill_contour: bool = False
-    """ Fill the contour line with color """
+    """
+    A class to represent a contour plot.
 
+    Attributes:
+        x (Union[List[float], List[List[float]]]): x-axis values, can be a vector or 2D grid.
+        y (Union[List[float], List[List[float]]]): y-axis values, can be a vector or 2D grid.
+        scalar (List[List[float]]): Scalar 2D field.
+        iso_values (List[float]): Level values for plotting the iso contours.
+        colormap (Optional[Union[str, object]]): Colormap to use for plotting. Default is 'blue_black_red'.
+        x_scale_factor (Optional[float]): Scaling factor for the x-axis. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y-axis. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        fill_contour (Optional[bool]): Flag to fill the contour lines with color. Default is False.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    x: Union[List[float], List[List[float]]]
+    y: Union[List[float], List[List[float]]]
+    scalar: List[List[float]]
+    iso_values: List[float]
+    colormap: Optional[Union[str, object]] = field(default_factory=lambda: colormaps.blue_black_red)
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
+    fill_contour: Optional[bool] = False
     mappable: object = field(init=False)
 
-    def __post_init__(self):
-        if self.colormap is None:
-            self.colormap = colormaps.blue_black_red
-
-    def _render_(self, ax: MPLAxis) -> None:
+    def _render_(self, ax: MPLAxis) -> matplotlib.contour.ContourLabeler:
         """
-        Renders the artist on the given ax.
+        Renders the contour plot on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: Contour plot object.
+        :rtype: matplotlib.contour.ContourLabeler
         """
         self.mappable = ax.mpl_ax.contour(
             self.x * self.x_scale_factor,
@@ -191,21 +202,27 @@ class Contour():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class Mesh():
-    scalar: numpy.ndarray
-    """ 2 dimensional numpy array representing the mesh to be plotted """
-    x: numpy.ndarray = None
-    """ Array representing the x axis, if not defined a numpy arrange is used instead """
-    y: numpy.ndarray = None
-    """ Array representing the y axis, if not defined a numpy arrange is used instead """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent a mesh plot.
 
+    Attributes:
+        scalar (List[List[float]]): 2D array representing the mesh to be plotted.
+        x (Optional[Union[List[float], List[List[float]]]]): Array representing the x-axis. If not defined, a numpy arange is used instead.
+        y (Optional[Union[List[float], List[List[float]]]]): Array representing the y-axis. If not defined, a numpy arange is used instead.
+        x_scale_factor (Optional[float]): Scaling factor for the x-axis. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y-axis. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    scalar: List[List[float]]
+    x: Optional[Union[List[float], List[List[float]]]] = None
+    y: Optional[Union[List[float], List[List[float]]]] = None
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
     def __post_init__(self):
@@ -240,45 +257,61 @@ class Mesh():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class Polygon():
-    instance: object
-    """ Shapely geo instance representing the polygone to be plotted """
-    name: str = ''
-    """ Name to be added to the plot next to the polygon """
-    alpha: float = 0.4
-    """ Opacity of the polygon to be plotted """
-    facecolor: str = 'lightblue'
-    """ Color for the interior of the polygon """
-    edgecolor: str = 'black'
-    """ Color for the border of the polygon """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent a polygon plot.
 
+    Attributes:
+        instance (object): Shapely geo instance representing the polygon to be plotted.
+        name (Optional[str]): Name to be added to the plot next to the polygon. Default is an empty string.
+        alpha (Optional[float]): Opacity of the polygon to be plotted. Default is 0.4.
+        facecolor (Optional[str]): Color for the interior of the polygon. Default is 'lightblue'.
+        edgecolor (Optional[str]): Color for the border of the polygon. Default is 'black'.
+        x_scale_factor (Optional[float]): Scaling factor for the x-axis. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y-axis. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    instance: object
+    name: Optional[str] = ''
+    alpha: Optional[float] = 0.4
+    facecolor: Optional[str] = 'lightblue'
+    edgecolor: Optional[str] = 'black'
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the polygon on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         if isinstance(self.instance, geo.MultiPolygon):
             for polygon in self.instance.geoms:
                 self.add_polygon_to_ax(polygon, ax)
-
         else:
             self.add_polygon_to_ax(self.instance, ax)
 
-    def add_polygon_to_ax(self, polygon, ax, add_name: str = None):
+    def add_polygon_to_ax(self, polygon, ax, add_name: Optional[str] = None) -> None:
+        """
+        Adds a polygon to the given axis.
+
+        :param polygon: Shapely polygon instance
+        :type polygon: shapely.geometry.Polygon
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
+        :param add_name: Optional name to add next to the polygon
+        :type add_name: Optional[str]
+
+        :returns: None
+        """
         collection = self.get_polygon_path(polygon)
 
         ax.mpl_ax.add_collection(collection, autolim=True)
@@ -289,7 +322,16 @@ class Polygon():
             ax.mpl_ax.scatter(polygon.centroid.x, polygon.centroid.y)
             ax.mpl_ax.text(polygon.centroid.x, polygon.centroid.y, self.name)
 
-    def get_polygon_path(self, polygon):
+    def get_polygon_path(self, polygon) -> PatchCollection:
+        """
+        Generates a PathCollection for the given polygon.
+
+        :param polygon: Shapely polygon instance
+        :type polygon: shapely.geometry.Polygon
+
+        :returns: PathCollection for the polygon
+        :rtype: matplotlib.collections.PatchCollection
+        """
         exterior_coordinate = numpy.asarray(polygon.exterior.coords)
 
         exterior_coordinate[:, 0] *= self.x_scale_factor
@@ -319,30 +361,37 @@ class Polygon():
         return collection
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class FillLine():
-    x: numpy.ndarray
-    """ Array representing the x axis """
-    y0: numpy.ndarray
-    """ Array representing the inferior y axis to be filled with color """
-    y1: numpy.ndarray
-    """ Array representing the superior y axis to be filled with color """
-    label: str = ""
-    color: str = None
-    """ Color for the fill """
-    line_style: str = None
-    """ Line style for the unique line default is next in cycle """
-    line_width: float = 1
-    """ Line width of the artists """
-    show_outline: bool = True
-    """ Show the outline of the filling """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent a filled line plot.
 
+    Attributes:
+        x (List[float]): Array representing the x-axis.
+        y0 (List[float]): Array representing the inferior y-axis to be filled with color.
+        y1 (List[float]): Array representing the superior y-axis to be filled with color.
+        label (Optional[str]): Label for the filled area. Default is an empty string.
+        color (Optional[str]): Color for the fill. Default is None.
+        line_style (Optional[str]): Line style for the outline. Default is next in cycle.
+        line_width (Optional[float]): Line width of the outline. Default is 1.
+        show_outline (Optional[bool]): Flag to show the outline of the filling. Default is True.
+        x_scale_factor (Optional[float]): Scaling factor for the x-axis. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y-axis. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    x: List[float]
+    y0: List[float]
+    y1: List[float]
+    label: Optional[str] = ""
+    color: Optional[str] = None
+    line_style: Optional[str] = None
+    line_width: Optional[float] = 1
+    show_outline: Optional[bool] = True
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis) -> None:
@@ -391,50 +440,52 @@ class FillLine():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class STDLine():
-    x: numpy.ndarray
-    """ Array representing the x axis """
-    y_mean: numpy.ndarray
-    """ Array representing the mean value of y axis """
-    y_std: numpy.ndarray
-    """ Array representing the standard deviation value of y axis """
-    label: str = ""
-    """ Label to be added to the plot """
-    color: str = None
-    """ Color for the artist to be ploted """
-    line_style: str = None
-    """ Line style for the y_mean line default is straight lines '-' """
-    line_width: float = 1
-    """ Line width of the artists """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent a line plot with standard deviation shading.
 
+    Attributes:
+        x (List[float]): Array representing the x-axis.
+        y_mean (List[float]): Array representing the mean value of the y-axis.
+        y_std (List[float]): Array representing the standard deviation value of the y-axis.
+        label (Optional[str]): Label to be added to the plot. Default is an empty string.
+        color (Optional[str]): Color for the artist to be plotted. Default is None.
+        line_style (Optional[str]): Line style for the y_mean line. Default is straight lines '-'.
+        line_width (Optional[float]): Line width of the artists. Default is 1.
+        x_scale_factor (Optional[float]): Scaling factor for the x-axis. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y-axis. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    x: List[float]
+    y_mean: List[float]
+    y_std: List[float]
+    label: Optional[str] = ""
+    color: Optional[str] = None
+    line_style: Optional[str] = '-'
+    line_width: Optional[float] = 1
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
-    def _render_(self, ax: MPLAxis):
+    def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the line plot with standard deviation shading on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
-        if self.line_style is None:
-            self.line_style = '-'
-
-        y0 = self.y_mean - self.y_std / 2
-        y1 = self.y_mean + self.y_std / 2
+        y0 = numpy.array(self.y_mean) - numpy.array(self.y_std) / 2
+        y1 = numpy.array(self.y_mean) + numpy.array(self.y_std) / 2
 
         line = ax.mpl_ax.plot(
-            self.x * self.x_scale_factor,
-            self.y_mean * self.y_scale_factor,
+            numpy.array(self.x) * self.x_scale_factor,
+            numpy.array(self.y_mean) * self.y_scale_factor,
             color=self.color,
             linestyle=self.line_style,
             linewidth=self.line_width,
@@ -455,27 +506,33 @@ class STDLine():
         return self.mappable
 
 
-@dataclass
+@_dataclass(slots=True)
 class Line():
-    y: numpy.ndarray
-    """ Array representing the y axis """
-    x: numpy.ndarray = None
-    """ Array representing the x axis, if not defined a numpy arrange is used instead """
-    label: str = ""
-    """ Label to be added to the plot """
-    color: str = None
-    """ Color for the artist to be ploted """
-    line_style: str = '-'
-    """ Line style for the unique line default is next in cycle """
-    line_width: float = 1
-    """ Line width of the artists """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent a line plot.
 
+    Attributes:
+        y (List[Any]): Array representing the y-axis.
+        x (Optional[List[float]]): Array representing the x-axis. If not defined, a numpy arange is used instead.
+        label (Optional[str]): Label to be added to the plot. Default is an empty string.
+        color (Optional[str]): Color for the artist to be plotted. Default is None.
+        line_style (Optional[str]): Line style for the line. Default is straight lines '-'.
+        line_width (Optional[float]): Line width of the artist. Default is 1.
+        x_scale_factor (Optional[float]): Scaling factor for the x-axis. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y-axis. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    y: List[Any]
+    x: Optional[List[float]] = None
+    label: Optional[str] = ""
+    color: Optional[str] = None
+    line_style: Optional[str] = '-'
+    line_width: Optional[float] = 1
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
     def __post_init__(self):
@@ -542,15 +599,27 @@ class Line():
             return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class Table():
-    table_values: list
-    column_labels: list = None
-    row_labels: list = None
-    position: str = 'top'
-    cell_color: str = None
-    text_position: str = 'center'
+    """
+    A class to represent a table plot.
 
+    Attributes:
+        table_values (List): 2D list representing the values in the table.
+        column_labels (Optional[List]): List of column labels. Default is None.
+        row_labels (Optional[List]): List of row labels. Default is None.
+        position (Optional[str]): Position of the table. Default is 'top'.
+        cell_color (Optional[str]): Color for the table cells. Default is None.
+        text_position (Optional[str]): Text position within the cells. Default is 'center'.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    table_values: List
+    column_labels: Optional[List] = None
+    row_labels: Optional[List] = None
+    position: Optional[str] = 'top'
+    cell_color: Optional[str] = None
+    text_position: Optional[str] = 'center'
     mappable: object = field(init=False)
 
     def __post_init__(self):
@@ -586,40 +655,45 @@ class Table():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class VerticalLine():
-    x: float
-    """ Array representing the x axis, if not defined a numpy arrange is used instead """
-    y_min: float = None
-    """ Array representing the y axis """
-    y_max: float = None
-    """ Array representing the y axis """
-    label: str = None
-    """ Label to be added to the plot """
-    color: str = None
-    """ Color for the artist to be ploted """
-    line_style: str = '-'
-    """ Line style for the unique line default is next in cycle """
-    line_width: float = 1
-    """ Line width of the artists """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent vertical lines on a plot.
 
+    Attributes:
+        x (Union[List[float], List]): Array representing the x positions for the vertical lines.
+        y_min (Optional[float]): Minimum y value for the vertical lines. Default is None.
+        y_max (Optional[float]): Maximum y value for the vertical lines. Default is None.
+        label (Optional[str]): Label to be added to the plot. Default is None.
+        color (Optional[str]): Color for the lines. Default is None.
+        line_style (Optional[str]): Line style for the lines. Default is straight lines '-'.
+        line_width (Optional[float]): Line width of the lines. Default is 1.
+        x_scale_factor (Optional[float]): Scaling factor for the x positions. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y positions. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    x: Union[List[float], List]
+    y_min: Optional[float] = None
+    y_max: Optional[float] = None
+    label: Optional[str] = None
+    color: Optional[str] = None
+    line_style: Optional[str] = '-'
+    line_width: Optional[float] = 1
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
-    def _render_(self, ax: MPLAxis):
+    def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the vertical lines on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
@@ -638,40 +712,45 @@ class VerticalLine():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class HorizontalLine():
-    y: float
-    """ Array representing the x axis, if not defined a numpy arrange is used instead """
-    x_min: float = None
-    """ Array representing the x axis """
-    x_max: float = None
-    """ Array representing the x axis """
-    label: str = None
-    """ Label to be added to the plot """
-    color: str = 'black'
-    """ Color for the artist to be ploted """
-    line_style: str = '-'
-    """ Line style for the unique line default is next in cycle """
-    line_width: float = 1
-    """ Line width of the artists """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent horizontal lines on a plot.
 
+    Attributes:
+        y (Union[List[float], List]): Array representing the y positions for the horizontal lines.
+        x_min (Optional[float]): Minimum x value for the horizontal lines. Default is None.
+        x_max (Optional[float]): Maximum x value for the horizontal lines. Default is None.
+        label (Optional[str]): Label to be added to the plot. Default is None.
+        color (Optional[str]): Color for the lines. Default is 'black'.
+        line_style (Optional[str]): Line style for the lines. Default is straight lines '-'.
+        line_width (Optional[float]): Line width of the lines. Default is 1.
+        x_scale_factor (Optional[float]): Scaling factor for the x positions. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y positions. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    y: Union[List[float], List]
+    x_min: Optional[float] = None
+    x_max: Optional[float] = None
+    label: Optional[str] = None
+    color: Optional[str] = 'black'
+    line_style: Optional[str] = '-'
+    line_width: Optional[float] = 1
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
-    def _render_(self, ax: MPLAxis):
+    def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the horizontal lines on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         if isinstance(self.line_style, str) and self.line_style.lower() == 'random':
             self.line_style = next(linecycler)
@@ -690,35 +769,41 @@ class HorizontalLine():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class Scatter():
-    y: numpy.ndarray
-    """ Array representing the y axis """
-    x: numpy.ndarray = None
-    """ Array representing the x axis, if not defined a numpy arrange is used instead """
-    label: str = None
-    """ Label to be added to the plot """
-    color: str = 'black'
-    """ Color for the artist to be ploted """
-    marker: str = 'o'
-    """ Line style for the unique line default is next in cycle """
-    marker_size: float = 4
-    """ Size of the markers """
-    line_style: str = 'None'
-    """ Line style for the unique line default is next in cycle """
-    line_width: str = 1
-    """ Line style for the unique line default is next in cycle """
-    alpha: float = 0.7
-    """ Opacity of the polygon to be plotted """
-    edge_color: str = 'black'
-    """ Scatter edge color """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    layer_position: int = 1
-    """ Position of the layer """
+    """
+    A class to represent a scatter plot.
 
+    Attributes:
+        y (List[float]): Array representing the y-axis.
+        x (Optional[List[float]]): Array representing the x-axis. If not defined, a numpy arange is used instead.
+        label (Optional[str]): Label to be added to the plot. Default is None.
+        color (Optional[str]): Color for the points. Default is 'black'.
+        marker (Optional[str]): Marker style for the points. Default is 'o'.
+        marker_size (Optional[float]): Size of the markers. Default is 4.
+        line_style (Optional[str]): Line style for the markers. Default is 'None'.
+        line_width (Optional[float]): Line width of the markers. Default is 1.
+        alpha (Optional[float]): Opacity of the points. Default is 0.7.
+        edge_color (Optional[str]): Edge color for the markers. Default is 'black'.
+        x_scale_factor (Optional[float]): Scaling factor for the x positions. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y positions. Default is 1.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    y: List[float]
+    x: Optional[List[float]] = None
+    label: Optional[str] = None
+    color: Optional[str] = 'black'
+    marker: Optional[str] = 'o'
+    marker_size: Optional[float] = 4
+    line_style: Optional[str] = 'None'
+    line_width: Optional[float] = 1
+    alpha: Optional[float] = 0.7
+    edge_color: Optional[str] = 'black'
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    layer_position: Optional[int] = 1
     mappable: object = field(init=False)
 
     def __post_init__(self):
@@ -728,15 +813,14 @@ class Scatter():
         self.y = numpy.asarray(self.y)
         self.x = numpy.asarray(self.x)
 
-    def _render_(self, ax: MPLAxis):
+    def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the scatter plot on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         self.mappable = ax.mpl_ax.scatter(
             self.x * self.x_scale_factor,
@@ -755,36 +839,41 @@ class Scatter():
         return self.mappable
 
 
-@dataclass(slots=True)
-class Text():
-    text: str
-    """ String to be plotted """
-    position: tuple = (0.0, 0.0)
-    """ Box position of the text """
-    font_size: int = 8
-    """ Font size of the text """
-    weight: str = 'normal'
-    """ Weight of the text """
-    color: str = 'black'
-    """ Color of the text """
-    add_box: bool = False
-    """ Boolean to enable a box around the text """
-    layer_position: int = 1
-    """ Position of the layer """
-    localisation: str = 'lower right'
-    """ Localisation of the text """
+@_dataclass(slots=True)
+class Text:
+    """
+    A class to represent a text annotation on a plot.
 
+    Attributes:
+        text (str): String to be plotted.
+        position (Optional[Tuple[float, float]]): Box position of the text. Default is (0.0, 0.0).
+        font_size (Optional[int]): Font size of the text. Default is 8.
+        weight (Optional[str]): Weight of the text. Default is 'normal'.
+        color (Optional[str]): Color of the text. Default is 'black'.
+        add_box (Optional[bool]): Boolean to enable a box around the text. Default is False.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        localisation (Optional[str]): Localisation of the text. Default is 'lower right'.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    text: str
+    position: Optional[Tuple[float, float]] = (0.0, 0.0)
+    font_size: Optional[int] = 8
+    weight: Optional[str] = 'normal'
+    color: Optional[str] = 'black'
+    add_box: Optional[bool] = False
+    layer_position: Optional[int] = 1
+    localisation: Optional[str] = 'lower right'
     mappable: object = field(init=False)
 
-    def _render_(self, ax: MPLAxis):
+    def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the text annotation on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         self.mappable = AnchoredText(
             self.text,
@@ -801,40 +890,45 @@ class Text():
         return self.mappable
 
 
-@dataclass(slots=True)
-class WaterMark():
-    text: str
-    """ String to be plotted """
-    position: tuple = (0.5, 0.1)
-    """ Box position of the text """
-    font_size: int = 30
-    """ Font size of the text """
-    weight: str = 'normal'
-    """ Weight of the text """
-    color: str = 'black'
-    """ Color of the text """
-    add_box: bool = False
-    """ Boolean to enable a box around the text """
-    layer_position: int = 1
-    """ Position of the layer """
-    localisation: str = 'lower right'
-    """ Localisation of the text """
-    alpha: float = 0.2
-    """ Transparency of the text"""
-    rotation: float = 45
-    """ Rotation of the text """
+@_dataclass(slots=True)
+class WaterMark:
+    """
+    A class to represent a watermark on a plot.
 
+    Attributes:
+        text (str): String to be plotted.
+        position (Optional[Tuple[float, float]]): Box position of the text. Default is (0.5, 0.1).
+        font_size (Optional[int]): Font size of the text. Default is 30.
+        weight (Optional[str]): Weight of the text. Default is 'normal'.
+        color (Optional[str]): Color of the text. Default is 'black'.
+        add_box (Optional[bool]): Boolean to enable a box around the text. Default is False.
+        layer_position (Optional[int]): Position of the layer. Default is 1.
+        localisation (Optional[str]): Localisation of the text. Default is 'lower right'.
+        alpha (Optional[float]): Transparency of the text. Default is 0.2.
+        rotation (Optional[float]): Rotation of the text. Default is 45.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    text: str
+    position: Optional[Tuple[float, float]] = (0.5, 0.1)
+    font_size: Optional[int] = 30
+    weight: Optional[str] = 'normal'
+    color: Optional[str] = 'black'
+    add_box: Optional[bool] = False
+    layer_position: Optional[int] = 1
+    localisation: Optional[str] = 'lower right'
+    alpha: Optional[float] = 0.2
+    rotation: Optional[float] = 45
     mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the watermark on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         self.mappable = ax.mpl_ax.text(
             *self.position,
@@ -852,24 +946,33 @@ class WaterMark():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class AxAnnotation():
-    text: str = ""
-    font_size: int = 18
-    font_weight: str = 'bold'
-    position: tuple = (-0.08, 1.08)
+    """
+    A class to represent an annotation on a plot axis.
 
+    Attributes:
+        text (Optional[str]): The text of the annotation. Default is an empty string.
+        font_size (Optional[int]): Font size of the annotation text. Default is 18.
+        font_weight (Optional[str]): Font weight of the annotation text. Default is 'bold'.
+        position (Optional[Tuple[float, float]]): Position of the annotation in axis coordinates. Default is (-0.08, 1.08).
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    text: Optional[str] = ""
+    font_size: Optional[int] = 18
+    font_weight: Optional[str] = 'bold'
+    position: Optional[Tuple[float, float]] = (-0.08, 1.08)
     mappable: object = field(init=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the annotation on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         self.mappable = ax.mpl_ax.text(
             *self.position,
@@ -882,25 +985,31 @@ class AxAnnotation():
         return self.mappable
 
 
-@dataclass(slots=True)
-class PatchPolygon():
-    coordinates: numpy.ndarray = None
-    """ Coordinate of the vertices """
-    name: str = ''
-    """ Name to be added to the plot next to the polygon """
-    alpha: float = 0.4
-    """ Opacity of the polygon to be plotted """
-    facecolor: str = 'lightblue'
-    """ Color for the interior of the polygon """
-    edgecolor: str = 'black'
-    """ Color for the border of the polygon """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    label: str = None
-    """ Label to be added to the plot """
+@_dataclass(slots=True)
+class PatchPolygon:
+    """
+    A class to represent a polygon patch on a plot.
 
+    Attributes:
+        coordinates (np.ndarray): Coordinates of the vertices of the polygon.
+        name (Optional[str]): Name to be added to the plot next to the polygon. Default is an empty string.
+        alpha (Optional[float]): Opacity of the polygon to be plotted. Default is 0.4.
+        facecolor (Optional[str]): Color for the interior of the polygon. Default is 'lightblue'.
+        edgecolor (Optional[str]): Color for the border of the polygon. Default is 'black'.
+        x_scale_factor (Optional[float]): Scaling factor for the x positions. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y positions. Default is 1.
+        label (Optional[str]): Label to be added to the plot. Default is None.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    coordinates: List[List] = None
+    name: Optional[str] = ''
+    alpha: Optional[float] = 0.4
+    facecolor: Optional[str] = 'lightblue'
+    edgecolor: Optional[str] = 'black'
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    label: Optional[str] = None
     mappable: object = field(init=False)
 
     def __post_init__(self):
@@ -908,13 +1017,12 @@ class PatchPolygon():
 
     def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the polygon patch on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         self.coordinates[:, 0] *= self.x_scale_factor
         self.coordinates[:, 1] *= self.y_scale_factor
@@ -934,27 +1042,33 @@ class PatchPolygon():
         return self.mappable
 
 
-@dataclass(slots=True)
+@_dataclass(slots=True)
 class PatchCircle():
-    position: tuple
-    """ Position of the center """
-    radius: float
-    """ Radius of the circle """
-    name: str = ''
-    """ Name to be added to the plot next to the polygon """
-    alpha: float = 0.4
-    """ Opacity of the polygon to be plotted """
-    facecolor: str = 'lightblue'
-    """ Color for the interior of the polygon """
-    edgecolor: str = 'black'
-    """ Color for the border of the polygon """
-    x_scale_factor: float = 1
-    """ Scaling factor for the x axis """
-    y_scale_factor: float = 1
-    """ Scaling factor for the y axis """
-    label: str = None
-    """ Label to be added to the plot """
+    """
+    A class to represent a circular patch on a plot.
 
+    Attributes:
+        position (Tuple[float, float]): Position of the center of the circle.
+        radius (float): Radius of the circle.
+        name (Optional[str]): Name to be added to the plot next to the circle. Default is an empty string.
+        alpha (Optional[float]): Opacity of the circle to be plotted. Default is 0.4.
+        facecolor (Optional[str]): Color for the interior of the circle. Default is 'lightblue'.
+        edgecolor (Optional[str]): Color for the border of the circle. Default is 'black'.
+        x_scale_factor (Optional[float]): Scaling factor for the x positions. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y positions. Default is 1.
+        label (Optional[str]): Label to be added to the plot. Default is None.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    position: Tuple[float, float]
+    radius: float
+    name: Optional[str] = ''
+    alpha: Optional[float] = 0.4
+    facecolor: Optional[str] = 'lightblue'
+    edgecolor: Optional[str] = 'black'
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    label: Optional[str] = None
     mappable: object = field(init=False)
 
     def __post_init__(self):
@@ -962,13 +1076,12 @@ class PatchCircle():
 
     def _render_(self, ax: MPLAxis) -> None:
         """
-        Renders the artist on the given ax.
+        Renders the circular patch on the given axis.
 
-        :param      ax:   Matplotlib axis
-        :type       ax:   MPLAxis
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
 
-        :returns:   No returns
-        :rtype:     None
+        :returns: None
         """
         self.position[0] *= self.x_scale_factor
         self.position[1] *= self.y_scale_factor
