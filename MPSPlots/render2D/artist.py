@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from typing import Union, Optional, List, Any, Tuple
+from typing import Union, Optional, List, Tuple
 from dataclasses import field
 from pydantic.dataclasses import dataclass as _dataclass
 from pydantic import ConfigDict
@@ -45,7 +45,10 @@ __all__ = [
 ]
 
 
-@_dataclass()
+config_dict = ConfigDict(extra='forbid', arbitrary_types_allowed=True, strict=True)
+
+
+@_dataclass(slots=True, config=config_dict)
 class Colorbar():
     """
     A class to represent a colorbar for a plot.
@@ -143,7 +146,7 @@ class Colorbar():
             colorbar.ax.tick_params(labelsize=self.label_size)
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
+@_dataclass(slots=True, config=config_dict)
 class Contour():
     """
     A class to represent a contour plot.
@@ -161,10 +164,10 @@ class Contour():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: numpy.ndarray
-    y: numpy.ndarray
-    scalar: numpy.ndarray
-    iso_values: numpy.ndarray
+    x: Union[numpy.ndarray, float]
+    y: Union[numpy.ndarray, float]
+    scalar: Union[numpy.ndarray, float]
+    iso_values: Union[numpy.ndarray, float]
     colormap: Optional[Union[str, object]] = field(default_factory=lambda: colormaps.blue_black_red)
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
@@ -204,7 +207,7 @@ class Contour():
         return self.mappable
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
+@_dataclass(slots=True, config=config_dict)
 class Mesh():
     """
     A class to represent a mesh plot.
@@ -219,9 +222,9 @@ class Mesh():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    scalar: numpy.ndarray
-    x: Optional[numpy.ndarray] = None
-    y: Optional[numpy.ndarray] = None
+    scalar: Union[numpy.ndarray, float]
+    x: Optional[Union[numpy.ndarray, float]] = None
+    y: Optional[Union[numpy.ndarray, float]] = None
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
@@ -262,7 +265,7 @@ class Mesh():
         return self.mappable
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid'))
+@_dataclass(slots=True, config=config_dict)
 class Polygon():
     """
     A class to represent a polygon plot.
@@ -366,7 +369,7 @@ class Polygon():
         return collection
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
+@_dataclass(slots=True, config=config_dict)
 class FillLine():
     """
     A class to represent a filled line plot.
@@ -386,9 +389,9 @@ class FillLine():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: numpy.ndarray
-    y0: numpy.ndarray
-    y1: numpy.ndarray
+    x: Union[numpy.ndarray, float]
+    y0: Union[numpy.ndarray, float]
+    y1: Union[numpy.ndarray, float]
     label: Optional[str] = ""
     color: Optional[str] = None
     line_style: Optional[str] = None
@@ -445,7 +448,7 @@ class FillLine():
         return self.mappable
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
+@_dataclass(slots=True, config=config_dict)
 class STDLine():
     """
     A class to represent a line plot with standard deviation shading.
@@ -464,9 +467,9 @@ class STDLine():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: numpy.ndarray
-    y_mean: numpy.ndarray
-    y_std: numpy.ndarray
+    x: Union[numpy.ndarray, List[float]]
+    y_mean: Union[numpy.ndarray, List[float]]
+    y_std: Union[numpy.ndarray, List[float]]
     label: Optional[str] = ""
     color: Optional[str] = None
     line_style: Optional[str] = '-'
@@ -511,7 +514,7 @@ class STDLine():
         return self.mappable
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
+@_dataclass(slots=True, config=config_dict)
 class Line():
     """
     A class to represent a line plot.
@@ -529,8 +532,8 @@ class Line():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    y: numpy.ndarray
-    x: Optional[numpy.ndarray] = None
+    y: Union[numpy.ndarray, List[float]]
+    x: Optional[Union[numpy.ndarray, List[float]]] = None
     label: Optional[str] = ""
     color: Optional[str] = None
     line_style: Optional[str] = '-'
@@ -774,7 +777,7 @@ class HorizontalLine():
         return self.mappable
 
 
-@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True, strict=True))
 class Scatter():
     """
     A class to represent a scatter plot.
