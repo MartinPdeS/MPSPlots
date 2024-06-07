@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from typing import Union, Optional, List, Any, Tuple
+from dataclasses import field
 from pydantic.dataclasses import dataclass as _dataclass
+from pydantic import ConfigDict
 
 # Matplotlib imports
 import matplotlib
@@ -19,7 +21,7 @@ import matplotlib.colors as colors
 import numpy
 import shapely.geometry as geo
 from itertools import cycle
-from dataclasses import dataclass, field
+
 from MPSPlots import colormaps
 
 linecycler = cycle(["-", "--", "-.", ":"])
@@ -141,7 +143,7 @@ class Colorbar():
             colorbar.ax.tick_params(labelsize=self.label_size)
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class Contour():
     """
     A class to represent a contour plot.
@@ -159,10 +161,10 @@ class Contour():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: Union[List[float], List[List[float]]]
-    y: Union[List[float], List[List[float]]]
-    scalar: List[List[float]]
-    iso_values: List[float]
+    x: numpy.ndarray
+    y: numpy.ndarray
+    scalar: numpy.ndarray
+    iso_values: numpy.ndarray
     colormap: Optional[Union[str, object]] = field(default_factory=lambda: colormaps.blue_black_red)
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
@@ -202,7 +204,7 @@ class Contour():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class Mesh():
     """
     A class to represent a mesh plot.
@@ -217,9 +219,9 @@ class Mesh():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    scalar: List[List[float]]
-    x: Optional[Union[List[float], List[List[float]]]] = None
-    y: Optional[Union[List[float], List[List[float]]]] = None
+    scalar: numpy.ndarray
+    x: Optional[numpy.ndarray] = None
+    y: Optional[numpy.ndarray] = None
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
@@ -231,6 +233,9 @@ class Mesh():
 
         if self.y is None:
             self.y = numpy.arange(self.scalar.shape[0])
+
+        self.x = numpy.asarray(self.x)
+        self.y = numpy.asarray(self.y)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -257,7 +262,7 @@ class Mesh():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid'))
 class Polygon():
     """
     A class to represent a polygon plot.
@@ -361,7 +366,7 @@ class Polygon():
         return collection
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class FillLine():
     """
     A class to represent a filled line plot.
@@ -381,9 +386,9 @@ class FillLine():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: List[float]
-    y0: List[float]
-    y1: List[float]
+    x: numpy.ndarray
+    y0: numpy.ndarray
+    y1: numpy.ndarray
     label: Optional[str] = ""
     color: Optional[str] = None
     line_style: Optional[str] = None
@@ -440,7 +445,7 @@ class FillLine():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class STDLine():
     """
     A class to represent a line plot with standard deviation shading.
@@ -459,9 +464,9 @@ class STDLine():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: List[float]
-    y_mean: List[float]
-    y_std: List[float]
+    x: numpy.ndarray
+    y_mean: numpy.ndarray
+    y_std: numpy.ndarray
     label: Optional[str] = ""
     color: Optional[str] = None
     line_style: Optional[str] = '-'
@@ -506,7 +511,7 @@ class STDLine():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class Line():
     """
     A class to represent a line plot.
@@ -524,8 +529,8 @@ class Line():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    y: List[Any]
-    x: Optional[List[float]] = None
+    y: numpy.ndarray
+    x: Optional[numpy.ndarray] = None
     label: Optional[str] = ""
     color: Optional[str] = None
     line_style: Optional[str] = '-'
@@ -655,7 +660,7 @@ class Table():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class VerticalLine():
     """
     A class to represent vertical lines on a plot.
@@ -674,7 +679,7 @@ class VerticalLine():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    x: Union[List[float], List]
+    x: numpy.ndarray
     y_min: Optional[float] = None
     y_max: Optional[float] = None
     label: Optional[str] = None
@@ -712,7 +717,7 @@ class VerticalLine():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class HorizontalLine():
     """
     A class to represent horizontal lines on a plot.
@@ -731,7 +736,7 @@ class HorizontalLine():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    y: Union[List[float], List]
+    y: numpy.ndarray
     x_min: Optional[float] = None
     x_max: Optional[float] = None
     label: Optional[str] = None
@@ -769,7 +774,7 @@ class HorizontalLine():
         return self.mappable
 
 
-@_dataclass(slots=True)
+@_dataclass(slots=True, config=ConfigDict(extra='forbid', arbitrary_types_allowed=True))
 class Scatter():
     """
     A class to represent a scatter plot.
@@ -791,8 +796,8 @@ class Scatter():
         mappable (object): Matplotlib mappable object. Initialized in __post_init__.
     """
 
-    y: List[float]
-    x: Optional[List[float]] = None
+    y: Union[numpy.ndarray, float, List[float]]
+    x: Optional[Union[numpy.ndarray, float, List[float]]] = None
     label: Optional[str] = None
     color: Optional[str] = 'black'
     marker: Optional[str] = 'o'
@@ -1024,6 +1029,9 @@ class PatchPolygon:
 
         :returns: None
         """
+        if self.coordinates.size == 0:
+            return
+
         self.coordinates[:, 0] *= self.x_scale_factor
         self.coordinates[:, 1] *= self.y_scale_factor
 
