@@ -123,30 +123,6 @@ Adding a Mesh artist to first axis
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    Colorbar(artist=Mesh(scalar=array([[  0,   1,   2, ...,  97,  98,  99],
-           [  1,   2,   3, ...,  98,  99, 100],
-           [  2,   3,   4, ...,  99, 100, 101],
-           ...,
-           [ 97,  98,  99, ..., 194, 195, 196],
-           [ 98,  99, 100, ..., 195, 196, 197],
-           [ 99, 100, 101, ..., 196, 197, 198]]), x=array([[ 0,  0,  0, ...,  0,  0,  0],
-           [ 1,  1,  1, ...,  1,  1,  1],
-           [ 2,  2,  2, ...,  2,  2,  2],
-           ...,
-           [97, 97, 97, ..., 97, 97, 97],
-           [98, 98, 98, ..., 98, 98, 98],
-           [99, 99, 99, ..., 99, 99, 99]]), y=array([[ 0,  1,  2, ..., 97, 98, 99],
-           [ 0,  1,  2, ..., 97, 98, 99],
-           [ 0,  1,  2, ..., 97, 98, 99],
-           ...,
-           [ 0,  1,  2, ..., 97, 98, 99],
-           [ 0,  1,  2, ..., 97, 98, 99],
-           [ 0,  1,  2, ..., 97, 98, 99]]), x_scale_factor=1, y_scale_factor=1, layer_position=1), discreet=False, position='right', colormap=<matplotlib.colors.LinearSegmentedColormap object at 0x10b8fd4d0>, orientation='vertical', symmetric=False, log_norm=False, numeric_format=None, n_ticks=None, label_size=None, width='10%', padding=0.1, norm=None, label='')
 
 
 
@@ -212,7 +188,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.345 seconds)
+   **Total running time of the script:** (0 minutes 0.235 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_mesh.py:

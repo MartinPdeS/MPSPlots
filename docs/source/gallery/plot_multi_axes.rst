@@ -99,12 +99,6 @@ Adding a first axis to the scene for the plots
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    WaterMark(text='Watermark', position=(0.5, 0.1), font_size=30, weight='normal', color='black', add_box=False, layer_position=1, localisation='lower right', alpha=0.2, rotation=45)
 
 
 
@@ -220,7 +214,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.149 seconds)
+   **Total running time of the script:** (0 minutes 0.164 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_multi_axes.py:

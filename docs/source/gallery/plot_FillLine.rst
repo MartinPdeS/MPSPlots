@@ -140,12 +140,6 @@ Adding a Table artist to axis
 
 
 
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    Table(table_values=array([['1', '2', '3', '4']], dtype=object), column_labels=['', '', '', ''], row_labels=[''], position='top', cell_color=None, text_position='center')
 
 
 
@@ -173,7 +167,7 @@ Showing the figure
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.163 seconds)
+   **Total running time of the script:** (0 minutes 0.132 seconds)
 
 
 .. _sphx_glr_download_gallery_plot_FillLine.py:
