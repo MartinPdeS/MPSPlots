@@ -41,6 +41,7 @@ __all__ = [
     'AxAnnotation',
     'PatchPolygon',
     'PatchCircle',
+    'PatchEllipse',
 
 ]
 
@@ -85,7 +86,7 @@ class Colorbar():
     norm: Optional[object] = None
     label: Optional[str] = ""
 
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         self.norm = self.get_norm()
@@ -173,7 +174,7 @@ class Contour():
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
     fill_contour: Optional[bool] = False
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> matplotlib.contour.ContourLabeler:
         """
@@ -228,7 +229,7 @@ class Mesh():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         if self.x is None:
@@ -290,7 +291,7 @@ class Polygon():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -400,7 +401,7 @@ class FillLine():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -477,7 +478,7 @@ class STDLine():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -541,7 +542,7 @@ class Line():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         if self.x is None:
@@ -628,7 +629,7 @@ class Table():
     position: Optional[str] = 'top'
     cell_color: Optional[str] = None
     text_position: Optional[str] = 'center'
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         self.table_values = numpy.array(self.table_values, dtype=object)
@@ -692,7 +693,7 @@ class VerticalLine():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -749,7 +750,7 @@ class HorizontalLine():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -812,7 +813,7 @@ class Scatter():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     layer_position: Optional[int] = 1
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         if self.x is None:
@@ -872,7 +873,7 @@ class Text:
     add_box: Optional[bool] = False
     layer_position: Optional[int] = 1
     localisation: Optional[str] = 'lower right'
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -927,7 +928,7 @@ class WaterMark:
     localisation: Optional[str] = 'lower right'
     alpha: Optional[float] = 0.2
     rotation: Optional[float] = 45
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -971,7 +972,7 @@ class AxAnnotation():
     font_size: Optional[int] = 18
     font_weight: Optional[str] = 'bold'
     position: Optional[Tuple[float, float]] = (-0.08, 1.08)
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def _render_(self, ax: MPLAxis) -> None:
         """
@@ -1018,7 +1019,7 @@ class PatchPolygon:
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     label: Optional[str] = None
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         self.coordinates = numpy.asarray(self.coordinates)
@@ -1080,7 +1081,7 @@ class PatchCircle():
     x_scale_factor: Optional[float] = 1
     y_scale_factor: Optional[float] = 1
     label: Optional[str] = None
-    mappable: object = field(init=False)
+    mappable: object = field(init=False, repr=False)
 
     def __post_init__(self):
         self.position = numpy.asarray(self.position)
@@ -1100,6 +1101,71 @@ class PatchCircle():
         self.mappable = matplotlib.patches.Circle(
             self.position,
             self.radius,
+            facecolor=self.facecolor,
+            alpha=self.alpha,
+            edgecolor=self.edgecolor,
+            label=self.label
+        )
+
+        ax.mpl_ax.add_patch(self.mappable)
+
+        ax.mpl_ax.autoscale_view()
+
+        return self.mappable
+
+
+@_dataclass(slots=True)
+class PatchEllipse():
+    """
+    A class to represent a circular patch on a plot.
+
+    Attributes:
+        position (Tuple[float, float]): Position of the center of the circle.
+        width (float):
+        height (float):
+        name (Optional[str]): Name to be added to the plot next to the circle. Default is an empty string.
+        alpha (Optional[float]): Opacity of the circle to be plotted. Default is 0.4.
+        facecolor (Optional[str]): Color for the interior of the circle. Default is 'lightblue'.
+        edgecolor (Optional[str]): Color for the border of the circle. Default is 'black'.
+        x_scale_factor (Optional[float]): Scaling factor for the x positions. Default is 1.
+        y_scale_factor (Optional[float]): Scaling factor for the y positions. Default is 1.
+        label (Optional[str]): Label to be added to the plot. Default is None.
+        mappable (object): Matplotlib mappable object. Initialized in __post_init__.
+    """
+
+    position: Tuple[float, float]
+    width: float
+    height: float
+    angle: float = 0
+    name: Optional[str] = ''
+    alpha: Optional[float] = 0.4
+    facecolor: Optional[str] = 'lightblue'
+    edgecolor: Optional[str] = 'black'
+    x_scale_factor: Optional[float] = 1
+    y_scale_factor: Optional[float] = 1
+    label: Optional[str] = None
+    mappable: object = field(init=False, repr=False)
+
+    def __post_init__(self):
+        self.position = numpy.asarray(self.position)
+
+    def _render_(self, ax: MPLAxis) -> None:
+        """
+        Renders the circular patch on the given axis.
+
+        :param ax: Matplotlib axis
+        :type ax: MPLAxis
+
+        :returns: None
+        """
+        self.position[0] *= self.x_scale_factor
+        self.position[1] *= self.y_scale_factor
+
+        self.mappable = matplotlib.patches.Ellipse(
+            self.position,
+            width=self.width,
+            height=self.height,
+            angle=self.angle,
             facecolor=self.facecolor,
             alpha=self.alpha,
             edgecolor=self.edgecolor,
