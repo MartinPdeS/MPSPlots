@@ -1,7 +1,8 @@
 graft MPSPlots
 
-global-exclude __pycache__
-global-exclude .DS_Store
+prune Makefile
+prune tests
+prune docs
 
 global-exclude __pycache__
 global-exclude .DS_Store
