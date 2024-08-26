@@ -34,10 +34,6 @@ jobs:
 
       - name: "Chekcout requirements and files for testing"
         uses: actions/checkout@v4
-        with:
-            sparse-checkout: |
-              tests
-              requirements
 
       - name: Install everything, run the tests, produce the .coverage file
         run: |
