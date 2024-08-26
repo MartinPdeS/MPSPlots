@@ -62,7 +62,13 @@ minversion = "6.0"
 xfail_strict = true
 log_cli_level = "INFO"
 testpaths = "tests"
-addopts = ['-v', '-rA', '-rw']
+addopts = [
+    '-v',
+    '-rA',
+    '-rw',
+    '--cov=MPSPlots',
+    '--cov-report=html'
+]
 
 
 [tool.coverage.run]
@@ -70,7 +76,3 @@ source = ['MPSPlots']
 omit = []
 branch = true
 relative_files = true
-
-
-[tool.pytest.ini_options]
-addopts = "-v --cov=MPSPlots --cov-report=html"
