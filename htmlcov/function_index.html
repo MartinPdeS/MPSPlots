@@ -11,7 +11,7 @@
 <header>
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">0%</span>
+            <span class="pc_cov">78%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -27,6 +27,8 @@
                         <kbd>s</kbd>
                         <kbd>m</kbd>
                         <kbd>x</kbd>
+                        <kbd>b</kbd>
+                        <kbd>p</kbd>
                         <kbd>c</kbd>
                         &nbsp; change column sorting
                     </p>
@@ -55,7 +57,7 @@
         </h2>
         <p class="text">
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.1">coverage.py v7.6.1</a>,
-            created at 2024-08-26 19:49 +0000
+            created at 2024-08-26 19:50 +0000
         </p>
     </div>
 </header>
@@ -68,6 +70,8 @@
                 <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
                 <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
                 <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
+                <th id="branches" aria-sort="none" data-default-sort-order="descending" data-shortcut="b">branches<span class="arrows"></span></th>
+                <th id="partial" aria-sort="none" data-default-sort-order="descending" data-shortcut="p">partial<span class="arrows"></span></th>
                 <th id="coverage" class="right" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
             </tr>
         </thead>
@@ -76,33 +80,41 @@
                 <td class="name left"><a href="z_bb4888ac87fb5df1___init___py.html">MPSPlots/__init__.py</a></td>
                 <td class="name left"><a href="z_bb4888ac87fb5df1___init___py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>5</td>
-                <td>5</td>
+                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 5">60%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_bb4888ac87fb5df1__version_py.html">MPSPlots/_version.py</a></td>
                 <td class="name left"><a href="z_bb4888ac87fb5df1__version_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>11</td>
-                <td>11</td>
+                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 11">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="10 13">77%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_bb4888ac87fb5df1_colormaps_py.html#t18">MPSPlots/colormaps.py</a></td>
                 <td class="name left"><a href="z_bb4888ac87fb5df1_colormaps_py.html#t18"><data value='init__'>NameSpace.__init__</data></a></td>
                 <td>2</td>
+                <td>0</td>
+                <td>0</td>
                 <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td class="right" data-ratio="4 4">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_bb4888ac87fb5df1_colormaps_py.html">MPSPlots/colormaps.py</a></td>
                 <td class="name left"><a href="z_bb4888ac87fb5df1_colormaps_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>10</td>
-                <td>10</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 10">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2___init___py.html#t10">MPSPlots/render2D/__init__.py</a></td>
@@ -110,71 +122,89 @@
                 <td>4</td>
                 <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 6">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2___init___py.html">MPSPlots/render2D/__init__.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2___init___py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>5</td>
-                <td>5</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t91">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t91"><data value='post_init__'>Colorbar.__post_init__</data></a></td>
                 <td>5</td>
-                <td>5</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="7 7">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t101">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t101"><data value='get_norm'>Colorbar.get_norm</data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>4</td>
+                <td>1</td>
+                <td class="right" data-ratio="6 8">75%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t108">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t108"><data value='create_sub_ax'>Colorbar.create_sub_ax</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t119">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t119"><data value='render_'>Colorbar._render_</data></a></td>
                 <td>7</td>
-                <td>7</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="8 11">73%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t179">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t179"><data value='render_'>Contour._render_</data></a></td>
                 <td>4</td>
-                <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="5 6">83%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t234">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t234"><data value='post_init__'>Mesh.__post_init__</data></a></td>
                 <td>6</td>
-                <td>6</td>
+                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="6 10">60%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t244">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t244"><data value='render_'>Mesh._render_</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t296">MPSPlots/render2D/artist.py</a></td>
@@ -182,7 +212,9 @@
                 <td>4</td>
                 <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 8">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t311">MPSPlots/render2D/artist.py</a></td>
@@ -190,7 +222,9 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 8">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t334">MPSPlots/render2D/artist.py</a></td>
@@ -198,47 +232,59 @@
                 <td>12</td>
                 <td>12</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 12">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 14">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t406">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t406"><data value='render_'>FillLine._render_</data></a></td>
                 <td>7</td>
-                <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>0</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="9 11">82%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t483">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t483"><data value='render_'>STDLine._render_</data></a></td>
                 <td>5</td>
-                <td>5</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="5 5">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t547">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t547"><data value='post_init__'>Line.__post_init__</data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="4 6">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t554">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t554"><data value='render_'>Line._render_</data></a></td>
                 <td>13</td>
-                <td>13</td>
+                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 13">0%</td>
+                <td>8</td>
+                <td>3</td>
+                <td class="right" data-ratio="15 21">71%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t634">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t634"><data value='post_init__'>Table.__post_init__</data></a></td>
                 <td>7</td>
-                <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>0</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="9 11">82%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t645">MPSPlots/render2D/artist.py</a></td>
@@ -246,15 +292,19 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 2">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t698">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t698"><data value='render_'>VerticalLine._render_</data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="4 6">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t755">MPSPlots/render2D/artist.py</a></td>
@@ -262,31 +312,39 @@
                 <td>4</td>
                 <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 6">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t818">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t818"><data value='post_init__'>Scatter.__post_init__</data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="4 6">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t825">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t825"><data value='render_'>Scatter._render_</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t878">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t878"><data value='render_'>Text._render_</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t933">MPSPlots/render2D/artist.py</a></td>
@@ -294,37 +352,47 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 2">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t977">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t977"><data value='render_'>AxAnnotation._render_</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1024">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1024"><data value='post_init__'>PatchPolygon.__post_init__</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1027">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1027"><data value='render_'>PatchPolygon._render_</data></a></td>
                 <td>8</td>
-                <td>8</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 8">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="8 10">80%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1086">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1086"><data value='post_init__'>PatchCircle.__post_init__</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -334,6 +402,8 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 6">0%</td>
             </tr>
             <tr class="region">
@@ -341,6 +411,8 @@
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html#t1149"><data value='post_init__'>PatchEllipse.__post_init__</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -350,21 +422,27 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 6">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html">MPSPlots/render2D/artist.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>256</td>
-                <td>256</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 256">0%</td>
+                <td>0</td>
+                <td>38</td>
+                <td>0</td>
+                <td class="right" data-ratio="294 294">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t83">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t83"><data value='getitem__'>Axis.__getitem__</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -374,29 +452,37 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 2">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t90">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t90"><data value='add_artist_to_ax'>Axis.add_artist_to_ax</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="3 4">75%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t92">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t92"><data value='wrapper'>Axis.add_artist_to_ax.wrapper</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t99">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t99"><data value='style'>Axis.style</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -406,7 +492,9 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 10">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t138">MPSPlots/render2D/axis.py</a></td>
@@ -414,7 +502,9 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 10">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t152">MPSPlots/render2D/axis.py</a></td>
@@ -422,7 +512,9 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 10">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t166">MPSPlots/render2D/axis.py</a></td>
@@ -430,7 +522,9 @@
                 <td>6</td>
                 <td>6</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 10">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t180">MPSPlots/render2D/axis.py</a></td>
@@ -438,13 +532,17 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 5">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t191">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t191"><data value='add_artist'>Axis.add_artist</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -454,231 +552,289 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 5">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t214">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t214"><data value='set_ax_limits'>Axis.set_ax_limits</data></a></td>
                 <td>9</td>
-                <td>9</td>
+                <td>5</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 9">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="5 11">45%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t230">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t230"><data value='set_artist_parameter_value'>Axis.set_artist_parameter_value</data></a></td>
                 <td>5</td>
-                <td>5</td>
+                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>6</td>
+                <td>1</td>
+                <td class="right" data-ratio="3 11">27%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t245">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t245"><data value='scale_artist_x_axis'>Axis.scale_artist_x_axis</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t254">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t254"><data value='scale_artist_y_axis'>Axis.scale_artist_y_axis</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t263">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t263"><data value='set_artist_line_width'>Axis.set_artist_line_width</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t272">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t272"><data value='set_artist_line_style'>Axis.set_artist_line_style</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t281">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t281"><data value='render_artists'>Axis.render_artists</data></a></td>
                 <td>2</td>
+                <td>0</td>
+                <td>0</td>
                 <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td class="right" data-ratio="4 4">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t288">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t288"><data value='render_'>Axis._render_</data></a></td>
                 <td>9</td>
-                <td>9</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 9">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 11">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t304">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t304"><data value='generate_legend'>Axis.generate_legend</data></a></td>
                 <td>4</td>
-                <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="5 6">83%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t321">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t321"><data value='set_x_ticks_position'>Axis.set_x_ticks_position</data></a></td>
                 <td>7</td>
-                <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="7 7">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t336">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t336"><data value='set_y_ticks_position'>Axis.set_y_ticks_position</data></a></td>
                 <td>7</td>
-                <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="7 7">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t351">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t351"><data value='set_title'>Axis.set_title</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t363">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t363"><data value='set_tick_size'>Axis.set_tick_size</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t373">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t373"><data value='set_aspect'>Axis.set_aspect</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t383">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t383"><data value='set_show_grid'>Axis.set_show_grid</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t394">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t394"><data value='set_x_label'>Axis.set_x_label</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t405">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t405"><data value='set_y_label'>Axis.set_y_label</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t416">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t416"><data value='set_y_scale'>Axis.set_y_scale</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t426">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t426"><data value='set_x_scale'>Axis.set_x_scale</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t436">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t436"><data value='decorate_axis'>Axis.decorate_axis</data></a></td>
                 <td>11</td>
-                <td>11</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 11">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 11">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t453">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t453"><data value='add_fill_line'>Axis.add_fill_line</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t466">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t466"><data value='add_std_line'>Axis.add_std_line</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t479">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t479"><data value='add_scatter'>Axis.add_scatter</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t491">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t491"><data value='add_table'>Axis.add_table</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t504">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t504"><data value='add_mesh'>Axis.add_mesh</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t517">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t517"><data value='add_contour'>Axis.add_contour</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t530">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t530"><data value='add_line'>Axis.add_line</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t543">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t543"><data value='add_vertical_line'>Axis.add_vertical_line</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t556">MPSPlots/render2D/axis.py</a></td>
@@ -686,15 +842,19 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t569">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t569"><data value='add_text'>Axis.add_text</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t582">MPSPlots/render2D/axis.py</a></td>
@@ -702,21 +862,27 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t595">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t595"><data value='add_polygon'>Axis.add_polygon</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t608">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t608"><data value='add_ellipse'>Axis.add_ellipse</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -726,23 +892,29 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t633">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t633"><data value='add_colorbar'>Axis.add_colorbar</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t648">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t648"><data value='add_ax_annotation'>Axis.add_ax_annotation</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html#t662">MPSPlots/render2D/axis.py</a></td>
@@ -750,15 +922,19 @@
                 <td>4</td>
                 <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 6">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html">MPSPlots/render2D/axis.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>102</td>
-                <td>102</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 102">0%</td>
+                <td>0</td>
+                <td>32</td>
+                <td>15</td>
+                <td class="right" data-ratio="119 134">89%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t40">MPSPlots/render2D/scene.py</a></td>
@@ -766,21 +942,27 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t43">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t43"><data value='post_init__'>SceneProperties.__post_init__</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t47">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t47"><data value='getitem__'>SceneProperties.__getitem__</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -790,7 +972,9 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>4</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 7">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t64">MPSPlots/render2D/scene.py</a></td>
@@ -798,53 +982,67 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 4">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t69">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t69"><data value='shape'>SceneProperties.shape</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t73">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t73"><data value='maximum_column_value'>SceneProperties.maximum_column_value</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t78">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t78"><data value='maximum_row_value'>SceneProperties.maximum_row_value</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t83">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t83"><data value='number_of_column'>SceneProperties.number_of_column</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t93">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t93"><data value='number_of_row'>SceneProperties.number_of_row</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t102">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t102"><data value='close'>SceneProperties.close</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -854,47 +1052,59 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 3">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t116">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t116"><data value='show'>SceneProperties.show</data></a></td>
                 <td>5</td>
-                <td>5</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="5 7">71%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t126">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t126"><data value='render_'>SceneProperties._render_</data></a></td>
                 <td>7</td>
-                <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>0</td>
+                <td>6</td>
+                <td>2</td>
+                <td class="right" data-ratio="11 13">85%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t141">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t141"><data value='getitem__'>SceneProperties.__getitem__</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t153">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t153"><data value='generate_mpl_figure'>SceneProperties.generate_mpl_figure</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t158">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t158"><data value='annotate_axis'>SceneProperties.annotate_axis</data></a></td>
                 <td>11</td>
-                <td>11</td>
+                <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 11">0%</td>
+                <td>10</td>
+                <td>1</td>
+                <td class="right" data-ratio="12 21">57%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t178">MPSPlots/render2D/scene.py</a></td>
@@ -902,39 +1112,49 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 5">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t198">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t198"><data value='next_row_number'>SceneList.next_row_number</data></a></td>
                 <td>5</td>
-                <td>5</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="6 9">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t207">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t207"><data value='next_column_number'>SceneList.next_column_number</data></a></td>
                 <td>5</td>
-                <td>5</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 5">0%</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="6 9">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t215">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t215"><data value='append_ax'>SceneList.append_ax</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t235">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t235"><data value='generate_axis_'>SceneList._generate_axis_</data></a></td>
                 <td>7</td>
-                <td>7</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 7">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="9 9">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t259">MPSPlots/render2D/scene.py</a></td>
@@ -942,7 +1162,9 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 4">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t263">MPSPlots/render2D/scene.py</a></td>
@@ -950,7 +1172,9 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 4">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t267">MPSPlots/render2D/scene.py</a></td>
@@ -958,7 +1182,9 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 5">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t274">MPSPlots/render2D/scene.py</a></td>
@@ -966,55 +1192,69 @@
                 <td>4</td>
                 <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 6">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t281">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t281"><data value='append_ax'>SceneMatrix.append_ax</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t301">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html#t301"><data value='generate_axis_'>SceneMatrix._generate_axis_</data></a></td>
                 <td>9</td>
-                <td>9</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 9">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="11 11">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html">MPSPlots/render2D/scene.py</a></td>
                 <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>66</td>
-                <td>66</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 66">0%</td>
+                <td>0</td>
+                <td>22</td>
+                <td>8</td>
+                <td class="right" data-ratio="80 88">91%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e___init___py.html">MPSPlots/render3D/__init__.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e___init___py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t23">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t23"><data value='get_colormap_limits'>UnstructuredMesh.get_colormap_limits</data></a></td>
                 <td>6</td>
-                <td>6</td>
+                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>4</td>
+                <td>2</td>
+                <td class="right" data-ratio="5 10">50%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t33">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t33"><data value='render_'>UnstructuredMesh._render_</data></a></td>
                 <td>8</td>
-                <td>8</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 8">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="8 10">80%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t65">MPSPlots/render3D/artist.py</a></td>
@@ -1022,31 +1262,39 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 2">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t100">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t100"><data value='render_'>Mesh._render_</data></a></td>
                 <td>6</td>
-                <td>6</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 6">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="7 8">88%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t122">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t122"><data value='get_colormap_limits'>Mesh.get_colormap_limits</data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="4 6">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t137">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t137"><data value='render_'>UnitSphere._render_</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t160">MPSPlots/render3D/artist.py</a></td>
@@ -1054,39 +1302,49 @@
                 <td>3</td>
                 <td>3</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 3">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t177">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t177"><data value='render_'>UnitAxis._render_</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t195">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t195"><data value='render_'>UnitThetaVector._render_</data></a></td>
                 <td>10</td>
-                <td>10</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 10">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t243">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t243"><data value='render_'>UnitPhiVector._render_</data></a></td>
                 <td>10</td>
-                <td>10</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 10">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t291">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t291"><data value='render_'>UnitRadialVector._render_</data></a></td>
                 <td>10</td>
-                <td>10</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 10">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html#t333">MPSPlots/render3D/artist.py</a></td>
@@ -1094,15 +1352,19 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 2">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html">MPSPlots/render3D/artist.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>116</td>
-                <td>116</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 116">0%</td>
+                <td>0</td>
+                <td>24</td>
+                <td>1</td>
+                <td class="right" data-ratio="139 140">99%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t26">MPSPlots/render3D/axis.py</a></td>
@@ -1110,63 +1372,79 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t30">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t30"><data value='row'>Axis.row</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t34">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t34"><data value='column'>Axis.column</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t37">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t37"><data value='add_artist_to_ax'>Axis.add_artist_to_ax</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t38">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t38"><data value='wrapper'>Axis.add_artist_to_ax.wrapper</data></a></td>
                 <td>3</td>
-                <td>3</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 3">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="3 3">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t46">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t46"><data value='post_init__'>Axis.__post_init__</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t50">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t50"><data value='add_unstructured_mesh'>Axis.add_unstructured_mesh</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t54">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t54"><data value='add_unit_sphere'>Axis.add_unit_sphere</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t58">MPSPlots/render3D/axis.py</a></td>
@@ -1174,53 +1452,67 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t62">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t62"><data value='add_unit_axis'>Axis.add_unit_axis</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t66">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t66"><data value='add_unit_theta_vector'>Axis.add_unit_theta_vector</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t70">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t70"><data value='add_unit_phi_vector'>Axis.add_unit_phi_vector</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t74">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t74"><data value='add_unit_radial_vector'>Axis.add_unit_radial_vector</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t78">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t78"><data value='add_mesh'>Axis.add_mesh</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t82">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t82"><data value='add_text'>Axis.add_text</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -1230,31 +1522,39 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t88">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html#t88"><data value='render_'>Axis._render_</data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>4</td>
+                <td>1</td>
+                <td class="right" data-ratio="6 8">75%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html">MPSPlots/render3D/axis.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>34</td>
-                <td>34</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 34">0%</td>
+                <td>0</td>
+                <td>24</td>
+                <td>11</td>
+                <td class="right" data-ratio="47 58">81%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t20">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t20"><data value='post_init__'>SceneList.__post_init__</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t23">MPSPlots/render3D/scene.py</a></td>
@@ -1262,55 +1562,69 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t26">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t26"><data value='get_next_plot_number'>SceneList.get_next_plot_number</data></a></td>
                 <td>8</td>
-                <td>8</td>
+                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 8">0%</td>
+                <td>6</td>
+                <td>1</td>
+                <td class="right" data-ratio="9 14">64%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t39">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t39"><data value='append_ax'>SceneList.append_ax</data></a></td>
                 <td>4</td>
-                <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="4 4">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t51">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t51"><data value='get_shape'>SceneList.get_shape</data></a></td>
                 <td>1</td>
-                <td>1</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="1 1">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t55">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t55"><data value='number_of_columns'>SceneList.number_of_columns</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t60">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t60"><data value='number_of_rows'>SceneList.number_of_rows</data></a></td>
                 <td>2</td>
-                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 2">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="2 2">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t64">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t64"><data value='show'>SceneList.show</data></a></td>
                 <td>8</td>
-                <td>8</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 8">0%</td>
+                <td>0</td>
+                <td>2</td>
+                <td>0</td>
+                <td class="right" data-ratio="10 10">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html#t87">MPSPlots/render3D/scene.py</a></td>
@@ -1318,21 +1632,27 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html">MPSPlots/render3D/scene.py</a></td>
                 <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>22</td>
-                <td>22</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 22">0%</td>
+                <td>0</td>
+                <td>6</td>
+                <td>2</td>
+                <td class="right" data-ratio="26 28">93%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_644bddde3ee3a0db___init___py.html#t13">MPSPlots/styles/__init__.py</a></td>
                 <td class="name left"><a href="z_644bddde3ee3a0db___init___py.html#t13"><data value='use_mpsplots_style'>use_mpsplots_style</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -1342,6 +1662,8 @@
                 <td>1</td>
                 <td>1</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
             <tr class="region">
@@ -1349,6 +1671,8 @@
                 <td class="name left"><a href="z_644bddde3ee3a0db___init___py.html#t20"><data value='use_ggplot_style'>use_ggplot_style</data></a></td>
                 <td>1</td>
                 <td>1</td>
+                <td>0</td>
+                <td>0</td>
                 <td>0</td>
                 <td class="right" data-ratio="0 1">0%</td>
             </tr>
@@ -1358,23 +1682,29 @@
                 <td>2</td>
                 <td>2</td>
                 <td>0</td>
+                <td>0</td>
+                <td>0</td>
                 <td class="right" data-ratio="0 2">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_644bddde3ee3a0db___init___py.html">MPSPlots/styles/__init__.py</a></td>
                 <td class="name left"><a href="z_644bddde3ee3a0db___init___py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>9</td>
-                <td>9</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 9">0%</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td class="right" data-ratio="9 9">100%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_51186b495386eb21_directories_py.html">MPSPlots/tools/directories.py</a></td>
                 <td class="name left"><a href="z_51186b495386eb21_directories_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>17</td>
-                <td>17</td>
+                <td>4</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 17">0%</td>
+                <td>4</td>
+                <td>1</td>
+                <td class="right" data-ratio="14 21">67%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_51186b495386eb21_utils_py.html#t4">MPSPlots/tools/utils.py</a></td>
@@ -1382,15 +1712,19 @@
                 <td>12</td>
                 <td>12</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 12">0%</td>
+                <td>6</td>
+                <td>0</td>
+                <td class="right" data-ratio="0 18">0%</td>
             </tr>
             <tr class="region">
                 <td class="name left"><a href="z_51186b495386eb21_utils_py.html">MPSPlots/tools/utils.py</a></td>
                 <td class="name left"><a href="z_51186b495386eb21_utils_py.html"><data value=''><span class='no-noun'>(no function)</span></data></a></td>
                 <td>4</td>
-                <td>4</td>
+                <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 4">0%</td>
+                <td>2</td>
+                <td>1</td>
+                <td class="right" data-ratio="3 6">50%</td>
             </tr>
         </tbody>
         <tfoot>
@@ -1398,9 +1732,11 @@
                 <td class="name left">Total</td>
                 <td class="name left">&nbsp;</td>
                 <td>1166</td>
-                <td>1166</td>
+                <td>190</td>
                 <td>0</td>
-                <td class="right" data-ratio="0 1166">0%</td>
+                <td>320</td>
+                <td>76</td>
+                <td class="right" data-ratio="1152 1486">78%</td>
             </tr>
         </tfoot>
     </table>
@@ -1412,7 +1748,7 @@
     <div class="content">
         <p>
             <a class="nav" href="https://coverage.readthedocs.io/en/7.6.1">coverage.py v7.6.1</a>,
-            created at 2024-08-26 19:49 +0000
+            created at 2024-08-26 19:50 +0000
         </p>
     </div>
     <aside class="hidden">
