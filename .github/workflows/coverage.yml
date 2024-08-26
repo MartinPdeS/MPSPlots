@@ -35,7 +35,7 @@ jobs:
           python -m pip install wheel build
           python -m build --wheel
           python -m pip install .[testing]
-          pytest -v --cov=MPSPlots --cov-report=html
+          pytest
 
       - name: Coverage comment
         uses: py-cov-action/python-coverage-comment-action@v3

@@ -70,3 +70,7 @@ source = ['MPSPlots']
 omit = []
 branch = true
 relative_files = true
+
+
+[tool.pytest.ini_options]
+addopts = "-v --cov=MPSPlots --cov-report=html"
