@@ -70,4 +70,3 @@ source = ['MPSPlots']
 omit = []
 branch = true
 relative_files = true
-context = '${CONTEXT}'
