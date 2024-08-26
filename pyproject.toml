@@ -66,4 +66,8 @@ addopts = ['-v', '-rA', '-rw']
 
 
 [tool.coverage.run]
+source = ['MPSPlots']
+omit = []
+branch = true
 relative_files = true
+context = '${CONTEXT}'
