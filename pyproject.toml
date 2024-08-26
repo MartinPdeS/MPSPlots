@@ -63,3 +63,7 @@ xfail_strict = true
 log_cli_level = "INFO"
 testpaths = "tests"
 addopts = ['-v', '-rA', '-rw']
+
+
+[tool.coverage.run]
+relative_files = true
