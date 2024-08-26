@@ -43,7 +43,7 @@ jobs:
         run: |
           python build --wheel
           python -m pip install .[testing]
-          make test # This is the part where you put your own test command
+          pytest --cov=${{ inputs.package-name }} --cov-report=html
 
       - name: Coverage comment
         uses: py-cov-action/python-coverage-comment-action@v3
