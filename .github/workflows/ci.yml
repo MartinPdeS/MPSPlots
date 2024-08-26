@@ -41,6 +41,7 @@ jobs:
 
       - name: Install everything, run the tests, produce the .coverage file
         run: |
+          python -m pip install wheel build
           python build --wheel
           python -m pip install .[testing]
           pytest --cov=${{ inputs.package-name }} --cov-report=html
