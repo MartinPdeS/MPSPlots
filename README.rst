@@ -4,7 +4,7 @@ MPSPlots
 
 |python|
 |docs|
-|unittest|
+|coverage|
 |PyPi|
 |PyPi_download|
 
@@ -52,7 +52,7 @@ Email:`martin.poinsinet-de-sivry@polymtl.ca <mailto:martin.poinsinet-de-sivry@po
    :target: https://mpsplots.readthedocs.io/en/latest/
    :alt: Documentation Status
 
-.. |unittest| image:: https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/MartinPdeS/f0955be398d59efac69042c1b0fbece2/raw/b0469e6a361cc54c19eca1f23662b3ad0b76b1ce/MPSPlotscoverage_badge.json
+.. |coverage| image:: https://raw.githubusercontent.com/MartinPdeS/MPSPlots/python-coverage-comment-action-data/badge.svg
    :alt: Unittest coverage
    :target: https://github.com/MartinPdeS/MPSPlots/actions
 

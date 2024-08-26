@@ -9,7 +9,7 @@ on:
 
 jobs:
   coverage:
-    name: Run tests & display coverage
+    name: Run test and generate coverage data
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -41,3 +41,5 @@ jobs:
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MINIMUM_GREEN: 90
+          MINIMUM_ORANGE: 50
