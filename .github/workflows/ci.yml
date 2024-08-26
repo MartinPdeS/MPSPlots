@@ -20,7 +20,18 @@ jobs:
       # comments (to avoid publishing multiple comments in the same PR)
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - name: "Set-up: Python ${{ env.cp_python_version }}"
+        uses: actions/setup-python@v4
+        id: cp310
+        with:
+            python-version: 3.10
+
+      - name: "Chekcout requirements and files for testing"
+        uses: actions/checkout@v4
+        with:
+            sparse-checkout: |
+              tests
+              requirements
 
       - name: Install everything, run the tests, produce the .coverage file
         run: make test # This is the part where you put your own test command
