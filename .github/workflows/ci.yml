@@ -8,16 +8,11 @@ on:
     branches: "master"
 
 jobs:
-  test:
+  coverage:
     name: Run tests & display coverage
     runs-on: ubuntu-latest
     permissions:
-      # Gives the action the necessary permissions for publishing new
-      # comments in pull requests.
       pull-requests: write
-      # Gives the action the necessary permissions for pushing data to the
-      # python-coverage-comment-action branch, and for editing existing
-      # comments (to avoid publishing multiple comments in the same PR)
       contents: write
     steps:
       - name: "Set-up: Python ${{ env.cp_python_version }}"
@@ -32,7 +27,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install libgl1-mesa-glx xvfb
 
-      - name: "Chekcout requirements and files for testing"
+      - name: "Checkout requirements and files for testing"
         uses: actions/checkout@v4
 
       - name: Install everything, run the tests, produce the .coverage file
@@ -40,7 +35,7 @@ jobs:
           python -m pip install wheel build
           python -m build --wheel
           python -m pip install .[testing]
-          pytest --cov=${{ inputs.package-name }} --cov-report=html
+          pytest --cov=MPSPlots --cov-report=html
 
       - name: Coverage comment
         uses: py-cov-action/python-coverage-comment-action@v3
