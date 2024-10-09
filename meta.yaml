@@ -1,0 +1,35 @@
+package:
+  name: mpsplots
+  version: {{ GIT_DESCRIBE_TAG }}
+
+source:
+  path: .
+
+build:
+  noarch: python
+  script: |
+    {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+
+requirements:
+  host:
+    - python>=3.10.*
+    - pip
+    - setuptools>=40.8.*
+    - setuptools_scm[toml]>=8.0.*
+  run:
+    - matplotlib==3.8.*
+    - numpy>=1.26.*
+    - pydantic>=2.9.*
+    - pathvalidate==3.2.*
+    - pyvista==0.43.*
+    - vtk
+    - shapely>=2.0.*
+
+about:
+  home: https://github.com/MartinPdeS/MPSPlots
+  license: MIT
+  summary: "My own plotting style package"
+  description: Empty.
+  dev_url: https://github.com/MartinPdeS/MPSPlots
+  doc_url: https://mpsplots.readthedocs.io
+  license_file: LICENSE
