@@ -6,30 +6,48 @@ source:
   path: .
 
 build:
+  number: 0
   noarch: python
-  script: |
-    {{ PYTHON }} -m pip install . --no-deps --ignore-installed -vvv
+  script: python -m pip install --no-cache-dir --no-deps -v .
 
 requirements:
   host:
-    - python>=3.10.*
+    - python
     - pip
     - setuptools>=40.8.*
     - setuptools_scm[toml]>=8.0.*
   run:
-    - matplotlib==3.8.*
-    - numpy>=1.26.*
-    - pydantic>=2.9.*
-    - pathvalidate==3.2.*
-    - pyvista==0.43.*
+    - matplotlib=3.8.*
+    - numpy=1.26.*
+    - pydantic=2.9.*
+    - pathvalidate=3.2.*
+    - pyvista=0.43.*
     - vtk
-    - shapely>=2.0.*
+    - shapely=2.0.*
+
+test:
+  requires:
+    - pytest>=0.6
+    - pytest-cov>=2.0
+    - pytest-json-report=1.5.*
+    - mypy>=0.910
+    - flake8>=3.9
+    - tox>=3.24
+    - coverage
+  commands:
+    - python -m pytest
+  source_files:
+    - tests
 
 about:
   home: https://github.com/MartinPdeS/MPSPlots
   license: MIT
-  summary: "My own plotting style package"
+  summary: A matplotlib wrapper for defered plots and plotting styles.
   description: Empty.
   dev_url: https://github.com/MartinPdeS/MPSPlots
   doc_url: https://mpsplots.readthedocs.io
   license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - MartinPdeS
