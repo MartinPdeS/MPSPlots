@@ -1,9 +1,6 @@
-{% set name = "MPSPLots" %}
-{% set version = "1.4.14.post0" %}
-
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: mpsplots
+  version: {{ GIT_DESCRIBE_TAG }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mpsplots-{{ version }}.tar.gz
@@ -13,6 +10,9 @@ build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
+  # os: linux-64
+  # os: win-64
+  os: osx-64
 
 requirements:
   host:
@@ -34,10 +34,20 @@ requirements:
 test:
   imports:
     - MPSPlots
-  commands:
-    - pip check
   requires:
     - pip
+    - scipy==1.11.3
+    - pytest>=0.6
+    - pytest-cov>=2.0
+    - pytest-json-report==1.5.0
+    - mypy>=0.910
+    - flake8>=3.9
+    - tox>=3.24
+    - coverage==7.6.1
+  commands:
+    - python -m pytest
+  source_files:
+    - tests
 
 about:
   summary: A matplotlib wrapper for defered plots.
