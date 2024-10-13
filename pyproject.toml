@@ -62,7 +62,9 @@ minversion = "6.0"
 xfail_strict = true
 log_cli_level = "INFO"
 testpaths = "tests"
-addopts = ['-v', '-rA', '-rw', '--cov=MPSPlots', '--cov-report=html']
+addopts = [
+    "-v", "-rA", "-rw", "--cov=MPSPlots", "--cov-report=html", "--cov-report=term"
+]
 
 
 [tool.coverage.run]

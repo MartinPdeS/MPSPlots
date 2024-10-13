@@ -2,11 +2,23 @@ MPSPlots
 ========
 
 
-|python|
-|docs|
-|coverage|
-|PyPi|
-|PyPi_download|
+.. list-table::
+   :widths: 10 25 25 25
+   :header-rows: 1
+
+   * - Testing
+     - |coverage|
+     -
+     -
+   * - Package
+     - |python|
+     - |PyPi|
+     - |PyPi_download|
+   * - Meta
+     - |docs|
+     -
+     -
+
 
 
 The library

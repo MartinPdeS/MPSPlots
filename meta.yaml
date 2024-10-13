@@ -1,51 +1,47 @@
+{% set name = "MPSPLots" %}
+{% set version = "1.4.14.post0" %}
+
 package:
-  name: mpsplots
-  version: {{ GIT_DESCRIBE_TAG }}
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  path: .
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mpsplots-{{ version }}.tar.gz
+  sha256: d44162b9e2a5a899b36fe37b46a97e311b20198feef431b224ab066c5f4a5cec
 
 build:
-  number: 0
   noarch: python
-  script: python -m pip install --no-cache-dir --no-deps -v .
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
 
 requirements:
   host:
-    - python
+    - python >=3.8
+    - setuptools >=40.8.0
+    - wheel
+    - setuptools-scm >=8.0
     - pip
-    - setuptools>=40.8.*
-    - setuptools_scm[toml]>=8.0.*
   run:
-    - matplotlib=3.8.*
-    - numpy=1.26.*
-    - pydantic=2.9.*
-    - pathvalidate=3.2.*
-    - pyvista=0.43.*
+    - python >=3.8
+    - matplotlib-base
+    - pydantic >=2.6.3
+    - numpy ==1.*
+    - pathvalidate ==3.2.0
+    - pyvista ==0.43.1
     - vtk
-    - shapely=2.0.*
+    - shapely >=2.0.0
 
 test:
-  requires:
-    - pytest>=0.6
-    - pytest-cov>=2.0
-    - pytest-json-report=1.5.*
-    - mypy>=0.910
-    - flake8>=3.9
-    - tox>=3.24
-    - coverage
+  imports:
+    - MPSPlots
   commands:
-    - python -m pytest
-  source_files:
-    - tests
+    - pip check
+  requires:
+    - pip
 
 about:
-  home: https://github.com/MartinPdeS/MPSPlots
+  summary: A matplotlib wrapper for defered plots.
   license: MIT
-  summary: A matplotlib wrapper for defered plots and plotting styles.
-  description: Empty.
-  dev_url: https://github.com/MartinPdeS/MPSPlots
-  doc_url: https://mpsplots.readthedocs.io
   license_file: LICENSE
 
 extra:
