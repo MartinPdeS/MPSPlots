@@ -10,12 +10,12 @@ MPSPlots
      - |coverage|
      -
    * - Package
-     - |python|
      - |PyPi|
      - |PyPi_download|
+     - |anaconda|
    * - Meta
+     - |python|
      - |docs|
-     -
      -
 
 Overview
@@ -180,3 +180,6 @@ The project continues to evolve, and your contributions are encouraged!
 
 .. |PyPi_download| image:: https://img.shields.io/pypi/dm/MPSPlots.svg
    :target: https://pypistats.org/packages/mpsplots
+
+.. |anaconda| image:: https://anaconda.org/martinpdes/mpsplots/badges/version.svg
+   :target: https://anaconda.org/martinpdes/mpsplots
