@@ -23,13 +23,13 @@ requirements:
     - pip
   run:
     - python >=3.8
-    - matplotlib-base
-    - pydantic >=2.6.3
-    - numpy ==1.*
-    - pathvalidate ==3.2.0
-    - pyvista ==0.43.1
-    - vtk
-    - shapely >=2.0.0
+    - matplotlib ~=3.8
+    - pydantic ~=2.6
+    - numpy ~=1.6
+    - pathvalidate ~=3.2
+    - pyvista ~=0.43
+    - vtk ~=9.2
+    - shapely ~=2.0
 
 test:
   imports:

@@ -79,6 +79,23 @@ Examples
 
 .. raw:: html
 
+    <div class="sphx-glr-thumbcontainer" tooltip="STD line">
+
+.. only:: html
+
+  .. image:: /gallery/images/thumb/sphx_glr_plot_ellipse_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_gallery_plot_ellipse.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">STD line</div>
+    </div>
+
+
+.. raw:: html
+
     <div class="sphx-glr-thumbcontainer" tooltip="Mesh - Line">
 
 .. only:: html
@@ -225,6 +242,7 @@ Examples
    /gallery/plot_Line
    /gallery/plot_STDLine
    /gallery/plot_contour
+   /gallery/plot_ellipse
    /gallery/plot_mesh
    /gallery/plot_mesh_2
    /gallery/plot_multi_axes

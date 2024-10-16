@@ -32,10 +32,18 @@ version = MPSPlots.__version__
 
 extensions = [
     'sphinx.ext.mathjax',
-    'numpydoc',
-    "pyvista.ext.plot_directive",
+    'pyvista.ext.plot_directive',
     'sphinx_gallery.gen_gallery',
+    'sphinx.ext.autodoc',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.intersphinx',
 ]
+
+# Napoleon settings for docstrings
+napoleon_google_docstring = False
+napoleon_numpy_docstring = True
 
 
 def reset_mpl(gallery_conf, fname):
@@ -72,27 +80,24 @@ autodoc_default_options = {
     'show-inheritance': True,
 }
 
+
+
+autosectionlabel_prefix_document = True
 numpydoc_show_class_members = False
+add_module_names = False
+
 
 source_suffix = '.rst'
-
 master_doc = 'index'
-
 language = 'en'
-
-exclude_patterns = []
-
-pygments_style = 'monokai'
-
 highlight_language = 'python3'
-
 html_theme = "pydata_sphinx_theme"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 exclude_trees = []
-default_role = "autolink"
+# default_role = "autolink"
 pygments_style = "sphinx"
 
 # -- Sphinx-gallery configuration --------------------------------------------
@@ -116,6 +121,11 @@ html_theme_options = {
             "name": "PyPI",
             "url": "https://pypi.org/project/mpsplots/",
             "icon": "fa-solid fa-box",
+        },
+        {
+            "name": "Anaconda",
+            "url": "https://anaconda.org/MartinPdeS/mpsplots",
+            "icon": "fa-brands fa-python",
         },
     ],
     "navbar_align": "left",
@@ -154,5 +164,7 @@ texinfo_documents = [
 epub_title = project
 
 html_static_path = ['_static']
+templates_path = ['_templates']
 html_css_files = ['default.css']
 epub_exclude_files = ['search.html']
+
