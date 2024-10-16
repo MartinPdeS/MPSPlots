@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from MPSPlots.tools.directories import style_directory
+from MPSPlots.directories import style_directory
 import matplotlib.pyplot as plt
 
 mps = style_directory.joinpath('mps_plot.mplstyle')

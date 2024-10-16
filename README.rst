@@ -2,21 +2,22 @@ MPSPlots
 ========
 
 .. list-table::
-   :widths: 10 25 25 25
-   :header-rows: 1
+   :widths: 10 25 25
+   :header-rows: 0
 
-   * - Testing
-     - |ci/cd|
-     - |coverage|
-     -
-   * - Package
-     - |PyPi|
-     - |PyPi_download|
-     - |anaconda|
    * - Meta
      - |python|
      - |docs|
-     -
+   * - Testing
+     - |ci/cd|
+     - |coverage|
+   * - PyPi
+     - |PyPi|
+     - |PyPi_download|
+   * - Anaconda
+     - |anaconda|
+     - |anaconda_download|
+
 
 Overview
 ********
@@ -43,7 +44,7 @@ To install the library from PyPI, simply use `pip`, or `conda`:
 .. code:: console
 
    pip install MPSPlots
-   conda install mpsplots
+   conda install --channels martinpdes mpsplots
 
 For a development version, clone the GitHub repository and install the dependencies manually:
 
@@ -160,6 +161,7 @@ The project continues to evolve, and your contributions are encouraged!
 ----
 
 .. |python| image:: https://img.shields.io/pypi/pyversions/mpsplots.svg
+   :alt: Python
    :target: https://www.python.org/
 
 .. |PyPi| image:: https://badge.fury.io/py/MPSPlots.svg
@@ -179,7 +181,13 @@ The project continues to evolve, and your contributions are encouraged!
    :target: https://github.com/MartinPdeS/MPSPlots/actions
 
 .. |PyPi_download| image:: https://img.shields.io/pypi/dm/MPSPlots.svg
+   :alt: PyPi version
    :target: https://pypistats.org/packages/mpsplots
 
 .. |anaconda| image:: https://anaconda.org/martinpdes/mpsplots/badges/version.svg
+   :alt: Anaconda version
+   :target: https://anaconda.org/martinpdes/mpsplots
+
+.. |anaconda_download| image:: https://anaconda.org/martinpdes/mpsplots/badges/downloads.svg
+   :alt: Anaconda downloads
    :target: https://anaconda.org/martinpdes/mpsplots

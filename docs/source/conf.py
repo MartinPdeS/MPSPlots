@@ -3,11 +3,10 @@
 
 import os
 import sys
-from sphinx_gallery.sorting import FileNameSortKey
-from packaging.version import parse
-from MPSPlots.styles import use_mpsplots_style
 import MPSPlots
-from MPSPlots.tools.directories import project_path, doc_css_path
+from sphinx_gallery.sorting import FileNameSortKey
+from MPSPlots.styles import use_mpsplots_style
+from MPSPlots.directories import project_path, doc_css_path
 
 sys.path.insert(0, project_path)
 sys.path.insert(0, os.path.join(project_path, "MPSPlots"))
