@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from pathlib import Path
-import MPSPlots
 
 
 __all__ = [
@@ -16,9 +15,6 @@ __all__ = [
 ]
 
 root_path = Path(__file__).parents[0]
-
-
-# root_path = Path(MPSPlots.__path__[0])
 
 project_path = root_path.parents[0]
 
@@ -40,5 +36,3 @@ if __name__ == '__main__':
         path = locals()[path_name]
         print(f"{path_name:20s}: {path}")
         assert path.exists(), f"Path [{path_name}] {path_name} do not exists"
-
-# -

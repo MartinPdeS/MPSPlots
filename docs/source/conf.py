@@ -53,7 +53,7 @@ def reset_mpl(gallery_conf, fname):
 try:
     import pyvista
     pyvista.start_xvfb()  # Works only on linux system!
-except:
+except ImportError:
     print('Could not load pyvista library for 3D rendering')
 
 
@@ -79,7 +79,6 @@ autodoc_default_options = {
     'undoc-members': False,
     'show-inheritance': True,
 }
-
 
 
 autosectionlabel_prefix_document = True
@@ -167,4 +166,3 @@ html_static_path = ['_static']
 templates_path = ['_templates']
 html_css_files = ['default.css']
 epub_exclude_files = ['search.html']
-
