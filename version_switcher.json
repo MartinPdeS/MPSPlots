@@ -1,0 +1,19 @@
+[
+{
+  "name": "latest",
+  "version": "latest",
+  "url": "https://martinpdes.github.io/MSPlots/docs/latest"
+}
+,
+{
+  "name": "v1.6.0",
+  "version": "v1.6.0",
+  "url": "https://martinpdes.github.io/MSPlots/docs/v1.6.0"
+}
+,
+{
+  "name": "empty.txt",
+  "version": "empty.txt",
+  "url": "https://martinpdes.github.io/MSPlots/docs/empty.txt"
+}
+]
