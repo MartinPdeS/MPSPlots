@@ -21,12 +21,7 @@ requirements:
   run:
     - python >=3.8
     - matplotlib ~=3.8
-    - pydantic ~=2.6
-    - numpy ~=1.6
     - pathvalidate ~=3.2
-    - pyvista ~=0.43
-    - vtk ~=9.2
-    - shapely ~=2.0
 
 test:
   imports:
