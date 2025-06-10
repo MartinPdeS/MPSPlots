@@ -24,8 +24,6 @@ keywords = ["finit-difference", "matrix"]
 
 dependencies = [
     "matplotlib ~=3.8",
-    "pydantic ~=2.6",
-    "numpy ~=2.*",
     "pathvalidate ~=3.2",
     "pyvista ~=0.43",
     "vtk ~=9.2",
