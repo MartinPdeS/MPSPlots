@@ -11,7 +11,6 @@ __all__ = [
     'doc_css_path',
     'style_directory',
     'logo_path',
-    'examples_path',
 ]
 
 root_path = Path(__file__).parents[0]
@@ -28,7 +27,6 @@ style_directory = root_path.joinpath('styles')
 
 logo_path = doc_path.joinpath('images/logo.png')
 
-examples_path = doc_path.joinpath('examples')
 
 
 if __name__ == '__main__':
