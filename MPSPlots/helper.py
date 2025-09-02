@@ -77,5 +77,7 @@ def pre_plot(nrows: int = 1, ncols: int = 1, subplot_kw: dict = {}):
                 if show:
                     plt.show()
 
+                return figure
+
         return wrapper
     return decorator
