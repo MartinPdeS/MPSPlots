@@ -59,8 +59,7 @@ figure.subplot.hspace  : 0.5    # the amount of height reserved for white space 
 ## FONT
 font.family: serif
 font.sans-serif: Overpass, Helvetica, Helvetica Neue, Arial, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
-
-font.serif: cmr10, Times New Roman, DejaVu Serif, Bitstream Vera Serif, Computer Modern Roman, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times, Palatino, Charter, serif
+font.serif: Times New Roman, cmr10, DejaVu Serif, Bitstream Vera Serif, Computer Modern Roman, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times, Palatino, Charter, serif
 
 savefig.edgecolor: auto
 savefig.facecolor: auto
