@@ -20,6 +20,38 @@ def pre_plot(nrows: int = 1, ncols: int = 1, subplot_kw: dict = {}):
         Number of subplot columns.
     """
     def decorator(function):
+        extra_doc = """
+        Extra Parameters
+        ----------------
+        show : bool
+            Whether to display the plot after creation.
+        save_as : str, optional
+            If provided, save the figure to this path.
+        figure_size : tuple, optional
+            Size of the figure in inches.
+        tight_layout : bool, default=True
+            Whether to use tight layout for the figure.
+        axes : matplotlib.axes.Axes, optional
+            Axes to draw on. If None, a new figure+axes are created.
+        xscale : str, optional
+            X-axis scale type (e.g., 'linear', 'log').
+        yscale : str, optional
+            Y-axis scale type (e.g., 'linear', 'log').
+        xlim : tuple, optional
+            X-axis limits as (min, max).
+        ylim : tuple, optional
+            Y-axis limits as (min, max).
+        style : str, default=plot_style
+            Matplotlib style to use for the plot.
+        **kwargs
+            Additional keyword arguments to pass to the plotting function.
+
+        Returns
+        -------
+        axes : matplotlib.axes.Axes
+            The axes with the market prices plot.
+        """
+
         @wraps(function)
         def wrapper(*args,
                     show: bool = True,
@@ -79,5 +111,12 @@ def pre_plot(nrows: int = 1, ncols: int = 1, subplot_kw: dict = {}):
 
                 return figure
 
+        # merge docstrings (original + extra)
+        if function.__doc__:
+            wrapper.__doc__ = f"{function.__doc__}\n{extra_doc}"
+        else:
+            wrapper.__doc__ = extra_doc
         return wrapper
+
+
     return decorator
