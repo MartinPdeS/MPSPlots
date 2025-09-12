@@ -34,8 +34,8 @@ def post_mpl_plot(function):
 
     Returns
     -------
-    axes : matplotlib.axes.Axes
-        The axes with the market prices plot.
+    Figure : matplotlib.figure.Figure
+        The figure with the market prices plot.
     """
     @wraps(function)
     def wrapper(
@@ -81,6 +81,8 @@ def post_mpl_plot(function):
 
             if show:
                 plt.show()
+
+            return figure
 
     # merge docstrings (original + extra)
     if function.__doc__:
