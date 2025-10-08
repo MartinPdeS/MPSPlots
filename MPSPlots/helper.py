@@ -310,3 +310,46 @@ def pre_figure_plot():
 
 
     return decorator
+
+
+def add_inset(ax: plt.Axes, x_lim: tuple = None, y_lim: tuple = None, zoom: float = 2., loc: str = "upper center"):
+
+    from mpl_toolkits.axes_grid1.inset_locator import zoomed_inset_axes, mark_inset
+
+    axins = zoomed_inset_axes(ax, zoom=zoom, loc=loc)
+
+    axins.set_xticks([])
+    axins.set_yticks([])
+
+    for line in ax.lines:
+        axins.plot(
+            *line.get_data(),
+            color=line.get_color(),
+            marker=line.get_marker(),
+            label=line.get_label(),
+            linestyle=line.get_linestyle(),
+            linewidth=line.get_linewidth(),
+        )
+
+    for collection in ax.collections:
+        verts = collection.get_paths()[0].vertices
+        x_fill, y_fill = verts[:, 0], verts[:, 1]
+
+        axins.fill_between(
+            x_fill,
+            0,
+            y_fill,
+            alpha=collection.get_alpha(),
+            color=collection.get_facecolor(),
+            label=collection.get_label()
+        )
+
+    mark_inset(ax, axins, loc1=2, loc2=4, fc="none", ec="0.5")
+
+    if x_lim is not None:
+        axins.set_xlim(x_lim)
+
+    if y_lim is not None:
+        axins.set_ylim(y_lim)
+
+    return axins
