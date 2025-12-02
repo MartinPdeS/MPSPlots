@@ -207,9 +207,6 @@ svg.image_inline: True
 text.antialiased: True
 text.color: black
 
-
-
-
 xaxis.labellocation: center
 xtick.alignment: center
 xtick.bottom: True
