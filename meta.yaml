@@ -45,10 +45,6 @@ test:
     - pytest-cov >=2.0
     - pytest-json-report ~=1.5.0
     - coverage ~=7.6.1
-  commands:
-    - python -m pytest
-  source_files:
-    - tests
 
 extra:
   recipe-maintainers:
