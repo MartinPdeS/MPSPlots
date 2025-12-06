@@ -4,14 +4,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Coverage report</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_58284776.png">
-    <link rel="stylesheet" href="style_cb_8e611ae1.css" type="text/css">
-    <script src="coverage_html_cb_6fb7b396.js" defer></script>
+    <link rel="stylesheet" href="style_cb_8432e98f.css" type="text/css">
+    <script src="coverage_html_cb_bcae5fc4.js" defer></script>
 </head>
 <body class="indexfile">
 <header>
     <div class="content">
         <h1>Coverage report:
-            <span class="pc_cov">78%</span>
+            <span class="pc_cov">20.39%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -45,7 +45,7 @@
         <form id="filter_container">
             <input id="filter" type="text" value="" placeholder="filter...">
             <div>
-                <input id="hide100" type="checkbox" >
+                <input id="hide100" type="checkbox" checked disabled >
                 <label for="hide100">hide covered</label>
             </div>
         </form>
@@ -55,179 +55,99 @@
                 <a class="button" href="class_index.html">Classes</a>
         </h2>
         <p class="text">
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-23 12:45 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.12.0">coverage.py v7.12.0</a>,
+            created at 2025-12-06 15:10 +0000
         </p>
     </div>
 </header>
 <main id="index">
     <table class="index" data-sortable>
         <thead>
+            <tr class="tablehead grouphead">
+                <th class="spacer">&nbsp;</th>
+                <th class="spacer">&nbsp;</th>
+                <th class="left" colspan="4">Statements</th>
+                <th class="spacer">&nbsp;</th>
+                <th class="left" colspan="3">Branches</th>
+                <th class="spacer">&nbsp;</th>
+                <th>Total</th>
+            </tr>
             <tr class="tablehead" title="Click to sort">
-                <th id="file" class="name left" aria-sort="none" data-shortcut="f">File<span class="arrows"></span></th>
+                <th id="file" class="name" aria-sort="none" data-shortcut="f">File<span class="arrows"></span></th>
+                <th class="spacer">&nbsp;</th>
+                <th id="statements_coverage" aria-sort="none" data-default-sort-order="descending">coverage<span class="arrows"></span></th>
                 <th id="statements" aria-sort="none" data-default-sort-order="descending" data-shortcut="s">statements<span class="arrows"></span></th>
                 <th id="missing" aria-sort="none" data-default-sort-order="descending" data-shortcut="m">missing<span class="arrows"></span></th>
                 <th id="excluded" aria-sort="none" data-default-sort-order="descending" data-shortcut="x">excluded<span class="arrows"></span></th>
+                <th class="spacer">&nbsp;</th>
+                <th id="branches_coverage" aria-sort="none" data-default-sort-order="descending">coverage<span class="arrows"></span></th>
                 <th id="branches" aria-sort="none" data-default-sort-order="descending" data-shortcut="b">branches<span class="arrows"></span></th>
                 <th id="partial" aria-sort="none" data-default-sort-order="descending" data-shortcut="p">partial<span class="arrows"></span></th>
-                <th id="coverage" class="right" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
+                <th class="spacer">&nbsp;</th>
+                <th id="coverage" aria-sort="none" data-shortcut="c">coverage<span class="arrows"></span></th>
             </tr>
         </thead>
         <tbody>
             <tr class="region">
-                <td class="name left"><a href="z_bb4888ac87fb5df1___init___py.html">MPSPlots/__init__.py</a></td>
-                <td>5</td>
-                <td>2</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="3 5">60%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_bb4888ac87fb5df1__version_py.html">MPSPlots/_version.py</a></td>
-                <td>13</td>
-                <td>3</td>
-                <td>0</td>
-                <td>2</td>
-                <td>1</td>
-                <td class="right" data-ratio="11 15">73%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_bb4888ac87fb5df1_colormaps_py.html">MPSPlots/colormaps.py</a></td>
+                <td class="name"><a href="z_bb4888ac87fb5df1_colormaps_py.html">MPSPlots&#8201;/&#8201;colormaps.py</a></td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="0 12">0.00%</td>
+                <td>12</td>
                 <td>12</td>
                 <td>0</td>
-                <td>0</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="0 2">0.00%</td>
                 <td>2</td>
                 <td>0</td>
-                <td class="right" data-ratio="14 14">100%</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="0 14">0.00%</td>
             </tr>
             <tr class="region">
-                <td class="name left"><a href="z_bb4888ac87fb5df1_directories_py.html">MPSPlots/directories.py</a></td>
-                <td>15</td>
-                <td>4</td>
+                <td class="name"><a href="z_bb4888ac87fb5df1_helper_py.html">MPSPlots&#8201;/&#8201;helper.py</a></td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="31 120">25.83%</td>
+                <td>120</td>
+                <td>89</td>
                 <td>0</td>
-                <td>4</td>
-                <td>1</td>
-                <td class="right" data-ratio="12 19">63%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_e47b54c9e169d8d2___init___py.html">MPSPlots/render2D/__init__.py</a></td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="11 72">15.28%</td>
+                <td>72</td>
                 <td>9</td>
-                <td>4</td>
-                <td>0</td>
-                <td>2</td>
-                <td>0</td>
-                <td class="right" data-ratio="5 11">45%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_e47b54c9e169d8d2_artist_py.html">MPSPlots/render2D/artist.py</a></td>
-                <td>392</td>
-                <td>55</td>
-                <td>0</td>
-                <td>50</td>
-                <td>17</td>
-                <td class="right" data-ratio="360 442">81%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_e47b54c9e169d8d2_axis_py.html">MPSPlots/render2D/axis.py</a></td>
-                <td>240</td>
-                <td>51</td>
-                <td>0</td>
-                <td>36</td>
-                <td>3</td>
-                <td class="right" data-ratio="196 276">71%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_e47b54c9e169d8d2_scene_py.html">MPSPlots/render2D/scene.py</a></td>
-                <td>157</td>
-                <td>31</td>
-                <td>0</td>
-                <td>46</td>
-                <td>8</td>
-                <td class="right" data-ratio="144 203">71%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_9b19d910b2a23b7e___init___py.html">MPSPlots/render3D/__init__.py</a></td>
-                <td>2</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="2 2">100%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_9b19d910b2a23b7e_artist_py.html">MPSPlots/render3D/artist.py</a></td>
-                <td>182</td>
-                <td>12</td>
-                <td>0</td>
-                <td>10</td>
-                <td>5</td>
-                <td class="right" data-ratio="175 192">91%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_9b19d910b2a23b7e_axis_py.html">MPSPlots/render3D/axis.py</a></td>
-                <td>57</td>
-                <td>5</td>
-                <td>0</td>
-                <td>4</td>
-                <td>1</td>
-                <td class="right" data-ratio="55 61">90%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_9b19d910b2a23b7e_scene_py.html">MPSPlots/render3D/scene.py</a></td>
-                <td>50</td>
-                <td>4</td>
-                <td>0</td>
-                <td>8</td>
-                <td>1</td>
-                <td class="right" data-ratio="51 58">88%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_644bddde3ee3a0db___init___py.html">MPSPlots/styles/__init__.py</a></td>
-                <td>14</td>
-                <td>5</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td class="right" data-ratio="9 14">64%</td>
-            </tr>
-            <tr class="region">
-                <td class="name left"><a href="z_51186b495386eb21_utils_py.html">MPSPlots/tools/utils.py</a></td>
-                <td>16</td>
-                <td>14</td>
-                <td>0</td>
-                <td>8</td>
-                <td>1</td>
-                <td class="right" data-ratio="3 24">12%</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="42 192">21.88%</td>
             </tr>
         </tbody>
         <tfoot>
             <tr class="total">
-                <td class="name left">Total</td>
-                <td>1164</td>
-                <td>190</td>
+                <td class="name">Total</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="31 132">23.48%</td>
+                <td>132</td>
+                <td>101</td>
                 <td>0</td>
-                <td>172</td>
-                <td>38</td>
-                <td class="right" data-ratio="1040 1336">78%</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="11 74">14.86%</td>
+                <td>74</td>
+                <td>9</td>
+                <td class="spacer">&nbsp;</td>
+                <td data-ratio="42 206">20.39%</td>
             </tr>
         </tfoot>
     </table>
     <p id="no_rows">
         No items found using the specified filter.
     </p>
-        <p>2 empty files skipped.</p>
 </main>
 <footer>
     <div class="content">
         <p>
-            <a class="nav" href="https://coverage.readthedocs.io/en/7.6.4">coverage.py v7.6.4</a>,
-            created at 2025-03-23 12:45 +0000
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.12.0">coverage.py v7.12.0</a>,
+            created at 2025-12-06 15:10 +0000
         </p>
     </div>
     <aside class="hidden">
-        <a id="prevFileLink" class="nav" href="z_51186b495386eb21_utils_py.html"></a>
-        <a id="nextFileLink" class="nav" href="z_bb4888ac87fb5df1___init___py.html"></a>
+        <a id="prevFileLink" class="nav" href="z_bb4888ac87fb5df1_helper_py.html"></a>
+        <a id="nextFileLink" class="nav" href="z_bb4888ac87fb5df1_colormaps_py.html"></a>
         <button type="button" class="button_prev_file" data-shortcut="["></button>
         <button type="button" class="button_next_file" data-shortcut="]"></button>
         <button type="button" class="button_show_hide_help" data-shortcut="?"></button>
