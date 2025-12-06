@@ -50,28 +50,6 @@ def reset_mpl(gallery_conf, fname):
     use_mpsplots_style()
 
 
-try:
-    import pyvista
-    pyvista.start_xvfb()  # Works only on linux system!
-except ImportError:
-    print('Could not load pyvista library for 3D rendering')
-
-
-sphinx_gallery_conf = {
-    'examples_dirs': '../examples',
-    'gallery_dirs': "gallery",
-    'image_scrapers': ('matplotlib', 'pyvista'),
-    'ignore_pattern': '/__',
-    'plot_gallery': True,
-    'thumbnail_size': [600, 600],
-    'download_all_examples': False,
-    'reset_modules': reset_mpl,
-    'line_numbers': False,
-    'remove_config_comments': True,
-    'within_subsection_order': FileNameSortKey,
-    'capture_repr': ('_repr_html_', '__repr__'),
-    'nested_sections': True,
-}
 
 autodoc_default_options = {
     'members': False,
