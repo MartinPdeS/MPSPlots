@@ -10,6 +10,8 @@ new_age = style_directory.joinpath('new_age.mplstyle')
 
 gg_plot = style_directory.joinpath('ggplot.mplstyle')
 
+scientific = style_directory.joinpath('scientific.mplstyle')
+
 
 def use_mpsplots_style():
     plt.style.use(mps)
@@ -26,3 +28,7 @@ def use_ggplot_style():
 def use_default_style():
     plt.rcParams["mathtext.fontset"] = "dejavuserif"
     plt.rcParams["font.family"] = "serif"
+
+
+def use_scientific_style():
+    plt.style.use(scientific)
