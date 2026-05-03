@@ -1,23 +1,6 @@
-legend.facecolor: white
-legend.borderaxespad: 0.5
-legend.borderpad: 0.4
-legend.columnspacing: 2.0
-legend.edgecolor: black
-legend.fancybox: True
-legend.fontsize: 17
-legend.framealpha: 0.8
-legend.frameon: True
-legend.handleheight: 0.7
-legend.handlelength: 2.0
-legend.handletextpad: 0.8
-legend.labelcolor: None
-legend.labelspacing: 0.5
-legend.loc: best
-legend.markerscale: 1.0
-legend.numpoints: 1
-legend.scatterpoints: 1
-legend.shadow: False
-legend.title_fontsize: None
+# ============================================================
+# Figure export
+# ============================================================
 
 savefig.bbox: tight
 savefig.dpi: figure
@@ -28,8 +11,351 @@ savefig.orientation: portrait
 savefig.pad_inches: 0.1
 savefig.transparent: False
 
-_internal.classic_mode: False
-agg.path.chunksize: 0
+
+# ============================================================
+# Figure defaults
+# ============================================================
+
+figure.autolayout: False
+figure.constrained_layout.use: False
+figure.constrained_layout.h_pad: 0.04167
+figure.constrained_layout.hspace: 0.02
+figure.constrained_layout.w_pad: 0.04167
+figure.constrained_layout.wspace: 0.02
+
+figure.dpi: 100
+figure.edgecolor: black
+figure.facecolor: white
+figure.figsize: 6.4, 4.8
+figure.frameon: True
+
+figure.subplot.bottom: 0.11
+figure.subplot.hspace: 0.5
+figure.subplot.left: 0.125
+figure.subplot.right: 0.9
+figure.subplot.top: 0.88
+figure.subplot.wspace: 0.2
+
+figure.titlesize: 36
+figure.titleweight: normal
+
+
+# ============================================================
+# Font defaults
+# ============================================================
+
+font.family: sans-serif
+font.sans-serif: Arial, Helvetica, Helvetica Neue, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
+font.size: 10
+font.weight: normal
+font.style: normal
+font.variant: normal
+font.stretch: normal
+
+font.monospace: DejaVu Sans Mono, Bitstream Vera Sans Mono, Computer Modern Typewriter, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
+font.cursive: Apple Chancery, Textile, Zapf Chancery, Sand, Script MT, Felipa, Comic Neue, Comic Sans MS, cursive
+font.fantasy: Chicago, Charcoal, Impact, Western, Humor Sans, xkcd, fantasy
+
+
+# ============================================================
+# Axes
+# ============================================================
+
+axes.autolimit_mode: data
+axes.axisbelow: True
+axes.edgecolor: black
+axes.facecolor: white
+axes.linewidth: 3.0
+
+axes.spines.bottom: True
+axes.spines.left: True
+axes.spines.right: True
+axes.spines.top: True
+
+axes.xmargin: 0.0
+axes.ymargin: 0.0
+axes.zmargin: 0.05
+
+axes.labelcolor: black
+axes.labelpad: 4.0
+axes.labelsize: 30
+axes.labelweight: normal
+
+axes.titlecolor: auto
+axes.titlelocation: center
+axes.titlepad: 10.0
+axes.titlesize: 34
+axes.titleweight: normal
+axes.titley: None
+
+axes.unicode_minus: True
+
+axes.formatter.limits: -5, 6
+axes.formatter.min_exponent: 0
+axes.formatter.offset_threshold: 4
+axes.formatter.use_locale: False
+axes.formatter.use_mathtext: True
+axes.formatter.useoffset: True
+
+axes.prop_cycle: cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
+
+
+# ============================================================
+# Grid
+# ============================================================
+
+axes.grid: False
+axes.grid.axis: both
+
+grid.alpha: 1.0
+grid.color: black
+grid.linestyle: -
+grid.linewidth: 0.5
+
+axes3d.grid: False
+
+
+# ============================================================
+# Lines and markers
+# ============================================================
+
+lines.antialiased: True
+lines.color: C0
+lines.linestyle: -
+lines.linewidth: 3.0
+lines.marker: None
+lines.markeredgecolor: auto
+lines.markeredgewidth: 1.0
+lines.markerfacecolor: auto
+lines.markersize: 6.0
+
+lines.dash_capstyle: butt
+lines.dash_joinstyle: round
+lines.scale_dashes: True
+lines.solid_capstyle: projecting
+lines.solid_joinstyle: round
+
+scatter.edgecolors: face
+scatter.marker: o
+
+
+# ============================================================
+# Ticks
+# ============================================================
+
+xtick.alignment: center
+xtick.bottom: True
+xtick.top: True
+xtick.color: black
+xtick.direction: out
+xtick.labelbottom: True
+xtick.labeltop: False
+xtick.labelcolor: inherit
+xtick.labelsize: 20
+
+xtick.major.bottom: True
+xtick.major.top: True
+xtick.major.pad: 6.0
+xtick.major.size: 8.0
+xtick.major.width: 2.0
+
+xtick.minor.bottom: True
+xtick.minor.top: True
+xtick.minor.visible: True
+xtick.minor.pad: 6.0
+xtick.minor.size: 4.0
+xtick.minor.width: 1.5
+
+ytick.alignment: center_baseline
+ytick.left: True
+ytick.right: True
+ytick.color: black
+ytick.direction: out
+ytick.labelleft: True
+ytick.labelright: False
+ytick.labelcolor: inherit
+ytick.labelsize: 20
+
+ytick.major.left: True
+ytick.major.right: True
+ytick.major.pad: 6.0
+ytick.major.size: 8.0
+ytick.major.width: 2.0
+
+ytick.minor.left: True
+ytick.minor.right: True
+ytick.minor.visible: True
+ytick.minor.pad: 6.0
+ytick.minor.size: 4.0
+ytick.minor.width: 1.5
+
+xaxis.labellocation: center
+yaxis.labellocation: center
+
+
+# ============================================================
+# Legend
+# ============================================================
+
+legend.facecolor: white
+legend.edgecolor: black
+legend.fancybox: True
+legend.framealpha: 0.8
+legend.frameon: True
+legend.shadow: False
+
+legend.fontsize: 17
+legend.title_fontsize: 19
+legend.labelcolor: None
+legend.loc: best
+
+legend.borderaxespad: 0.5
+legend.borderpad: 0.4
+legend.columnspacing: 2.0
+legend.handleheight: 0.7
+legend.handlelength: 2.0
+legend.handletextpad: 0.8
+legend.labelspacing: 0.5
+legend.markerscale: 1.0
+legend.numpoints: 1
+legend.scatterpoints: 1
+
+
+# ============================================================
+# Math text
+# ============================================================
+
+mathtext.default: regular
+mathtext.fontset: custom
+mathtext.rm: Arial
+mathtext.it: Arial:italic
+mathtext.bf: Arial:bold
+
+
+# ============================================================
+# Text rendering
+# ============================================================
+
+text.antialiased: True
+text.color: black
+
+svg.fonttype: path
+svg.hashsalt: None
+svg.image_inline: True
+
+
+# ============================================================
+# Images
+# ============================================================
+
+image.aspect: equal
+image.cmap: viridis
+image.composite_image: True
+image.interpolation: antialiased
+image.lut: 256
+image.origin: upper
+image.resample: True
+
+
+# ============================================================
+# Error bars
+# ============================================================
+
+errorbar.capsize: 0.0
+
+
+# ============================================================
+# Histograms
+# ============================================================
+
+hist.bins: 10
+
+
+# ============================================================
+# Box plots
+# ============================================================
+
+boxplot.bootstrap: None
+boxplot.notch: False
+boxplot.patchartist: False
+boxplot.showbox: True
+boxplot.showcaps: True
+boxplot.showfliers: True
+boxplot.showmeans: False
+boxplot.vertical: True
+boxplot.whiskers: 1.5
+
+boxplot.boxprops.color: black
+boxplot.boxprops.linestyle: -
+boxplot.boxprops.linewidth: 1.0
+
+boxplot.capprops.color: black
+boxplot.capprops.linestyle: -
+boxplot.capprops.linewidth: 1.0
+
+boxplot.whiskerprops.color: black
+boxplot.whiskerprops.linestyle: -
+boxplot.whiskerprops.linewidth: 1.0
+
+boxplot.flierprops.color: black
+boxplot.flierprops.linestyle: none
+boxplot.flierprops.linewidth: 1.0
+boxplot.flierprops.marker: o
+boxplot.flierprops.markeredgecolor: black
+boxplot.flierprops.markeredgewidth: 1.0
+boxplot.flierprops.markerfacecolor: none
+boxplot.flierprops.markersize: 6.0
+
+boxplot.meanline: False
+boxplot.meanprops.color: C2
+boxplot.meanprops.linestyle: --
+boxplot.meanprops.linewidth: 1.0
+boxplot.meanprops.marker: ^
+boxplot.meanprops.markeredgecolor: C2
+boxplot.meanprops.markerfacecolor: C2
+boxplot.meanprops.markersize: 6.0
+
+boxplot.medianprops.color: C1
+boxplot.medianprops.linestyle: -
+boxplot.medianprops.linewidth: 1.0
+
+
+# ============================================================
+# Contours
+# ============================================================
+
+contour.corner_mask: True
+contour.linewidth: None
+contour.negative_linestyle: dashed
+
+
+# ============================================================
+# Dates
+# ============================================================
+
+date.converter: auto
+date.interval_multiples: True
+
+date.autoformatter.year: %Y
+date.autoformatter.month: %Y-%m
+date.autoformatter.day: %Y-%m-%d
+date.autoformatter.hour: %m-%d %H
+date.autoformatter.minute: %d %H:%M
+date.autoformatter.second: %H:%M:%S
+date.autoformatter.microsecond: %M:%S.%f
+
+
+# ============================================================
+# Hatches
+# ============================================================
+
+hatch.color: black
+hatch.linewidth: 1.0
+
+
+# ============================================================
+# Animation
+# ============================================================
 
 animation.bitrate: -1
 animation.codec: h264
@@ -42,231 +368,10 @@ animation.frame_format: png
 animation.html: none
 animation.writer: ffmpeg
 
-axes.autolimit_mode: data
-axes.axisbelow: True
-axes.edgecolor: black
-axes.facecolor: white
-axes.formatter.limits: -5, 6
-axes.formatter.min_exponent: 0
-axes.formatter.offset_threshold: 4
-axes.formatter.use_locale: False
-axes.formatter.use_mathtext: True
-axes.formatter.useoffset: True
-axes.grid: False
-axes.grid.axis: both
-axes.labelcolor: black
-axes.labelpad: 4.0
-axes.labelsize: 30
-axes.labelweight: normal
-axes.linewidth: 3.0
-axes.prop_cycle: cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])
-axes.spines.bottom: True
-axes.spines.left: True
-axes.spines.right: True
-axes.spines.top: True
-axes.titlecolor: auto
-axes.titlelocation: center
-axes.titlepad: 6.0
-axes.titlesize: x-large
-axes.titleweight: normal
-axes.titley: None
-axes.unicode_minus: True
-axes.xmargin: 0.0
-axes.ymargin: 0.0
-axes.zmargin: 0.05
 
-axes3d.grid: False
+# ============================================================
+# Backend/internal
+# ============================================================
 
-boxplot.bootstrap: None
-boxplot.boxprops.color: black
-boxplot.boxprops.linestyle: -
-boxplot.boxprops.linewidth: 1.0
-boxplot.capprops.color: black
-boxplot.capprops.linestyle: -
-boxplot.capprops.linewidth: 1.0
-boxplot.flierprops.color: black
-boxplot.flierprops.linestyle: none
-boxplot.flierprops.linewidth: 1.0
-boxplot.flierprops.marker: o
-boxplot.flierprops.markeredgecolor: black
-boxplot.flierprops.markeredgewidth: 1.0
-boxplot.flierprops.markerfacecolor: none
-boxplot.flierprops.markersize: 6.0
-boxplot.meanline: False
-boxplot.meanprops.color: C2
-boxplot.meanprops.linestyle: --
-boxplot.meanprops.linewidth: 1.0
-boxplot.meanprops.marker: ^
-boxplot.meanprops.markeredgecolor: C2
-boxplot.meanprops.markerfacecolor: C2
-boxplot.meanprops.markersize: 6.0
-boxplot.medianprops.color: C1
-boxplot.medianprops.linestyle: -
-boxplot.medianprops.linewidth: 1.0
-boxplot.notch: False
-boxplot.patchartist: False
-boxplot.showbox: True
-boxplot.showcaps: True
-boxplot.showfliers: True
-boxplot.showmeans: False
-boxplot.vertical: True
-boxplot.whiskerprops.color: black
-boxplot.whiskerprops.linestyle: -
-boxplot.whiskerprops.linewidth: 1.0
-boxplot.whiskers: 1.5
-
-contour.corner_mask: True
-contour.linewidth: None
-contour.negative_linestyle: dashed
-
-date.autoformatter.day: %Y-%m-%d
-date.autoformatter.hour: %m-%d %H
-date.autoformatter.microsecond: %M:%S.%f
-date.autoformatter.minute: %d %H:%M
-date.autoformatter.month: %Y-%m
-date.autoformatter.second: %H:%M:%S
-date.autoformatter.year: %Y
-date.converter: auto
-date.interval_multiples: True
-
-errorbar.capsize: 0.0
-
-figure.autolayout: False
-figure.constrained_layout.h_pad: 0.04167
-figure.constrained_layout.hspace: 0.02
-figure.constrained_layout.use: False
-figure.constrained_layout.w_pad: 0.04167
-figure.constrained_layout.wspace: 0.02
-figure.dpi: 100.0
-figure.edgecolor: black
-figure.facecolor: white
-figure.figsize: 6.4, 4.8
-figure.frameon: True
-figure.subplot.bottom: 0.11
-figure.subplot.hspace: 0.5
-figure.subplot.left: 0.125
-figure.subplot.right: 0.9
-figure.subplot.top: 0.88
-figure.subplot.wspace: 0.2
-figure.titlesize: large
-figure.titleweight: normal
-
-font.cursive: Apple Chancery, Textile, Zapf Chancery, Sand, Script MT, Felipa, Comic Neue, Comic Sans MS, cursive
-font.family: sans-serif
-font.fantasy: Chicago, Charcoal, Impact, Western, Humor Sans, xkcd, fantasy
-font.monospace: DejaVu Sans Mono, Bitstream Vera Sans Mono, Computer Modern Typewriter, Andale Mono, Nimbus Mono L, Courier New, Courier, Fixed, Terminal, monospace
-font.sans-serif: Arial, Helvetica, Helvetica Neue, Liberation Sans, DejaVu Sans, Bitstream Vera Sans, sans-serif
-font.size: 10.0
-font.stretch: normal
-font.style: normal
-font.variant: normal
-font.weight: normal
-
-grid.alpha: 1.0
-grid.color: black
-grid.linestyle: -
-grid.linewidth: 0.5
-
-hatch.color: black
-hatch.linewidth: 1.0
-
-hist.bins: 10
-
-image.aspect: equal
-image.cmap: viridis
-image.composite_image: True
-image.interpolation: antialiased
-image.lut: 256
-image.origin: upper
-image.resample: True
-
-keymap.back: left, c, backspace, MouseButton.BACK
-keymap.copy: ctrl+c, cmd+c
-keymap.forward: right, v, MouseButton.FORWARD
-keymap.fullscreen: f, ctrl+f
-keymap.grid: g
-keymap.grid_minor: G
-keymap.help: f1
-keymap.home: h, r, home
-keymap.pan: p
-keymap.quit: ctrl+w, cmd+w, q
-keymap.quit_all:
-keymap.save: s, ctrl+s
-keymap.xscale: k, L
-keymap.yscale: l
-keymap.zoom: o
-
-lines.antialiased: True
-lines.color: C0
-lines.dash_capstyle: butt
-lines.dash_joinstyle: round
-lines.linestyle: -
-lines.linewidth: 3.0
-lines.marker: None
-lines.markeredgecolor: auto
-lines.markeredgewidth: 1.0
-lines.markerfacecolor: auto
-lines.markersize: 6.0
-lines.scale_dashes: True
-lines.solid_capstyle: projecting
-lines.solid_joinstyle: round
-
-scatter.edgecolors: face
-scatter.marker: o
-
-svg.fonttype: path
-svg.hashsalt: None
-svg.image_inline: True
-
-text.antialiased: True
-text.color: black
-
-xaxis.labellocation: center
-xtick.alignment: center
-xtick.bottom: True
-xtick.color: black
-xtick.direction: out
-xtick.labelbottom: True
-xtick.labelcolor: inherit
-xtick.labelsize: 20
-xtick.labeltop: False
-xtick.major.bottom: True
-xtick.major.pad: 6.0
-xtick.major.size: 8.0
-xtick.major.top: True
-xtick.major.width: 2.0
-xtick.minor.bottom: True
-xtick.minor.pad: 6.0
-xtick.minor.size: 4.0
-xtick.minor.top: True
-xtick.minor.visible: True
-xtick.minor.width: 1.5
-xtick.top: True
-
-yaxis.labellocation: center
-ytick.alignment: center_baseline
-ytick.color: black
-ytick.direction: out
-ytick.labelcolor: inherit
-ytick.labelleft: True
-ytick.labelright: False
-ytick.labelsize: 20
-ytick.left: True
-ytick.major.left: True
-ytick.major.pad: 6.0
-ytick.major.right: True
-ytick.major.size: 8.0
-ytick.major.width: 2.0
-ytick.minor.left: True
-ytick.minor.pad: 6.0
-ytick.minor.right: True
-ytick.minor.size: 4.0
-ytick.minor.visible: True
-ytick.minor.width: 1.5
-ytick.right: True
-
-mathtext.default: regular
-mathtext.fontset: custom
-mathtext.rm: Arial
-mathtext.it: Arial:italic
-mathtext.bf: Arial:bold
+_internal.classic_mode: False
+agg.path.chunksize: 0

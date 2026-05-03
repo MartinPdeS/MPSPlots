@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from functools import wraps
 
-from MPSPlots.styles import mps as plot_style
+from MPSPlots.styles import scientific as plot_style
 
 
 def post_mpl_plot(function):
