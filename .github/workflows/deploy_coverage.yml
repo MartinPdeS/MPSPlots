@@ -1,0 +1,20 @@
+name: Publish coverage
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  coverage:
+    uses: MartinPdeS/MPSActions/.github/workflows/publish_coverage.yml@v5
+    with:
+      python-version: "3.11"
+      coverage-package: MPSPlots
+    secrets:
+      _GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
