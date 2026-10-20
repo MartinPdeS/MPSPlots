@@ -3,42 +3,18 @@
 Source code structures
 ======================
 
-Axis
-----
- .. automodule:: MPSPlots.render2D.axis
-     :members:
-     :inherited-members:
-     :member-order: bysource
+Plotting helpers
+----------------
 
+.. automodule:: MPSPlots.helper
+   :members:
+   :inherited-members:
+   :member-order: bysource
 
+Colormaps
+---------
 
-Artists list
-------------
- .. automodule:: MPSPlots.render2D.artist
-     :members:
-     :inherited-members:
-     :member-order: bysource
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.. automodule:: MPSPlots.colormaps
+   :members:
+   :inherited-members:
+   :member-order: bysource
