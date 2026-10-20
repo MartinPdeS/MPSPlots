@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:06.801** total execution time for 13 files **from gallery**:
+**00:00.000** total execution time for 0 files **from gallery**:
 
 .. container::
 
@@ -32,42 +32,6 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_gallery_plot_structured_mesh.py` (``plot_structured_mesh.py``)
-     - 00:03.247
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_FillLine.py` (``plot_FillLine.py``)
-     - 00:00.498
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_structured_mesh_coloring.py` (``plot_structured_mesh_coloring.py``)
-     - 00:00.447
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_mesh_2.py` (``plot_mesh_2.py``)
-     - 00:00.405
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_mesh.py` (``plot_mesh.py``)
-     - 00:00.383
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_multi_axes.py` (``plot_multi_axes.py``)
-     - 00:00.365
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_unstrictured_mesh.py` (``plot_unstrictured_mesh.py``)
-     - 00:00.287
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_Line.py` (``plot_Line.py``)
-     - 00:00.264
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_scatter.py` (``plot_scatter.py``)
-     - 00:00.224
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_STDLine.py` (``plot_STDLine.py``)
-     - 00:00.195
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_contour.py` (``plot_contour.py``)
-     - 00:00.170
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_ellipse.py` (``plot_ellipse.py``)
-     - 00:00.158
-     - 0.0
-   * - :ref:`sphx_glr_gallery_plot_patch.py` (``plot_patch.py``)
-     - 00:00.158
-     - 0.0
+   * - N/A
+     - N/A
+     - N/A
