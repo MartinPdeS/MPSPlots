@@ -158,8 +158,6 @@ The author, `Martin Poinsinet de Sivry-Houle <https://github.com/MartinPdeS>`_, 
 The project continues to evolve, and your contributions are encouraged!
 
 
-----
-
 .. |python| image:: https://img.shields.io/pypi/pyversions/mpsplots.svg
    :alt: Python
    :target: https://www.python.org/
