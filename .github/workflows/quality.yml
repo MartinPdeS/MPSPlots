@@ -19,4 +19,4 @@ jobs:
           python-version: "3.11"
           install-command: >-
             python -m pip install --upgrade pip && python -m pip install "ruff>=0.6"
-      - run: python -m ruff check MPSPlots tests
+      - run: python -m ruff check --select E,F --ignore E501 MPSPlots tests
