@@ -1,18 +1,22 @@
 name: Publish documentation
-
-on:
+'on':
   push:
-    branches: [master]
-    tags: ["v*"]
-
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
 permissions:
-  contents: write
-  pages: write
-  id-token: write
-
+  contents: read
 jobs:
   documentation:
-    uses: MartinPdeS/MPSActions/.github/workflows/publish_documentation.yml@v11
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    uses: MartinPdeS/MPSActions/.github/workflows/publish_documentation.yml@v12
     with:
-      python-version: "3.11"
+      python-version: '3.11'
       package-name: MPSPlots
+      deploy-pages: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      debug: true
