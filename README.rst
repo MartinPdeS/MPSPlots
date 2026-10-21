@@ -1,6 +1,10 @@
 MPSPlots
 ========
 
+.. image:: docs/images/logo.png
+   :alt: MPSPlots logo
+   :width: 55%
+
 .. list-table::
    :widths: 10 25 25
    :header-rows: 0

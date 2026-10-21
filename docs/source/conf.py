@@ -19,7 +19,7 @@ globals().update(
         package=package_name,
         repository="MartinPdeS/MPSPlots",
         logo="../images/logo.png",
-        favicon="../images/logo.png",
+        favicon="_static/favicon.svg",
         prefer_installed_package=True,
         html_theme_options={
             "show_nav_level": 1,
