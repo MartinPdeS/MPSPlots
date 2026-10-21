@@ -28,10 +28,7 @@ globals().update(
         gallery_options={
             "reset_modules": [reset_mpl],
         },
+        html_css_files=["layout.css"],
+        extension_additions=["pyvista.ext.plot_directive"],
     )
 )
-
-extensions += ["pyvista.ext.plot_directive"]
-
-# Keep the local layout refinements alongside the shared documentation theme.
-html_css_files = ["default.css", "layout.css", "martinpdes_layout.css"]
