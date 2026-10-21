@@ -1,0 +1,17 @@
+PYTHON ?= python3.11
+RELEASE_KIND := $(filter major minor patch,$(MAKECMDGOALS))
+
+.PHONY: release tag major minor patch
+
+release:
+	@test "$(words $(RELEASE_KIND))" -eq 1 || { echo "usage: make release [patch|minor|major]" >&2; exit 2; }
+	@set -eu; release_tag="$$($(PYTHON) tools/next_release_version.py $(RELEASE_KIND))"; \
+	$(PYTHON) tools/release_tag.py "$$release_tag"; \
+	git push origin HEAD "refs/tags/$$release_tag"
+
+tag:
+	@test -n "$(VERSION)" || { echo "usage: make tag VERSION=vX.Y.Z" >&2; exit 2; }
+	$(PYTHON) tools/release_tag.py "$(VERSION)"
+
+major minor patch:
+	@:
