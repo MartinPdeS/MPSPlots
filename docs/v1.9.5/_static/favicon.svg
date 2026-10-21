@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">MPSPlots icon</title>
+  <defs>
+    <linearGradient id="plot" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#143b9b"/>
+      <stop offset="1" stop-color="#1e9fca"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="54" fill="#101c3d"/>
+  <path d="M54 196V56M54 196H210" fill="none" stroke="#dce8ff" stroke-width="8" stroke-linecap="round"/>
+  <path d="M70 166C88 145 94 168 110 134C126 100 136 151 149 116C163 79 177 102 190 67" fill="none" stroke="url(#plot)" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="190" cy="67" r="11" fill="#55d1c4"/>
+</svg>
