@@ -1,6 +1,6 @@
 package:
   name: mpsplots
-  version: {{ GIT_DESCRIBE_TAG | replace("v", "") }}
+  version: 1.9.5
 
 source:
   git_url: https://github.com/MartinPdeS/MPSPlots.git
@@ -15,7 +15,6 @@ requirements:
     - python
     - pip
     - setuptools >=40.8.0
-    - setuptools-scm >=8.0
     - wheel
 
   run:

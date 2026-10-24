@@ -15,3 +15,7 @@ tag:
 
 major minor patch:
 	@:
+
+.PHONY: release-check
+release-check:
+	$(PYTHON) tools/check_release.py $(if $(VERSION),--version $(VERSION),)
