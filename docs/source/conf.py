@@ -17,6 +17,7 @@ globals().update(
     configure(
         project=package_name,
         package=package_name,
+        version="auto",
         repository="MartinPdeS/MPSPlots",
         logo="../images/logo.png",
         favicon="_static/favicon.svg",
