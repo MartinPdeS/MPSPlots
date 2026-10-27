@@ -34,7 +34,7 @@ dependencies = [
 release = ["martinpdes-maintenance==0.2.2"]
 testing = [
     "pytest >=7.4,<9.0",
-    "pytest-cov >=2,<7",
+    "pytest-cov >=2,<8",
     "pytest-json-report ~=1.5",
     "coverage ~=7.6"
 ]
