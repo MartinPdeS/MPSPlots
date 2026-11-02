@@ -31,22 +31,15 @@ dependencies = [
 
 
 [project.optional-dependencies]
-release = ["martinpdes-maintenance==0.2.2"]
-testing = [
-    "pytest >=7.4,<9.0",
-    "pytest-cov >=2,<7",
-    "pytest-json-report ~=1.5",
-    "coverage ~=7.6"
-]
+release = ["martinpdes-maintenance==0.2.3"]
+testing = ["martinpdes-maintenance[testing]==0.2.3", "pytest-json-report ~=1.5", "pytest<9.0", "pytest-cov<7", "coverage ~=7.6"]
 
 
 documentation = [
     "MartinPdeS-docs>=0.4.0,<0.5",
 ]
 
-dev = [
-    "flake8 ==7.1.1",
-]
+dev = ["martinpdes-maintenance[quality]==0.2.3", "flake8 ==7.1.1"]
 
 # Include runtime resources when building wheels from a source archive without Git.
 [tool.setuptools.package-data]
